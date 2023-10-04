@@ -6,64 +6,17 @@
  * @env:
  * Return:
 */
-int main (int x, string_dp argv, string_dp env)
+int main (int x, _dou_p argv, _dou_p env)
 {
-    (void)x;
-    string prmpt = "[SHll][> ";
-    string bffr = NULL;
-    string arg[] = {NULL, NULL};
-    size_t bffsz = 0;
-    ssize_t getline_sz;
-    pid_t child_ID;
-    int _status, dz;
-
-
-    for (; 1; )
+    ssize_t _getline;
+    while (__STDC__)
     {
-        _print_string (prmpt);
+        _print_string("[$] ");
 
-
-        getline_sz = getline (&bffr, &bffsz, stdin);
-        if (getline_sz == -1)
-        {
-            _print_string("\n");
-            free(bffr);
-            exit(0);
-        }
-
-
-
-        dz = 0;
-        while (bffr[dz])
-        {
-            if (bffr[dz] == '\n')
-                bffr[dz] = 0;
-            dz++;
-        }
-
-
-        arg[0] = strdup(bffr);
-        child_ID = fork ();
-        if (child_ID < 0)
-        {
-            _print_string ("Forking failed ...");
-            free(bffr);
-            exit (0);
-        }
-        else if (child_ID == 0)
-        {
-            int xExe = execve (arg[0], arg, env);
-           /* if (xExe == -1)
-                 _print_string("Command does not exist ...\n"); */
-        }
-        else
-            wait(&_status);
-
-
-        /* _print_string (bffr); */
+        _gelline = getline();
     }
 
 
-    free (bffr);
+
     return (0);
 }

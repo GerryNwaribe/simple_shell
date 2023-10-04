@@ -8,7 +8,7 @@
 #include <string.h>
 
 typedef char* string;
-typedef char** string_dp;
+typedef char** _dou_p;
 
 int _putchar(char c);
 int _print_string(string st);
