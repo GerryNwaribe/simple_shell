@@ -1,0 +1,15 @@
+#include "main.h"
+
+/**
+ * _return -
+ * @sz:
+*/
+int _return(ssize_t sz)
+{
+    if (sz == -1)
+    {
+        return (-1)
+    }
+    return (0);
+
+}
