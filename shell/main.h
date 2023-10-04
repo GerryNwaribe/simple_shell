@@ -7,8 +7,6 @@
 #include <sys/wait.h>
 #include <string.h>
 
-//#define STD_OUT 1
-
 typedef char* string;
 typedef char** string_dp;
 

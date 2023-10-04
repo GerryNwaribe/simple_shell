@@ -9,7 +9,7 @@
 int main (int x, string_dp argv, string_dp env)
 {
     (void)x;
-    string prmpt = "[SHll][> ";
+    string prmpt = "_[SH]> ";
     string bffr = NULL;
     string arg[] = {NULL, NULL};
     size_t bffsz = 0;
@@ -20,13 +20,13 @@ int main (int x, string_dp argv, string_dp env)
 
     for (; 1; )
     {
-        _print_string (prmpt);
+        if (isatty(STDIN_FILENO))
+            _print_string (prmpt);
 
 
         getline_sz = getline (&bffr, &bffsz, stdin);
         if (getline_sz == -1)
         {
-            _print_string("\n");
             free(bffr);
             exit(0);
         }
@@ -48,13 +48,13 @@ int main (int x, string_dp argv, string_dp env)
         {
             _print_string ("Forking failed ...");
             free(bffr);
-            exit (0);
+            exit(0);
         }
         else if (child_ID == 0)
         {
-            int xExe = execve (arg[0], arg, env);
-           /* if (xExe == -1)
-                 _print_string("Command does not exist ...\n"); */
+            execve (arg[0], arg, env);
+            /* if (x == -1)
+                _print_string("Command does not exist ...\n"); */
         }
         else
             wait(&_status);
