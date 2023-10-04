@@ -39,12 +39,15 @@ int main(void)
 			i++;
 			token = strtok(NULL, " \n\t\r");
 		}
+
+
 		if (i == 0)
 		{
 			free(args);
 			continue;
 		}
 		args[i] = NULL;
+		
 		if (strcmp(args[0], "exit") == 0)
 		{
 			freemem(args);

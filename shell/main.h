@@ -7,6 +7,8 @@
 #include <sys/wait.h>
 #include <string.h>
 
+#define ERROR -1
+
 typedef char* string;
 typedef char** _dou_p;
 
