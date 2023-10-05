@@ -5,7 +5,7 @@
  * @st:
  * 
 */
-int _print_string(string st)
+int _print_string(char* st)
 {
     int x, idx;
     

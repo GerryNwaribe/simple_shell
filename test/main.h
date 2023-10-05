@@ -6,14 +6,14 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <string.h>
-
+#include <fcntl.h>
 #define ERROR -1
 
-typedef char* string;
-typedef char** _dou_p;
+/*typedef char* string;
+typedef char** _dou_p;*/
 
 int _putchar(char c);
-int _print_string(string st);
+int _print_string(char* st);
 
 #endif /* End of if statement */
 
