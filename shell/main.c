@@ -32,14 +32,14 @@ int main(int _cxt, _dou_p argv, _dou_p env)
         }
         /* ================== End_of_getline | Start_of_STRTOK ============== */
 
-        bffr_h = malloc(sizeof(char) * _getline_Rv);
-        if (bffr_h == NULL)
+        bffr_h = malloc(sizeof(char) * _getline_Rv);    /* Making allocation on heap */
+        if (bffr_h == NULL) /* Malloc check */
         {
             perror("hsh: memory allocation error");
             return (ERROR);
         }
 
-        _strcpy(bffr_h, bffr_Getline);
+        _strcpy(bffr_h, bffr_Getline);  /* Copying from the stack to the heap */
 
         token = strtok(bffr_h, _delimiters);
         while (bffr_h != NULL) /* Determining how many delimitable words there are */
