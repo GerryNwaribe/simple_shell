@@ -31,6 +31,9 @@ int main(int _cxt, _dou_p argv, _dou_p env)
             free(getline_bffr);
             return (-1);
         }
+        if (getline_bffr[_getline_Rv - 1] == '\n')
+            getline_bffr[_getline_Rv - 1] = '\0';
+        /* ===================== ################## ========================== */
 
         i = 0;
         while (getline_bffr[token_idx] != '\0')
@@ -53,46 +56,38 @@ int main(int _cxt, _dou_p argv, _dou_p env)
         }
         dptr[token_idx] = NULL;
 
-
-
-
-
-
-
-
-
         /* ================== This creates new allocations and copy the string to it ============== */
 
-      /*  bffr_h = malloc(sizeof(char) * _getline_Rv);    Making allocation on heap
-        if (bffr_h == NULL)                               Malloc check 
-        {
-            perror("hsh: memory allocation error");
-            return (ERROR);
-        }
+        /*  bffr_h = malloc(sizeof(char) * _getline_Rv);    Making allocation on heap
+          if (bffr_h == NULL)                               Malloc check
+          {
+              perror("hsh: memory allocation error");
+              return (ERROR);
+          }
 
-        _strcpy(bffr_h, getline_bffr);                    Copying from the stack to the heap 
+          _strcpy(bffr_h, getline_bffr);                    Copying from the stack to the heap
 
-        token = strtok(getline_bffr, _delimiters);
-        while (bffr_h != NULL)                            Determining how many delimitable words there are 
-        {
-            token_idx++;
-            token = strtok(NULL, _delimiters);
-        }
-        token_idx++;
+          token = strtok(getline_bffr, _delimiters);
+          while (bffr_h != NULL)                            Determining how many delimitable words there are
+          {
+              token_idx++;
+              token = strtok(NULL, _delimiters);
+          }
+          token_idx++;
 
-        argv = malloc(sizeof(char *) * token_idx);
+          argv = malloc(sizeof(char *) * token_idx);
 
-        token = strtok(bffr_h, _delimiters);
-        for (token_idx = 0; token != NULL; token_idx++)
-        {
-            argv[token_idx] = malloc(sizeof(char) * _strlen(token));
-            _strcpy(argv[token_idx], token);
+          token = strtok(bffr_h, _delimiters);
+          for (token_idx = 0; token != NULL; token_idx++)
+          {
+              argv[token_idx] = malloc(sizeof(char) * _strlen(token));
+              _strcpy(argv[token_idx], token);
 
-            token = strtok(NULL, _delimiters);
-        }
-        argv[token_idx] = NULL;
+              token = strtok(NULL, _delimiters);
+          }
+          argv[token_idx] = NULL;
 
-        /* ================== End_of_STRTOK | Start_of_Execve ============= */
+          /* ================== End_of_STRTOK | Start_of_Execve ============= */
         _child_PID_Rv = fork();
         if (_child_PID_Rv < 0)
         {
