@@ -11,9 +11,8 @@ int main (int _cxt, _dou_p argv, _dou_p env)
     ssize_t _getline_Rv; /* Num of chars read from getline | can used to malloc the right size */
     size_t bffsz = 0;
     string bffr_Getline, bffr_h;
-    int _exev_Rv, _status, i;
+    int _exev_Rv, _status, token_idx;
     char *_delimiters = " \n", *token;
-    char** token;
     pid_t _child_PID_Rv;
 
     (void)_cxt;
@@ -45,8 +44,24 @@ int main (int _cxt, _dou_p argv, _dou_p env)
         token = strtok(bffr_h, _delimiters);
         while (bffr_h != NULL)  /* Determining how many delimitable words there are */
         {
+            token_idx++;
+            token = strtok(NULL, _delimiters);
                         
         }
+        token_idx++;
+
+        argv  = malloc(sizeof(char*) * token_idx);
+
+        token = strtok(bffr_h, _delimiters);
+        for (token_idx = 0; token != NULL; token_idx++)
+        {
+            argv[token_idx] = malloc(sizeof(char) * _strlen(token));
+            _strcpy(argv[token_idx], token);
+
+            token = strtok(NULL, _delimiters);
+        }
+        argv[token_idx] = NULL;
+
 
 
 
@@ -75,6 +90,7 @@ int main (int _cxt, _dou_p argv, _dou_p env)
         bffr_h = NULL;
         free(bffr_Getline);        
         bffr_Getline = NULL;
+        //free(**argv)
         bffsz = 0;
     }
 
