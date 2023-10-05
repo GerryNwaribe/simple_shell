@@ -10,9 +10,9 @@ int main (int _cxt, _dou_p argv, _dou_p env)
 {
     ssize_t _getline_Rv; /* Num of chars read from getline | can used to malloc the right size */
     size_t bffsz = 0;
-    string bffr_s, bffr_h;
-    int _exev_Rv;
-    char *delimiters = " \n";
+    string bffr_Getline, bffr_h;
+    int _exev_Rv, _status, i;
+    char *_delimiters = " \n", *token;
     char** token;
     pid_t _child_PID_Rv;
 
@@ -20,53 +20,66 @@ int main (int _cxt, _dou_p argv, _dou_p env)
     while (X_OK)
     {
 
-/* ================== isatty == 1 for "It is interactive" ========= */
+/* ================== isatty == 1 for "It is interactive" ============= */
         if (isatty(STDIN_FILENO))
             _print_string("[$] ");
 
-/* ===================== End_of_ISATTY | Start_of_Execve ====================== */
-        _getline_Rv = getline(&bffr_s, &bffsz, stdin);
+/* ===================== End_of_ISATTY | Start_of_Execve ============== */
+        _getline_Rv = getline(&bffr_Getline, &bffsz, stdin);
         if (_getline_Rv == ERROR)
         {
-            free(bffr);
+            free(bffr_Getline);
             return (-1);
         }
-/* ===================== End_of_getline | Start_of_STRTOK ====================== */
+/* ================== End_of_getline | Start_of_STRTOK ============== */
 
-        bffr = malloc(sizeof(char) * _getline_Rv);
+        bffr_h = malloc(sizeof(char) * _getline_Rv);
+        if (bffr_h == NULL)
+        {
+            perror("hsh: memory allocation error");
+            return (ERROR);
+        }
 
-        _strcpy(bffr_h, bffr_s);
+        _strcpy(bffr_h, bffr_Getline);
 
-        token = strtok(bffr_h, delimiters);
+        token = strtok(bffr_h, _delimiters);
+        while (bffr_h != NULL)  /* Determining how many delimitable words there are */
+        {
+                        
+        }
 
 
 
- /* ===================== End_of_STRTOK | Start_of_Execve ====================== */
+ /* ================== End_of_STRTOK | Start_of_Execve ============= */
         _child_PID_Rv = fork();
         if (_child_PID_Rv == ERROR)
         {
-            free(bffr);
+            free(bffr_h);
             exit(EXIT_FAILURE);
         }
         else if (_child_PID_Rv == 0)
         {
             /* Execution by the Child process */
-            _exev_Rv = execve(bffr, argv, env);
-            if (_exev_Rv == ERROR)
-                _print_string("arv[0]: No such file or directory\n");
+            _exev_Rv = execve(bffr_h, argv, env);
+            /* if (_exev_Rv == ERROR)
+                _print_string("arv[0]: No such file or directory\n"); */
         }
         else
         {
-
+            wait(_status);
         }
-/* ===================== End_of_Execve ====================== */
+/* ======================== End_of_Execve =========================== */
 
-        free(bffr);
-        bffr = NULL;
+/* Freeing & Nullifying mallocs & Setting size = zero | Before next iteration */
+        free(bffr_h);
+        bffr_h = NULL;
+        free(bffr_Getline);        
+        bffr_Getline = NULL;
         bffsz = 0;
     }
 
 
-    free(bffr);
+    /*free(bffr_h);
+    free(bffr_Getline);*/
     return (0);
 }
