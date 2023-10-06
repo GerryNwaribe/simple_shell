@@ -1,12 +1,11 @@
 #include "main.h"
 
 /**
- * _strcmp - compare string values
- * @s1: input value
- * @s2: input value
+ * _strcmp -
+ * @s1:
+ * @s2:
  *
- * Return: The difference between the first differing characters in s1 and s2,
- *         or 0 if both strings are equal.
+ * Return: 
  */
 int _strcmp(char *s1, char *s2)
 {

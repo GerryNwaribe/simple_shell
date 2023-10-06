@@ -8,14 +8,15 @@
 void execmd(_dou_p argv)
 {
     int dxe;
-    string _path = NULL;
+    string _path = argv[0];
 
     if (argv)
     {
         dxe = execve(_path, argv, NULL);
         if (dxe < 0)
         {
-            perror("Error");
+            /*perror("Error");*/
+            return;
         }
     }
     return;

@@ -4,7 +4,7 @@
  * _tokenization -
  * @str:
  * Return:
- */
+ *
 _dou_p _tokenization(char *str)
 {
 
@@ -35,3 +35,61 @@ _dou_p _tokenization(char *str)
 
     return (local_argv);
 }
+*/
+
+char** tokenize_string(const char* input, const char* delimiters) {
+    int token_idx = 0, i = 0;
+    char* token;
+    char** result = NULL;
+    char* input_copy = strdup(input);  // Create a copy of the input string
+
+    if (input_copy == NULL) {
+        perror("strdup");
+        return NULL;
+    }
+
+    // Count the number of tokens
+    char* token_count_copy = strdup(input_copy);
+    if (token_count_copy == NULL) {
+        perror("strdup");
+        free(input_copy);
+        return NULL;
+    }
+
+    char* token_count_ptr = token_count_copy;
+    while (strtok(token_count_ptr, delimiters) != NULL) {
+        i++;
+        token_count_ptr = NULL;
+    }
+    free(token_count_copy);
+
+    result = (char**)malloc((i + 1) * sizeof(char*));
+    if (result == NULL) {
+        perror("malloc");
+        free(input_copy);
+        return NULL;
+    }
+
+    token = strtok(input_copy, delimiters);
+    while (token != NULL) {
+        result[token_idx] = strdup(token);
+        if (result[token_idx] == NULL) {
+            perror("strdup");
+            // Clean up and free memory on error
+            for (int j = 0; j < token_idx; j++) {
+                free(result[j]);
+            }
+            free(result);
+            free(input_copy);
+            return NULL;
+        }
+        token_idx++;
+        token = strtok(NULL, delimiters);
+    }
+
+    result[token_idx] = NULL;
+    free(input_copy);
+
+    return result;
+}
+

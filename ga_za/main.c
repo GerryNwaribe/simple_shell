@@ -35,14 +35,14 @@ int main(int _cxt, _dou_p argv, _dou_p env)
             getline_bffr[_getline_Rv - 1] = '\0';
 
         /* local_argv = _tokenization(getline_bffr); */
+        local_argv = tokenize_string(getline_bffr, " \n\t\r");
 
-        if (_strcmp(local_argv[0], "exit") == 0)
+        /*if (_strcmp(local_argv[0], "exit") == 0)
         {
-            free(local_argv);
             break;
-        }
+        }*/
 
-        /* ===================== ################## ==========================
+        /* ===================== tokenizer ==========================
 
         i = 0;
         while (getline_bffr[token_idx] != '\0')
@@ -65,7 +65,7 @@ int main(int _cxt, _dou_p argv, _dou_p env)
         }
         local_argv[token_idx] = NULL;
 
-         ================== End_of_STRTOK | Start_of_Execve ============= */
+         ================== End of tokenizeer | Start of Execve ============= */
 
         execmd(local_argv);
 
@@ -95,6 +95,8 @@ int main(int _cxt, _dou_p argv, _dou_p env)
             free(local_argv);
             local_argv = NULL;
         }
+        if (isatty(STDIN_FILENO) == 0)
+            break;
         if (getline_bffr != NULL)
         {
             free(getline_bffr);
