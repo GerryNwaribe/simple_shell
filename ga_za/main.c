@@ -29,10 +29,9 @@ int main(int _cxt, _dou_p argv, _dou_p env)
         {
             _putchar('\n');
             break;
-        }        
+        }
 
         /* ===================== tokenizer ========================== */
-
 
         local_argv = _tokenization(getline_bffr);
         /*local_argv = tokenize_string(getline_bffr, " \n\t\r");*/
@@ -40,40 +39,38 @@ int main(int _cxt, _dou_p argv, _dou_p env)
         if (local_argv[0] == NULL)
             continue;
 
-        printf("%s\n", local_argv[0]);
-        /*if (local_argv[1] != NULL)
+        /*printf("%s\n", local_argv[0]);
+        if (local_argv[1] != NULL)
                     printf("%s\n", local_argv[1]);*/
-
-
 
         if (_strcmp(local_argv[0], "exit") == 0)
         {
             break;
         }
 
-        /* ================== End of tokenizeer | Start of Execve ============= */
+        /* ================== End of tokenizeer ===== Start of Execve ============= */
 
-        /*execmd(local_argv);*/
+        execmd(local_argv, env);
 
-        /* _child_PID_Rv = fork();
-         if (_child_PID_Rv < 0)
-         {
-             perror("Fork");
-             free(argv);
-             exit(EXIT_FAILURE);
-         }
-         else if (_child_PID_Rv == 0)
-         {
+        /*_child_PID_Rv = fork();
+        if (_child_PID_Rv < 0)
+        {
+            perror("Fork");
+            free(local_argv);
+            exit(EXIT_FAILURE);
+        }
+        else if (_child_PID_Rv == 0)
+        {
 
-             _exev_Rv = execve(argv, argv, env);          Execution by the Child process
-             if (_exev_Rv == ERROR)
-                 perror("Error");
-         }
-         else
-         {
-             wait(_status);
-         }
-             ======================== End_of_Execve =========================== */
+            _exev_Rv = execve(local_argv[0], local_argv, env);                  Execution by the Child process
+            if (_exev_Rv == ERROR)
+                perror("Error");
+        }
+        else
+        {
+            wait(&_status);
+        }
+          ======================== End_of_Execve =========================== */
 
         /* Freeing & Nullifying mallocs & Setting size = zero | Before next iteration */
         if (local_argv != NULL)

@@ -5,19 +5,27 @@
  * @argv:
  * 
 */
-void execmd(_dou_p argv)
+void execmd(_dou_p local_argv, _dou_p env)
 {
-    int dxe;
-    string _path = argv[0];
+    int _status, _exev_Rv;
+    pid_t _child_PID_Rv;
 
-    if (argv)
-    {
-        dxe = execve(_path, argv, NULL);
-        if (dxe < 0)
+     _child_PID_Rv = fork();
+        if (_child_PID_Rv < 0)
         {
-            /*perror("Error");*/
-            return;
+            perror("Fork");
+            free(local_argv);
+            exit(EXIT_FAILURE);
         }
-    }
-    return;
+        else if (_child_PID_Rv == 0)
+        {
+
+            _exev_Rv = execve(local_argv[0], local_argv, env); /*Execution by the Child process*/
+            if (_exev_Rv == ERROR)
+                perror("Error");
+        }
+        else
+        {
+            wait(&_status);
+        }
 }
