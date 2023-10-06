@@ -6,10 +6,10 @@
  * Return:
  *
  */
-_dou_p _tokenization(char *str)
+_dou_p _tokenization(char *str, char *_delimiters)
 {
 
-    char *_delimiters = " \n\t\r", *token;
+    char *token;
     int i = 0, token_idx = 0;
     _dou_p local_argv;
 
@@ -39,7 +39,9 @@ _dou_p _tokenization(char *str)
 
 
 /*
-char** tokenize_string(const char* input, const char* delimiters) {
+_dou_p _tokenization(char* input)
+{
+    char* delimiters = " \n\t\r";
     int token_idx = 0, i = 0;
     char* token;
     char** result = NULL;

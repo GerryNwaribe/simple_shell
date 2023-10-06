@@ -14,12 +14,12 @@ void execmd(_dou_p local_argv, _dou_p env)
         if (_child_PID_Rv < 0)
         {
             perror("Fork");
-            free(local_argv);
+            if (local_argv != NULL)
+                free(local_argv);
             exit(EXIT_FAILURE);
         }
         else if (_child_PID_Rv == 0)
         {
-
             _exev_Rv = execve(local_argv[0], local_argv, env); /*Execution by the Child process*/
             if (_exev_Rv == ERROR)
                 perror("Error");
