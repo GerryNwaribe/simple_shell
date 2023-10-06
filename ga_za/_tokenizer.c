@@ -5,6 +5,7 @@
  * @str:
  * Return:
  *
+ */
 _dou_p _tokenization(char *str)
 {
 
@@ -35,8 +36,9 @@ _dou_p _tokenization(char *str)
 
     return (local_argv);
 }
-*/
 
+
+/*
 char** tokenize_string(const char* input, const char* delimiters) {
     int token_idx = 0, i = 0;
     char* token;
@@ -92,4 +94,4 @@ char** tokenize_string(const char* input, const char* delimiters) {
 
     return result;
 }
-
+*/

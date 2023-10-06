@@ -16,7 +16,7 @@ int _putchar(char c);
 int _print_string(string st);
 void execmd(_dou_p argv);
 int _strcmp(char *s1, char *s2);
-/* _dou_p _tokenization(char *str); */
+_dou_p _tokenization(char *str);
 char** tokenize_string(const char* input, const char* delimiters);
 int _strchr(char *s, char c);
 
