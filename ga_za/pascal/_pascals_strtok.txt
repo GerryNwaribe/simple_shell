@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+/**
+ * Demonstrating strtok and getline function
+ */
+int main(void)
+{
+	int i = 0;
+	char *content = NULL;
+	size_t buffsize = 0;
+	size_t bytereturned = 0;
+	char *token = NULL;
+	char **args = malloc(10 * sizeof(char *));
+
+	bytereturned = getline(&content, &buffsize, stdin);
+
+
+	token = strtok(content, " ");
+	while (token != NULL)
+	{
+		args[i] = malloc(sizeof(char) * (strlen(token) + 1));
+		strcpy(args[i], token);
+		i++;
+		token = strtok(NULL, " ");
+	}
+	args[i] = NULL;
+
+	for (int j = 0; j < i; j++)
+	{
+		printf("%d: %s\n", j, args[j]);
+	}
+	printf("the number of characters is = %ld\n", bytereturned);
+	if (content != NULL)
+	{
+		free(content);
+	}
+	for (int j = 0; j < i; j++)
+	{
+		if (args[j] != NULL)
+		{
+			free(args[j]);
+		}
+	}
+	free(args);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
