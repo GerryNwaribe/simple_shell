@@ -9,13 +9,8 @@
 #include <fcntl.h>
 #define ERROR -1
 
-<<<<<<< HEAD
 /*typedef char* string;
 typedef char** _dou_p;*/
-=======
-typedef char *string;
-typedef char **_dou_p;
->>>>>>> fc8a364d4de1cf4c10ebf26d0f0c1792de232d62
 
 int _putchar(char c);
 int _print_string(char* st);

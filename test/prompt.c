@@ -5,33 +5,45 @@
 */
 int main(int argc, char *argv[])
 {
-    char *prompt_line, token;
-    char *pointer_prompt, *pointer_prompt2;
+    char *prompt_line;
+    char *pointer_prompt = NULL, *pointer_prompt2 = NULL;
+    char *token;
     size_t size = 0; 
-    ssize_t handle_error;
+    ssize_t handle_error = 0;
     const char *limit = " \n\t\r";
-    int token_count = 0, a;
-    int argv_count;
+    int token_count = 0, a, b;
+   int argv_count;
     (void)argc;
+
+    while(1)
+    {
+    prompt_line = "$\n";
+    _print_string(prompt_line);
+    handle_error = getline(&pointer_prompt, &size, stdin);
+
+     if (handle_error == -1)
+    {
+        break;
+    }
+    _print_string(pointer_prompt);
+    
     /*allocate memeor for the copy of pointer*/
     pointer_prompt2 = malloc(sizeof(char *) * handle_error);
     if (pointer_prompt2 == NULL)
     {
         perror("sh");
+        free(pointer_prompt);
         return (-1);
     }
     /*make a copy of string*/
     strcpy(pointer_prompt2, pointer_prompt);
 
-     if (handle_error == -1)
-    {
-        return (-1);
-    }
-    else {
+
     /*calculate number of tokens*/
     token = strtok(pointer_prompt, limit);
-    for (; token != NULL; token_count++)
+    while (token != NULL)
     {
+        token_count++;
         token = strtok(NULL, limit);
     }
     token_count++;
@@ -39,31 +51,35 @@ int main(int argc, char *argv[])
     /*allocate space for array of strings (tokens)*/
     argv = malloc(sizeof(char *) * token_count);
     if (argv == NULL)
+    {
+        perror("sh");
+        free(pointer_prompt);
+        free(pointer_prompt2);
         return (-1);
-    
+    }  
+        /*allocate memory for copied string*/
+    token = strtok(pointer_prompt2, limit);
     for (a = 0; token != NULL; a++)
     {
+        argv[a] = strdup(token);
         argv[a] = malloc(sizeof(char) * strlen(token));
+        strcpy(argv[a], token);
+        token = strtok(NULL, limit);
+    }
+    
+    for (argv_count = 0; argv_count < a; argv_count++)
+    {
+        free(argv[a]);
     }
     argv[a] = NULL;
-
-    for (argv_count = 0; argv_count < token_count - 1; argv_count++)
+    for (b = 0; b < a; b++)
     {
-        _print_string(argv[argv_count]);
+        free(argv[b]);
     }
-    while(1)
-    {
-    prompt_line = "$ ";
-    _print_string(prompt_line);
-    handle_error = getline(&pointer_prompt, &size, stdin);
-
-   
-    _print_string(pointer_prompt);
-    }
-    free(pointer_prompt);
+    free(argv);
     free(pointer_prompt2);
-    free(pointer_prompt);
     }
+    free(pointer_prompt);
+    
     return (0);
-
 }
