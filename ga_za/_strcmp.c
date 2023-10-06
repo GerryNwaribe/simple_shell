@@ -13,15 +13,14 @@ int _strcmp(char *s1, char *s2)
 
 	i = 0;
 
-/* Compare chars of s1 and s2 until a difference or end of both strings */
 	while (s1[i] != '\0' && s2[i] != '\0')
 	{
 		if (s1[i] != s2[i])
-		{	/* Return the difference between the differing characters. */
+		{
 			return (s1[i] - s2[i]);
 		}
 		i++;
 	}
 
-	return (0); /* Return 0 if both strings are equal up to this point. */
+	return (0);
 }
