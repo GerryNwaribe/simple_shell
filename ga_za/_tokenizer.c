@@ -24,13 +24,13 @@ _dou_p _tokenization(char *str, char *_delimiters)
 
     local_argv = malloc(sizeof(char *) * (i + 1));
 
-    token = strtok(str, _delimiters);
+    token = _strtok(str, _delimiters);
     token_idx = 0;
     while (token != NULL)
     {
         local_argv[token_idx] = token;
         token_idx++;
-        token = strtok(NULL, _delimiters);
+        token = _strtok(NULL, _delimiters);
     }
     local_argv[token_idx] = NULL;
 

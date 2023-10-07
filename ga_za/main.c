@@ -26,23 +26,25 @@ int main(int _cxt, _dou_p argv, _dou_p env)
             exit(EXIT_FAILURE);
         }
 
-        local_argv = _tokenization(getline_bffr, " \n\t\r"); /* [Tokenizer] */
+        local_argv = _tokenization(getline_bffr, " \t\r"); /* [Tokenizer] */
 
         /*printf("%s\n", local_argv[0] == NULL ? "(null)" : local_argv[0]);*/
 
-        if (local_argv[0] == NULL) /* [If only '\n' OR Enter Button] */
+        if (local_argv[0][0] == '\n') /* [If only '\n' OR Enter Button] */
             continue;
 
-        if (strcmp(local_argv[0], "exit") == 0) /* [If input equals EXIT] */
+        if (_strcmp(local_argv[0], "exit") == 0) /* [If input equals EXIT] */
             exit(EXIT_FAILURE);
 
         execmd(local_argv, env); /* [End of tokenizeer || Start of Execve] */
 
+        /*if (local_argv[0] != NULL)
+            _free(local_argv, 0);
+        if (getline_bffr[0] != '\0')
+            _free(getline_bffr, 0);*/
+
         if (isatty(STDIN_FILENO) == 0)
             break;
-        _free(local_argv, 1);
-        _free(getline_bffr, 0);
-        
     }
 
     if (getline_bffr != NULL)

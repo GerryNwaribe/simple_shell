@@ -14,7 +14,7 @@
 typedef char* string;
 typedef char** _dou_p;
 
-string _strtok(string str, string _delimiters);
+char *_strtok(char *str, char *_delimiters);
 char *_strcat(char *dest, char *src);
 char *_strcpy(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
@@ -27,16 +27,6 @@ void _free(void* _malloc, int is_dou_p);
 int _print_string(string st);
 string get_PATH(string cmmd);
 int _putchar(char c);
-
-
-
-
-
-
-
-
-
-
 
 
 #endif /* End of if statement */
