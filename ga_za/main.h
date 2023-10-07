@@ -21,6 +21,10 @@ int _strcmp(char *s1, char *s2);
 _dou_p _tokenization(char *str, char *_delimiters);
 int _strchr(char *s, char c);
 string get_PATH(string cmmd);
+string _strtok(string str, string _delimiters);
+void _free(void* _malloc, int is_dou_p);
+
+
 
 
 
