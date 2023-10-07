@@ -14,6 +14,7 @@ typedef char** _dou_p;*/
 
 int _putchar(char c);
 int _print_string(char* st);
+void execute(char *argv[], char **env);
 
 #endif /* End of if statement */
 
