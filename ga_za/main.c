@@ -30,7 +30,7 @@ int main(int _cxt, _dou_p argv, _dou_p env)
         /* ===================== [Tokenizer] ========================== */
         local_argv = _tokenization(getline_bffr, " \n\t\r");
 
-        printf("%s\n", local_argv[0] == NULL ? "(null)" : local_argv[0]);
+        /*printf("%s\n", local_argv[0] == NULL ? "(null)" : local_argv[0]);*/
 
         /* ======== [If only '\n' OR Enter Button] ========== */
         if (local_argv[0] == NULL)
@@ -39,7 +39,7 @@ int main(int _cxt, _dou_p argv, _dou_p env)
         }
 
         /* ============ [If input equals EXIT] ==============*/
-        if (strcmp(local_argv[0], "exit") == 0)
+        if (strcmp(local_argv[0], "exit") == 0 || strcmp(local_argv[0], "-1") == 0)
         {
             exit(ERROR);
         }

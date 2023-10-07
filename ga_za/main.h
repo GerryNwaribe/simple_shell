@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 #define ERROR -1
 
@@ -18,6 +20,10 @@ void execmd(_dou_p local_argv, _dou_p env);
 int _strcmp(char *s1, char *s2);
 _dou_p _tokenization(char *str, char *_delimiters);
 int _strchr(char *s, char c);
+string get_PATH(string cmmd);
+
+
+
 
 
 

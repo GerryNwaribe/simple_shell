@@ -19,6 +19,8 @@ void execmd(_dou_p local_argv, _dou_p env)
         cmmd = local_argv[0];
         atl_cmmd = NULL;
 
+        atl_cmmd = get_PATH(cmmd);
+
         _exev_Rv = execve(atl_cmmd, local_argv, NULL);
         if (_exev_Rv == -1)
             perror("Error");
