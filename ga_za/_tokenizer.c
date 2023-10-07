@@ -24,13 +24,13 @@ _dou_p _tokenization(char *str, char *_delimiters)
 
     local_argv = malloc(sizeof(char *) * (i + 1));
 
-    token = strtok(str, _delimiters);
+    token = _strtok(str, _delimiters);
     token_idx = 0;
     while (token != NULL)
     {
         local_argv[token_idx] = token;
         token_idx++;
-        token = strtok(NULL, _delimiters);
+        token = _strtok(NULL, _delimiters);
     }
     local_argv[token_idx] = NULL;
 
@@ -61,7 +61,7 @@ _dou_p _tokenization(char* input)
     }
 
     char* token_count_ptr = token_count_copy;
-    while (strtok(token_count_ptr, delimiters) != NULL) {
+    while (_strtok(token_count_ptr, delimiters) != NULL) {
         i++;
         token_count_ptr = NULL;
     }
@@ -74,7 +74,7 @@ _dou_p _tokenization(char* input)
         return NULL;
     }
 
-    token = strtok(input_copy, delimiters);
+    token = _strtok(input_copy, delimiters);
     while (token != NULL) {
         result[token_idx] = strdup(token);
         if (result[token_idx] == NULL) {
@@ -88,7 +88,7 @@ _dou_p _tokenization(char* input)
             return NULL;
         }
         token_idx++;
-        token = strtok(NULL, delimiters);
+        token = _strtok(NULL, delimiters);
     }
 
     result[token_idx] = NULL;

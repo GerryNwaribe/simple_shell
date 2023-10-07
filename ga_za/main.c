@@ -16,60 +16,39 @@ int main(int _cxt, _dou_p argv, _dou_p env)
     (void)_cxt;
     while (X_OK)
     {
-
-        /* ================== [isatty == 1 for "It is interactive"] ============ */
-        if (isatty(STDIN_FILENO))
+        if (isatty(STDIN_FILENO)) /* [isatty == 1 for "It is interactive"] */
             _print_string("[$] ");
-        /* ===================== [End_of_ISATTY || Start_of_Getline] ============== */
-        _getline_Rv = getline(&getline_bffr, &bffsz, stdin);
+
+        _getline_Rv = getline(&getline_bffr, &bffsz, stdin); /* [End_of_ISATTY || Start_of_Getline] */
         if (_getline_Rv == ERROR)
         {
             _putchar('\n');
-            exit(ERROR);
+            exit(EXIT_FAILURE);
         }
-        /* ===================== [Tokenizer] ========================== */
-        local_argv = _tokenization(getline_bffr, " \n\t\r");
 
-        printf("%s\n", local_argv[0] == NULL ? "(null)" : local_argv[0]);
+        local_argv = _tokenization(getline_bffr, " \t\r"); /* [Tokenizer] */
 
-        /* ======== [If only '\n' OR Enter Button] ========== */
-        if (local_argv[0] == NULL)
-        {
+        /*printf("%s\n", local_argv[0] == NULL ? "(null)" : local_argv[0]);*/
+
+        if (local_argv[0][0] == '\n') /* [If only '\n' OR Enter Button] */
             continue;
-        }
 
-        /* ============ [If input equals EXIT] ==============*/
-        if (strcmp(local_argv[0], "exit") == 0)
-        {
-            exit(ERROR);
-        }
-            
+        if (_strcmp(local_argv[0], "exit") == 0) /* [If input equals EXIT] */
+            exit(EXIT_FAILURE);
 
-        /* ================== [End of tokenizeer || Start of Execve] ============= */
-        execmd(local_argv, env);
+        execmd(local_argv, env); /* [End of tokenizeer || Start of Execve] */
 
-        /* ======================== ###### =========================== */
+        /*if (local_argv[0] != NULL)
+            _free(local_argv, 0);
+        if (getline_bffr[0] != '\0')
+            _free(getline_bffr, 0);*/
 
-        /* Freeing & Nullifying mallocs & Setting size = zero | Before next iteration */
-        if (local_argv != NULL)
-        {
-            free(local_argv);
-            local_argv = NULL;
-        }
         if (isatty(STDIN_FILENO) == 0)
-        {
             break;
-        }
-            
-        if (getline_bffr != NULL)
-        {
-            free(getline_bffr);
-            getline_bffr = NULL;
-        }
     }
 
-   if (getline_bffr != NULL)
-        free(getline_bffr);
+    if (getline_bffr != NULL)
+        _free(getline_bffr, 0);
 
     return (0);
 }

@@ -6,20 +6,27 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 #define ERROR -1
 
 typedef char* string;
 typedef char** _dou_p;
 
-int _putchar(char c);
-int _print_string(string st);
-void execmd(_dou_p local_argv, _dou_p env);
+char *_strtok(char *str, char *_delimiters);
+char *_strcat(char *dest, char *src);
+char *_strcpy(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
-_dou_p _tokenization(char *str, char *_delimiters);
 int _strchr(char *s, char c);
+int _strlen(char *s);
 
-
+_dou_p _tokenization(char *str, char *_delimiters);
+void execmd(_dou_p local_argv, _dou_p env);
+void _free(void* _malloc, int is_dou_p);
+int _print_string(string st);
+string get_PATH(string cmmd);
+int _putchar(char c);
 
 
 #endif /* End of if statement */
