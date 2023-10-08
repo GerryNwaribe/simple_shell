@@ -88,3 +88,5 @@ int main(int argc, char *argv[], char **env)
 
     return (0);
 }
+
+/*Notes: handle enter, learn path stuff, learn envion stuff*/

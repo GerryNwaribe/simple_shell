@@ -7,7 +7,7 @@ void execute(char *argv[], char **env)
 {
    
     char *actual_command = NULL;
-    (void)argc;
+   
    
     if (argv[0] != NULL)
     {
