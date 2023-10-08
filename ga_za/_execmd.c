@@ -35,7 +35,7 @@ void execmd(_dou_p local_argv, _dou_p env)
         {
             _exev_Rv = execve(atl_cmmd, local_argv, env); /*Execution by the Child process*/
             if (_exev_Rv == ERROR)
-                perror("Error");
+                perror(local_argv[0]);
         }
         else
         {

@@ -22,7 +22,7 @@ int main(int _cxt, _dou_p argv, _dou_p env)
         _getline_Rv = getline(&getline_bffr, &bffsz, stdin); /* [End_of_ISATTY || Start_of_Getline] */
         if (_getline_Rv == ERROR)
         {
-            _putchar('\n');
+            /*_putchar('\n');*/
             exit(EXIT_FAILURE);
         }
 
