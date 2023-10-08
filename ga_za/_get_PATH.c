@@ -4,7 +4,7 @@
  * get_PATH -
  * @cmmd:
  * Return:
- * 
+ *
  */
 string get_PATH(string cmmd)
 {
@@ -43,7 +43,7 @@ string get_PATH(string cmmd)
                 path_token = strtok(NULL, ":");
             }
         }
-        
+
         if (path_cp != NULL)
             free(path_cp);
 
