@@ -1,13 +1,13 @@
 #include "main.h"
 
 /**
- * _strdup - function
+ * _strdup - uses malloc to alloc memory.
  *
- * @str: input
- * Return: pointer
+ * @str: input string.
+ * Return: A pointer to the new memory allocation.
  */
 
-char *_strdup(char *str)
+char *_strdup(string str)
 {
 	char *b;
 	size_t idx, m;
@@ -23,6 +23,8 @@ char *_strdup(char *str)
 
 	for (m = 0; m < idx; m++)
 		b[m] = str[m];
+
+	b[m] = '\0';
 
 	return (b);
 }

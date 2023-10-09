@@ -1,17 +1,16 @@
 #include "main.h"
 
 /**
- * _env -
+ * _env - This function prints all environmental variables.
  * Void input and output.
  */
-void _env()
+void _env(void)
 {
-    extern _dou_p environ;
-    _dou_p dx;
+	_dou_p dx;
 
-    for (dx = environ; *dx; dx++)
-    {
-        _print_string(*dx);
-        _putchar('\n');
-    }
+	for (dx = environ; *dx; dx++)
+	{
+		_print_string(*dx);
+		_putchar('\n');
+	}
 }

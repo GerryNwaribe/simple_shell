@@ -1,23 +1,20 @@
 #include "main.h"
 
 /**
- * _strcmp -
- * @s1:
- * @s2:
- *
- * Return: 
+ * _strcmp - Compares two string.
+ * @str: First string.
+ * @_str: Second string.
+ * Return: A difference if unequal char and 0 if non found.
  */
-int _strcmp(char *s1, char *s2)
+int _strcmp(char *str, char *_str)
 {
-	int i;
+	int i = 0;
 
-	i = 0;
-
-	while (s1[i] != '\0' && s2[i] != '\0')
+	while (str[i] != '\0' && _str[i] != '\0')
 	{
-		if (s1[i] != s2[i])
+		if (str[i] != _str[i])
 		{
-			return (s1[i] - s2[i]);
+			return (str[i] - _str[i]);
 		}
 		i++;
 	}

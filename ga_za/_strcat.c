@@ -1,5 +1,4 @@
 #include "main.h"
-#include <stdio.h>
 
 /**
  * _strcat - Concatenates two strings strcat()
@@ -10,30 +9,21 @@
  * Return: A pointer to the modified dest string.
  */
 
-char *_strcat(char *dest, char *src)
+string _strcat(string dest, string src)
 {
-    int i = 0;
-    int j = 0;
+	int i = 0, j = 0;
 
-    while (dest[i] != '\0')
-    {
-        i++;
-    }
+	i = _strlen(dest);
 
-    if (i + _strlen(src) >= sizeof(dest))
-    {
-        return NULL;
-    }
+	while (src[j] != '\0')
+	{
+		dest[i] = src[j];
+		i++;
+		j++;
+	}
 
-    while (src[j] != '\0')
-    {
-        dest[i] = src[j];
-        i++;
-        j++;
-    }
+	dest[i] = '\0';
 
-    dest[i] = '\0';
-
-    return dest;
+	return (dest);
 }
 

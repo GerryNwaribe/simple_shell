@@ -1,32 +1,28 @@
 #include "main.h"
 
 /**
- *
- *
+ * _free - This Function frees any kind of malloc (integer or string).
+ * @_malloc: The memory location to be freed.
+ * @is_dou_p: An indication for whether it is a array of pointers or not.
+ * Return: Void.
  */
 void _free(void *_malloc, int is_dou_p)
 {
-    if (_malloc == NULL)
-    {
-        return;
-    }
+	int x = 0;
 
-    if (is_dou_p)
-    {
-        void **alloc = (void **)_malloc;
-        if (alloc[0])
-        {
-            for (int x = 0; alloc[x]; x++)
-            {
-                if (alloc[x])
-                {
-                    free(alloc[x]);
-                }
-            }
-        }
-    }
+	if (_malloc == NULL)
+		return;
 
-    free(_malloc);
+	if (is_dou_p)
+	{
+		void **alloc = (void **)_malloc;
 
-    return;
+		for (; alloc[x]; x++)
+		{
+			if (alloc[x])
+				free(alloc[x]);
+		}
+	}
+
+	free(_malloc);
 }

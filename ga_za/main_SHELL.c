@@ -1,10 +1,11 @@
 #include "main.h"
 
 /**
- * main -
- * @argv:
- * @env:
- * Return:
+ * main - Simple Shell main function.
+ * @argv: double pointer for strings on stdin.
+ * @_cxt: stdin word count.
+ * @env: Environmental variable.
+ * Return: returns 0 on success.
  */
 int main(int _cxt, _dou_p argv, _dou_p env)
 {
@@ -24,7 +25,7 @@ int main(int _cxt, _dou_p argv, _dou_p env)
 		}
 		if (!(strcmp(getline_bffr, "\n")))
 			continue;
-/*printf("%s\n", getline_bffr);*/
+
 		local_argv = _tokenization(getline_bffr, " \n\t\r");
 
 		if (!(_strcmp(local_argv[0], "env")))
