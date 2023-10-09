@@ -26,7 +26,7 @@ int main(void)
     x = 0;
     while (s[x])
     {
-        z = s[x] * f;
+        z = (s[x] - '8') * f;
         printf("%d\n", z);
         f /= 10;
         x++;
