@@ -23,5 +23,5 @@ void _exit_num(char **local_argv)
         int _no = _atoi(local_argv[1]);
         exit(_no);
     }
-    exit(-1);
+    exit(1);
 }

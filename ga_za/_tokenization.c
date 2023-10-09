@@ -6,33 +6,33 @@
  * Return:
  *
  */
-_dou_p _tokenization(char *str, char *_delimiters)
+_dou_p _tokenization(string str, string _delimiters)
 {
 
-    char *token;
-    int i = 0, token_idx = 0;
+    string token;
+    int i = 0, _idx = 0;
     _dou_p local_argv;
 
     i = 0;
-    while (str[token_idx] != '\0')
+    while (str[_idx] != '\0')
     {
-        if (strchr(_delimiters, str[token_idx]))
+        if (_strchr(_delimiters, str[_idx]))
             i++;
-        token_idx++;
+        _idx++;
     }
-    i++;
 
-    local_argv = malloc(sizeof(char *) * (i + 1));
+    local_argv = malloc(sizeof(char*) * (i + 1));
 
-    token = strtok(str, _delimiters);
-    token_idx = 0;
+    token = _strtok(str, _delimiters);
+    
+    _idx = 0;
     while (token != NULL)
     {
-        local_argv[token_idx] = token;
-        token_idx++;
-        token = strtok(NULL, _delimiters);
+        local_argv[_idx] = token;
+        _idx++;
+        token = _strtok(NULL, _delimiters);
     }
-    local_argv[token_idx] = NULL;
+    local_argv[_idx] = NULL;
 
     return (local_argv);
 }

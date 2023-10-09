@@ -5,20 +5,17 @@
  * @argv:
  *
  */
-void execmd(_dou_p local_argv, _dou_p env, char **argv)
+void execmd(_dou_p local_argv, _dou_p env, _dou_p argv)
 {
 
     int _exev_Rv, _status;
     pid_t _child_PID_Rv;
-    string cmmd, atl_cmmd;
+    string atl_cmmd = NULL;
 
     (void)env;
     if (local_argv)
     {
-        cmmd = local_argv[0];
-        atl_cmmd = NULL;
-
-        atl_cmmd = get_PATH(cmmd);
+        atl_cmmd = get_PATH(local_argv[0]);
         if (atl_cmmd == NULL)
         {
             perror(argv[0]);
@@ -32,7 +29,7 @@ void execmd(_dou_p local_argv, _dou_p env, char **argv)
         _child_PID_Rv = fork();
         if (_child_PID_Rv < 0)
         {
-            perror(argv[0]);
+            perror("Error");
             if (local_argv != NULL)
             {
                 free(local_argv);

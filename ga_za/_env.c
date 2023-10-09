@@ -6,8 +6,8 @@
  */
 void _env()
 {
-    extern char **environ;
-    char **dx;
+    extern _dou_p environ;
+    _dou_p dx;
 
     for (dx = environ; *dx; dx++)
     {

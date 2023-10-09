@@ -1,91 +1,52 @@
 #include "main.h"
 
 /**
- *
- *
+ * _strtok -
+ * @str:
+ * @_delimiters:
+ * Return: string
  */
 
-/*char *_strtok(char *str, char *_delimiters)
+string _strtok(string str, string _delimiters)
 {
-    static char *_str;
-    char *_shifter, *rv;
-    int x;
+    static string _sStr;
+    string _shifter, rv;
 
     if (str)
-        _str = str;
+        _sStr = str;
 
-    if (*_str == '\0')
+    while (_strchr(_delimiters, *_sStr) && *_sStr)
+    {
+        _sStr++;
+    }
+
+    if (*_sStr == '\0')
         return (NULL);
 
-    _shifter = _str;
+    _shifter = _sStr;
     rv = _shifter;
 
-    x = 0;
     while (*_shifter)
     {
-        if (_strchr(_delimiters, _shifter[x]))
+        if (_strchr(_delimiters, *_shifter))
         {
+            if (*_shifter == '\0')
+                _sStr = _shifter;
+            else
+                _sStr = _shifter + 1;
 
-            _str = _shifter + 1;
-            if (_str)
-                *_shifter = '\0';
+            *_shifter = '\0';
 
+            while (strchr(_delimiters, *_sStr) && *_sStr)
+            {
+                _sStr++;
+            }
             return (rv);
         }
         _shifter++;
     }
 
-    _str = _shifter;
+    _sStr = _shifter;
 
     return (rv);
 }
-
-*/
-
-char *_strtok(char *str, char *_delimiters)
-{
-    static char *_str;
-    char *_shifter, *rv;
-    int x;
-
-if (str)
-    _str = str;
-  
-   if (*_str == '\0')
-        return (NULL);
-
-
-if (str != NULL || _delimiters != NULL)
-   {
-     while (strchr(_delimiters, *_str) != NULL)
-    {
-      if (*_str == '\0')
-        return (NULL);
-      _str++;
-    }
-     
-    }
-    
-    _shifter = _str;
-    rv = _shifter;
-
-    x = 0;
-    while (*_shifter)
-    {
-        if (strchr(_delimiters, _shifter[x]))
-        {
-
-            _str = _shifter + 1;
-            if (_str)
-                *_shifter = '\0';
-
-            return (rv);
-        }
-        _shifter++;
-    }
-
-    _str = _shifter;
-
-    return (rv);
-}
-

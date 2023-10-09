@@ -16,11 +16,12 @@ string get_PATH(string cmmd)
     if (path)
     {
         path_cp = strdup(path);
-        int cmmd_length = strlen(cmmd);
+        int cmmd_length = _strlen(cmmd);
 
-        path_token = strtok(path_cp, ":");
+        path_token = _strtok(path_cp, ":");
         while (path_token != NULL)
         {
+            
             dir_length = strlen(path_token);
             string file_path = malloc(cmmd_length + dir_length + 2);
             if (!file_path)
@@ -30,7 +31,7 @@ string get_PATH(string cmmd)
             strcat(file_path, "/");
             strcat(file_path, cmmd);
             strcat(file_path, "\0");
-
+/*printf("%s\n", file_path);*/
             _stat = stat(file_path, &bffr);
             if (_stat == 0)
             {
@@ -40,7 +41,7 @@ string get_PATH(string cmmd)
             else
             {
                 free(file_path);
-                path_token = strtok(NULL, ":");
+                path_token = _strtok(NULL, ":");
             }
         }
 

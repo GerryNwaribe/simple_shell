@@ -24,17 +24,16 @@ int main(int _cxt, _dou_p argv, _dou_p env)
 		}
 		if (!(strcmp(getline_bffr, "\n")))
 			continue;
-
+/*printf("%s\n", getline_bffr);*/
 		local_argv = _tokenization(getline_bffr, " \n\t\r");
-		if (!(strcmp(local_argv[0], "env")))
+
+		if (!(_strcmp(local_argv[0], "env")))
 		{
 			_env();
 			continue;
 		}
-		if (!(strcmp(local_argv[0], "exit")))
-		{
+		if (!(_strcmp(local_argv[0], "exit")))
 			_exit_num(local_argv);
-		}
 
 		execmd(local_argv, env, argv);
 
