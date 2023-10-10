@@ -15,6 +15,11 @@
 
 typedef char *string;
 typedef char **_dou_p;
+typedef struct main
+{
+    string key_w;
+    int (*_func)(_dou_p dou_argv);
+} _is;
 
 extern _dou_p environ;
 
@@ -34,11 +39,12 @@ int _atoi(string s);
 void execmd(_dou_p local_argv, _dou_p env, _dou_p argv);
 _dou_p _tokenization(string str, string _delimiters);
 void _free(void *_malloc, int is_dou_p);
-void _exit_num(_dou_p local_argv);
+int (*_slt(string s))(_dou_p dou_argv);
+int _exit_num(_dou_p local_argv);
 string get_PATH(string cmmd);
 string _getenv(string str);
-void _cd(_dou_p cmmd);
-void _env(void);
-
+int _is_prsent(string str);
+int _cd(_dou_p cmmd);
+int _env(_dou_p cmmd);
 
 #endif /* End of if statement */

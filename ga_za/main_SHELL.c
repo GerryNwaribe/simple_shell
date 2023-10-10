@@ -11,7 +11,7 @@ int main(int _cxt, _dou_p argv, _dou_p env)
 {
 	size_t bffsz = 0;
 	string getline_bffr;
-	_dou_p dou_vctr;
+	_dou_p dou_argv;
 
 	(void)_cxt;
 	while (1)
@@ -23,28 +23,21 @@ int main(int _cxt, _dou_p argv, _dou_p env)
 			_putchar('\n');
 			exit(-1);
 		}
+
 		if (!(strcmp(getline_bffr, "\n")))
 			continue;
 
-		dou_vctr = _tokenization(getline_bffr, " \n\t\r");
+		dou_argv = _tokenization(getline_bffr, " \n\t\r");
 
-		if (dou_vctr && !(_strcmp(dou_vctr[0], "cd")))
+		if (dou_argv && (!(_is_prsent(dou_argv[0]))))
 		{
-			_cd(dou_vctr);			
+			_slt(dou_argv[0])(dou_argv);
 			continue;
 		}
 
-		if (dou_vctr && !(_strcmp(dou_vctr[0], "env")))
-		{
-			_env();
-			continue;
-		}
-		if (dou_vctr && !(_strcmp(dou_vctr[0], "exit")))
-			_exit_num(dou_vctr);
+		execmd(dou_argv, env, argv);
 
-		execmd(dou_vctr, env, argv);
-
-		free(dou_vctr);
+		free(dou_argv);
 		if (isatty(STDIN_FILENO) == 0)
 			break;
 	}
