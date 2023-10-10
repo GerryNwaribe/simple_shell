@@ -10,7 +10,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #define ERROR -1
-
+#define BUFSIZE 1024
 /*typedef char* string;
 typedef char** _dou_p;*/
 
@@ -19,6 +19,7 @@ int _print_string(char* st);
 void execute(char *argv[], char **env);
 char *locate(char *a);
 int _true_path(const char *pathname, struct stat *buffer);
+ssize_t _getline(char **str, size_t *a, FILE *stream);
 #endif /* End of if statement */
 
 /**

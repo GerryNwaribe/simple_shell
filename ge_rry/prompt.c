@@ -20,7 +20,7 @@ int main(int argc, char *argv[], char **env)
     {
         prompt_line = "$ ";
         _print_string(prompt_line);
-        handle_error = getline(&pointer_prompt, &size, stdin);
+        handle_error = _getline(&pointer_prompt, &size, stdin);
 
         if (handle_error == -1)
         {

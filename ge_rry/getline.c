@@ -7,17 +7,16 @@ ssize_t _getline(char **str, size_t *a, FILE *stream)
 {
     char *buffer;
     char *buffer2;
-    ssize_t bufsize = BUFSIZE;
+    ssize_t bufsize = 0;
     int num_char = 0;
     char readd;
     int index;
-    *str = buffer;
-    buffer = malloc(sizeof(char *) * bufsize);
+    buffer = malloc(sizeof(char *) * *buffer);
     if (buffer == NULL)
     {
         perror("sh");
         free(buffer);
-        return (-1);
+        return(NULL);
     }
     while (1)
     {
@@ -29,12 +28,12 @@ ssize_t _getline(char **str, size_t *a, FILE *stream)
     
     if (num_char >= bufsize - 1)
     {
-        buffer2 = malloc(sizeof(char *) * (bufsize * 2));
+        buffer2 = malloc(sizeof(char *) * *buffer);
         if (buffer2 == NULL)
         {
             perror("sh");
             free(buffer2);
-            return (-1);
+            return(NULL);
         }
     
         for (index = 0; index < num_char; index++)
@@ -42,10 +41,9 @@ ssize_t _getline(char **str, size_t *a, FILE *stream)
             buffer2[index] = buffer[index];
 
         }
-        /*free(buffer2);*/
+        free(buffer2);
         free(buffer);
         buffer = buffer2;
-        bufsize *= 2;
     }
     buffer[num_char++] = readd;
     }
@@ -54,8 +52,8 @@ ssize_t _getline(char **str, size_t *a, FILE *stream)
     if (bufsize == 0 && num_char == -1)
     {
         free(buffer);
-        return (-1);
+        return (NULL);
     }
     else
-    return (bufsize);
+    return (buffer);
 }
