@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/geegii/simple_shell/shell",
-      "program": "/home/geegii/simple_shell/shell/build/Debug/outDebug",
+      "cwd": "/home/geegii/simple_shell/ga_za",
+      "program": "/home/geegii/simple_shell/ga_za/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
