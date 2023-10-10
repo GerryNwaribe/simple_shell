@@ -11,6 +11,7 @@
 #include <ctype.h>
 
 #define ERROR -1
+#define _bffsz 1024
 
 typedef char *string;
 typedef char **_dou_p;
@@ -31,8 +32,11 @@ void _free(void *_malloc, int is_dou_p);
 void _exit_num(_dou_p local_argv);
 int _print_string(string st);
 string get_PATH(string cmmd);
+string _getenv(string str);
+void _cd(_dou_p cmmd);
 int _putchar(char c);
 void _env(void);
+
 
 extern _dou_p environ;
 

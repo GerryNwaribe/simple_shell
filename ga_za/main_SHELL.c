@@ -28,12 +28,18 @@ int main(int _cxt, _dou_p argv, _dou_p env)
 
 		local_argv = _tokenization(getline_bffr, " \n\t\r");
 
-		if (!(_strcmp(local_argv[0], "env")))
+		if (local_argv && !(_strcmp(local_argv[0], "cd")))
+		{
+			_cd(local_argv);			
+			continue;
+		}
+
+		if (local_argv && !(_strcmp(local_argv[0], "env")))
 		{
 			_env();
 			continue;
 		}
-		if (!(_strcmp(local_argv[0], "exit")))
+		if (local_argv && !(_strcmp(local_argv[0], "exit")))
 			_exit_num(local_argv);
 
 		execmd(local_argv, env, argv);
