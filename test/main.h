@@ -7,6 +7,8 @@
 #include <sys/wait.h>
 #include <string.h>
 #include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 #define ERROR -1
 
 /*typedef char* string;
@@ -15,7 +17,8 @@ typedef char** _dou_p;*/
 int _putchar(char c);
 int _print_string(char* st);
 void execute(char *argv[], char **env);
-
+char *locate(char *a);
+int _true_path(const char *pathname, struct stat *buffer);
 #endif /* End of if statement */
 
 /**

@@ -68,7 +68,7 @@ int main(int argc, char *argv[], char **env)
             token = strtok(NULL, limit);
         }
         /*execute command*/
-        execute(argv, env);
+       execute(argv, env);
 
         for (argv_count = 0; argv_count < a; argv_count++)
         {
