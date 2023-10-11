@@ -10,7 +10,7 @@
 ssize_t _getline(char **str, size_t *a, FILE *stream)
 {
     static char *buffer, *buffer2;
-    static ssize_t bufsize = BUFSIZE;
+    static ssize_t bufsize = _bffsz;
     int num_char = 0, index;
     char readd;
 
