@@ -1,15 +1,18 @@
 #include "main.h"
 /**
- * 
+ * _getline -
+ * @str:
+ * @a:
+ * @stream:
+ * Return:
  * 
 */
 ssize_t _getline(char **str, size_t *a, FILE *stream)
 {
-    char *buffer, *buffer2;
-    ssize_t bufsize = BUFSIZE;
+    static char *buffer, *buffer2;
+    static ssize_t bufsize = BUFSIZE;
     int num_char = 0, index;
     char readd;
-
 
     *str = buffer;
     buffer = malloc(sizeof(char *) * bufsize);
