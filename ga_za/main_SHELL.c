@@ -18,11 +18,14 @@ int main(int _cxt, _dou_p argv, _dou_p env)
 	{
 		if (isatty(STDIN_FILENO))
 			_print_string("[$] ");
+		
 		if ((getline(&getline_bffr, &bffsz, stdin)) == EOF)
 		{
+			
 			_putchar('\n');
 			exit(-1);
 		}
+
 
 		if (!(strcmp(getline_bffr, "\n")))
 			continue;
