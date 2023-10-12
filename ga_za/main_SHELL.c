@@ -19,9 +19,8 @@ int main(int _cxt, _dou_p argv, _dou_p env)
 		if (isatty(STDIN_FILENO))
 			_print_string("[$] ");
 		
-		if ((getline(&getline_bffr, &bffsz, stdin)) == EOF)
+		if ((_getline(&getline_bffr, &bffsz, STDIN_FILENO/* stdin */) == EOF))
 		{
-			
 			_putchar('\n');
 			exit(-1);
 		}

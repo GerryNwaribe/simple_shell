@@ -3,55 +3,61 @@
  * _getline -
  * @str:
  * @a:
- * @stream:
+ * @f_d:
  * Return:
  * 
 */
-ssize_t _getline(char **lineptr, size_t *n, FILE *f_d)
+ssize_t _getline(char **lineptr, size_t *n, int f_d)
 {
     char buffer;
-   ssize_t i = 0;
-    int fd = 0;
+   ssize_t i = 0, res = 0;
+    /*int fd = 0;*/
 
-    (void)f_d;    
+    /*(void)f_d;*/    
     if (*lineptr == NULL || *n == 0)
     {
-        *n = 80;  // Initial size of buffer
+        *n = 80;  /* Initial size of buffer */
+
         *lineptr = malloc(*n);
-        if (*lineptr == NULL) {
+        if (*lineptr == NULL)
             return -1;
-        }
     }
     
     while (1)
     {
-        ssize_t res = read(fd, &buffer, 1);
+        res = read(f_d, &buffer, 1);
+        printf("%li", res);
         if (res == -1)
         {
-            return -1;  // Error reading from file descriptor
-        } else if (res == 0)
-        {
-            break;  // End-of-file reached
-        } else
+            
+            free (*lineptr);
+            return (-1);  /* Error reading from file descriptor */
+        }
+
+        else if (res == 0)
+            break;  /* End-of-file reached */
+
+        else
         {
             (*lineptr)[i++] = buffer;
-            if (i == *n) {  // Buffer is full, need to allocate more space
-                *n *= 2;  // Double the size of buffer
+
+            if (i == *n)         /* Buffer is full, need to allocate more space */
+            { 
+                *n *= 2;  /* Double the size of buffer */
+
                 *lineptr = realloc(*lineptr, *n);
                 if (*lineptr == NULL)
-                {
-                    return -1;
-                }
+                    return (-1);
             }
+
            if (buffer == '\n')
-            {
-                break;  // Newline reached, end of line
-            }
+                break;  /* Newline reached, end of line */
+
         }
     }
-    
-    (*lineptr)[i] = '\0'; // Null-terminate the string
-    return i;  // Return number of characters read
+     printf("%li", i);
+    (*lineptr)[i] = '\0'; /* Null-terminate the string */
+    return (i);  /* Return number of characters read */
 }
 
 

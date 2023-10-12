@@ -37,7 +37,7 @@ int _isdigit(int c);
 int _atoi(string s);
 
 void execmd(_dou_p local_argv, _dou_p env, _dou_p argv);
-ssize_t _getline(char **lineptr, size_t *n, FILE *f_d);
+ssize_t _getline(char **lineptr, size_t *n, int f_d);
 _dou_p _tokenization(string str, string _delimiters);
 void _free(void *_malloc, int is_dou_p);
 int (*_slt(string s))(_dou_p dou_argv);
