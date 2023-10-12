@@ -5,7 +5,7 @@
  * @cmmd: The command from stdin who's path is to be found.
  * Return: void.
  */
-int _cd(_dou_p cmmd)
+int _cd(_dou_p cmmd, size_t line_num, _dou_p argv)
 {
 	const char *hm = _getenv("HOME");
 	const char *p_wd = _getenv("OLDPWD");
@@ -21,11 +21,22 @@ int _cd(_dou_p cmmd)
 				return (0);
 			}
 		}
-		else
-			perror("cd");
+		/*else
+			perror("cd");*/
 
 		if ((chdir(cmmd[1])))
-			perror("cd");
+		{
+			_print_string(argv[0]);
+			_print_string(": ");
+			_print_num(line_num, 0);
+			_print_string(": ");
+			_print_string(cmmd[0]);		/* sh: 3: cd: can't cd to g */
+			_print_string(": can't cd to ");
+			_print_string(cmmd[1]);
+			_putchar('\n');
+		}
+			
+
 		return (0);
 	}
 	else

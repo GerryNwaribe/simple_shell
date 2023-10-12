@@ -9,7 +9,7 @@
  */
 int main(int _cxt, _dou_p argv, _dou_p env)
 {
-	size_t bffsz = 0;
+	size_t bffsz = 0, line_num = 1;
 	string getline_bffr;
 	_dou_p dou_argv;
 
@@ -18,26 +18,29 @@ int main(int _cxt, _dou_p argv, _dou_p env)
 	{
 		if (isatty(STDIN_FILENO))
 			_print_string("[$] ");
-		
-		if ((_getline(&getline_bffr, &bffsz, STDIN_FILENO/* stdin */) == EOF))
+
+		if ((getline(&getline_bffr, &bffsz, /*STDIN_FILENO*/ stdin) == EOF))
 		{
+			/* ctrl D */
 			_putchar('\n');
 			exit(-1);
 		}
 
-
-		if (!(strcmp(getline_bffr, "\n")))
+		if (!(strcmp(getline_bffr, "\n"))) /* Handles New line */
+		{
+			line_num++;
 			continue;
+		}
 
 		dou_argv = _tokenization(getline_bffr, " \n\t\r");
 
 		if (dou_argv && (!(_is_prsent(dou_argv[0]))))
 		{
-			_slt(dou_argv[0])(dou_argv);
+			_slt(dou_argv[0])(dou_argv, line_num, argv);
 			continue;
 		}
 
-		execmd(dou_argv, env, argv);
+		_execmd(dou_argv, env, argv, line_num);
 
 		free(dou_argv);
 		if (isatty(STDIN_FILENO) == 0)

@@ -5,7 +5,7 @@
  * @s:
  * Return:
  */
-int (*_slt(string s))(_dou_p dou_argv)
+int (*_slt(string s))(_dou_p dou_argv, size_t line_num, _dou_p argv)
 {
 	int x;
 

@@ -7,7 +7,7 @@
  * @argv: Command line argument.
  *
  */
-void execmd(_dou_p local_argv, _dou_p env, _dou_p argv)
+void _execmd(_dou_p local_argv, _dou_p env, _dou_p argv, size_t line_num)
 {
 	int _exev_Rv, _status;
 	pid_t _child_PID_Rv;
@@ -18,8 +18,14 @@ void execmd(_dou_p local_argv, _dou_p env, _dou_p argv)
 	{
 		atl_cmmd = get_PATH(local_argv[0]);
 		if (atl_cmmd == NULL)
-		{
-			perror(argv[0]);
+		{										
+			_print_string(argv[0]);
+			_print_string(": ");
+			_print_num(line_num, 0);
+			_print_string(": ");
+			_print_string(local_argv[0]);		/*sh: 3: exi: not found*/
+			_print_string(": not found");
+			_putchar('\n');
 			return;
 		}
 
@@ -27,7 +33,7 @@ void execmd(_dou_p local_argv, _dou_p env, _dou_p argv)
 		if (_child_PID_Rv < 0)
 		{
 			perror(argv[0]);
-			if (local_argv != NULL)
+			if (local_argv != NULL)			/*ls: cannot access '11': No such file or directory*/
 			{
 				_free(local_argv, 1);
 				exit(EXIT_FAILURE);
