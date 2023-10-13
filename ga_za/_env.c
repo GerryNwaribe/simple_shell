@@ -4,9 +4,9 @@
  * _env - This function prints all environmental variables.
  * Void input and output.
  */
-int _env(_dou_p cmmd, size_t line_num, _dou_p argv)
+int _env(dou_p cmmd, size_t line_num, dou_p argv)
 {
-	_dou_p dx;
+	dou_p dx;
 
 	(void)cmmd;
 	(void)argv;

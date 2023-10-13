@@ -1,18 +1,18 @@
 #include "main.h"
 
 /**
- * _tokenization - Takes the string from stdin and tokenize into _dou_p
+ * _tokenization - Takes the string from stdin and tokenize into dou_p
  * @str: The string to be tokenized.
  * @_delimiters: The string of delimiters for parsing.
  * Return: A Double pointer.
  *
  */
-_dou_p _tokenization(string str, string _delimiters)
+dou_p _tokenization(string str, string _delimiters)
 {
 
 	string token;
 	int i = 0, _idx = 0;
-	_dou_p local_argv;
+	dou_p local_argv;
 
 	i = 0;
 	while (str[_idx] != '\0')

@@ -2,20 +2,21 @@
 
 /**
  * _free - This Function frees any kind of malloc (integer or string).
- * @_malloc: The memory location to be freed.
+ * @_mem: The memory location to be freed.
  * @is_dou_p: An indication for whether it is a array of pointers or not.
  * Return: Void.
  */
-void _free(void *_malloc, int is_dou_p)
+void _free(void *_mem, int is_dou_p)
 {
 	int x = 0;
+	void **alloc;
 
-	if (_malloc == NULL)
+	if (_mem == NULL)
 		return;
 
 	if (is_dou_p)
 	{
-		void **alloc = (void **)_malloc;
+		alloc = (void **)_mem;
 
 		for (; alloc[x]; x++)
 		{
@@ -24,5 +25,5 @@ void _free(void *_malloc, int is_dou_p)
 		}
 	}
 
-	free(_malloc);
+	free(_mem);
 }

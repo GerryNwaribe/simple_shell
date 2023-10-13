@@ -7,7 +7,7 @@
  * @argv: Command line argument.
  *
  */
-void _execmd(_dou_p local_argv, _dou_p env, _dou_p argv, size_t line_num)
+void _execmd(dou_p local_argv, dou_p env, dou_p argv, size_t line_num)
 {
 	int _exev_Rv, _status;
 	pid_t _child_PID_Rv;

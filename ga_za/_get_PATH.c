@@ -12,7 +12,8 @@ string get_PATH(string cmmd)
 	string path, path_cp, _token, file_path;
 	struct stat bffr;
 
-	path = getenv("PATH");
+	path = _getenv("PATH");
+_print_string(path);
 	if (path)
 	{
 		path_cp = _strdup(path);

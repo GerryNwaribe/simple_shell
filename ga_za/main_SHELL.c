@@ -7,11 +7,11 @@
  * @env: Environmental variable.
  * Return: returns 0 on success.
  */
-int main(int _cxt, _dou_p argv, _dou_p env)
+int main(int _cxt, dou_p argv, dou_p env)
 {
 	size_t bffsz = 0, line_num = 1;
 	string getline_bffr;
-	_dou_p dou_argv;
+	dou_p dou_argv;
 
 	(void)_cxt;
 	while (1)

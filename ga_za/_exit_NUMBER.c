@@ -4,7 +4,7 @@
  * _exit_num - Exits the Shell with an integer 'exit <N0>'
  * @local_argv: The string to be converted into an integer.
  */
-int _exit_num(_dou_p local_argv, size_t line_num, _dou_p argv)
+int _exit_num(dou_p local_argv, size_t line_num, dou_p argv)
 {
 	int x;
 

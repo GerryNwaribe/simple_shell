@@ -47,6 +47,5 @@ string _strtok(string str, string _delimiters)
 	}
 
 	_sStr = _shifter;
-
 	return (rv);
 }

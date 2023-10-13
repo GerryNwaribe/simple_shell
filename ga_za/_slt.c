@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * _slt -
- * @s:
- * Return:
+ * _slt - Loops & compares 's' with the struct 'key_w'
+ * @s: The string to be compared with 'key_w'
+ * Return: A function pointer if found, otherwise returns 0
  */
-int (*_slt(string s))(_dou_p dou_argv, size_t line_num, _dou_p argv)
+int (*_slt(string s))(dou_p dou_argv, size_t line_num, dou_p argv)
 {
 	int x;
 

@@ -6,47 +6,38 @@
  * @ptr: Pointer to the memory block to reallocate.
  * @old_size: Previous size (in bytes) of the memory block.
  * @new_size: New size (in bytes) for the reallocated memory block.
- *
  * Return: A pointer to the reallocated memory block or NULL on failure.
  */
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
+void *_realloc(void *ptr, size_t old_size, size_t new_size)
 {
-        unsigned int z;
-        char *pxr;              /* Declare a character pointer variable pxr. */
-        char *xld_pz;           /* Declare a character pointer variable xld_pz. */
+    char *new_mem = NULL;    /* Declare a character pointer variable new_mem. */
+    char *temp_ptr = ptr; /* Declare a character pointer variable temp_ptr. */
 
-        if (new_size == old_size)
-                return (ptr);         /* If sizes are the same, no reallocation needed. */
+    if (new_size == old_size)
+        return (ptr); /* If sizes are the same, no reallocation needed. */
 
-        if (new_size == 0 && ptr)
-        {
-                free(ptr);          /* If new_size is 0 and ptr is not NULL, free memory. */
-                return (NULL);
-        }
+    if (new_size == 0 && ptr)
+    {
+        free(ptr); /* If new_size is 0 and ptr is not NULL, free memory. */
+        return (NULL);
+    }
 
-        if (!ptr && new_size)
-                return (malloc(new_size));  /* If ptr is NULL, allocate new memory. */
+    if (!ptr && new_size)          /* If ptr is NULL, allocate new memory. */
+        return (malloc(new_size));
 
-        pxr = malloc(new_size);      /* Allocate memory for the reallocated block. */
-        if (!pxr)
-                return (NULL);             /* Return NULL if memory allocation fails. */
 
-        xld_pz = ptr;               /* Store the original pointer in xld_pz. */
+    new_mem = malloc(new_size); /* Allocate memory for the reallocated block. */
+    if (!new_mem)
+        return (NULL); /* Return NULL if memory allocation fails. */
 
-        if (new_size < old_size)
-        {
-                for (z = 0; z < new_size; z++)
-                        pxr[z] = xld_pz[z];  /* Copy data from old to new block. */
-        }
 
-        if (new_size > old_size)
-        {
-                /* Copy data from old to new block for sizes larger than the old block. */
-                for (z = 0; z < old_size; z++)
-                        pxr[z] = xld_pz[z];
-        }
+    if (new_size < old_size)
+        _strncmp(new_mem, temp_ptr, new_size);    /* Copy data from old to new block. */
 
-        free(ptr);            /* Free the old memory block. */
+    if (new_size > old_size)
+        /* Copy data from old to new block for sizes larger than the old block. */
+         _strncmp(new_mem, temp_ptr, old_size);
 
-        return (pxr);        /* Return a pointer to the reallocated memory block. */
+    free(ptr);      /* Free the old memory block. */
+    return (new_mem);   /* Return a pointer to the reallocated memory block. */
 }
