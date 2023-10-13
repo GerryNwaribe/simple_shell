@@ -6,7 +6,7 @@
  * @cmmd: The command from stdin who's path is to be found.
  * Return: A pointer to valid PAth or NULL if it doesn't exist.
  */
-string get_PATH(string cmmd)
+string _get_PATH(string cmmd)
 {
 	int dir_length, _stat, __stat;
 	string path, path_cp, _token, file_path;

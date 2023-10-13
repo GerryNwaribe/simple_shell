@@ -50,7 +50,7 @@ ssize_t _getline(char **lineptr, size_t *n, int f_d);
 dou_p _tokenization(string str, string _delimiters);
 void _free(void *_malloc, int is_dou_p);
 int _print_num(size_t _n, int _c);
-string get_PATH(string cmmd);
+string _get_PATH(string cmmd);
 string _getenv(string str);
 
 #endif /* End of Include Guard */

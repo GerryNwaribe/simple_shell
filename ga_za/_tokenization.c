@@ -22,7 +22,7 @@ dou_p _tokenization(string str, string _delimiters)
 		_idx++;
 	}
 
-	local_argv = malloc(sizeof(char *) * (i + 1));
+	local_argv = malloc(sizeof(char *) * (i + 3));
 
 	token = _strtok(str, _delimiters);
 

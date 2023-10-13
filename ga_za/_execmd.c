@@ -13,10 +13,11 @@ void _execmd(dou_p local_argv, dou_p env, dou_p argv, size_t line_num)
 	pid_t _child_PID_Rv;
 	string atl_cmmd = NULL;
 
-	(void)env;
+	/*(void)env;*/
 	if (local_argv)
 	{
-		atl_cmmd = get_PATH(local_argv[0]);
+		atl_cmmd = _get_PATH(local_argv[0]);
+
 		if (atl_cmmd == NULL)
 		{										
 			_print_string(argv[0]);
@@ -41,7 +42,7 @@ void _execmd(dou_p local_argv, dou_p env, dou_p argv, size_t line_num)
 		}
 		else if (_child_PID_Rv == 0)
 		{
-			_exev_Rv = execve(atl_cmmd, local_argv, env);
+			_exev_Rv = execve(atl_cmmd, local_argv, NULL);
 			if (_exev_Rv == ERROR)
 			{
 				perror(argv[0]);
@@ -50,5 +51,6 @@ void _execmd(dou_p local_argv, dou_p env, dou_p argv, size_t line_num)
 		}
 		else
 			wait(&_status);
+		
 	}
 }

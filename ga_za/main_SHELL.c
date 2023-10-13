@@ -9,7 +9,7 @@
  */
 int main(int _cxt, dou_p argv, dou_p env)
 {
-	size_t bffsz = 0, line_num = 1, x = 0;
+	size_t bffsz = 0, line_num = 1;
 	string getline_bffr;
 	dou_p dou_argv, semi_colon;
 
@@ -31,11 +31,12 @@ int main(int _cxt, dou_p argv, dou_p env)
 			continue;
 		}
 
-		semi_colon = _tokenization(getline_bffr, " ;");
 
-		while (semi_colon[x])
+		semi_colon = _tokenization(getline_bffr, ";");
+
+		for (; *semi_colon; semi_colon++)
 		{
-			dou_argv = _tokenization(semi_colon[x], " \n\t\r");
+			dou_argv = _tokenization(*semi_colon, " \n\t\r");
 
 			if (dou_argv && (!(_is_prsent(dou_argv[0]))))
 			{
@@ -44,11 +45,10 @@ int main(int _cxt, dou_p argv, dou_p env)
 			}
 
 			_execmd(dou_argv, env, argv, line_num);
-			x++;
 		}
 
 		/*_free(dou_argv, 1);*/
-		free(semi_colon);
+		free(dou_argv);
 		if (isatty(STDIN_FILENO) == 0)
 			break;
 	}

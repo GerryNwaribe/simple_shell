@@ -16,6 +16,7 @@ int _cd(dou_p cmmd, size_t line_num, dou_p argv)
 		{
 			if (!(_strcmp(cmmd[1], "-")))
 			{
+				/*printf("%s\n", cmmd[1]);*/
 				if (chdir(p_wd))
 					perror("cd");
 				return (0);
@@ -42,6 +43,7 @@ int _cd(dou_p cmmd, size_t line_num, dou_p argv)
 	{
 		if (hm)
 		{
+			
 			if (chdir(hm))
 				perror("cd: HOME");
 			return (0);
