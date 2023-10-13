@@ -36,18 +36,20 @@ int _putchar(char c);
 int _isdigit(int c);
 int _atoi(string s);
 
-void _execmd(_dou_p local_argv, _dou_p env, _dou_p argv, size_t line_num);
-ssize_t _getline(char **lineptr, size_t *n, int f_d);
-_dou_p _tokenization(string str, string _delimiters);
-void *_realloc(void *ptr, size_t new_sz);
-void _free(void *_malloc, int is_dou_p);
 int (*_slt(string s))(_dou_p dou_argv, size_t line_num, _dou_p argv);
 int _exit_num(_dou_p local_argv, size_t line_num, _dou_p argv);
+int _env(_dou_p cmmd, size_t line_num, _dou_p argv);
+int _cd(_dou_p cmmd, size_t line_num, _dou_p argv);
+int _is_prsent(string str);
+
+void _execmd(_dou_p local_argv, _dou_p env, _dou_p argv, size_t line_num);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+ssize_t _getline(char **lineptr, size_t *n, int f_d);
+_dou_p _tokenization(string str, string _delimiters);
+void _free(void *_malloc, int is_dou_p);
+int _print_num(size_t _n, int _c);
 string get_PATH(string cmmd);
 string _getenv(string str);
-int _is_prsent(string str);
-int _cd(_dou_p cmmd, size_t line_num, _dou_p argv);
-int _env(_dou_p cmmd, size_t line_num, _dou_p argv);
-int _print_num(size_t _n, int _c);
 
-#endif /* End of if statement */
+
+#endif /* End of Include Guard */
