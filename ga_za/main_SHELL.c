@@ -21,8 +21,7 @@ int main(int _cxt, dou_p argv, dou_p env)
 
 		if ((getline(&getline_bffr, &bffsz, /*STDIN_FILENO*/ stdin) == EOF))
 		{
-			/* ctrl D */
-			_putchar('\n');
+			_putchar('\n');	/* ctrl D */
 			exit(-1);
 		}
 

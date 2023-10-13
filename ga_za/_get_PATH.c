@@ -13,7 +13,7 @@ string get_PATH(string cmmd)
 	struct stat bffr;
 
 	path = _getenv("PATH");
-_print_string(path);
+
 	if (path)
 	{
 		path_cp = _strdup(path);
