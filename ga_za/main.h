@@ -24,6 +24,7 @@ typedef struct main
 
 extern dou_p environ;
 
+char *_strncpy(char *dest, char *src, size_t n);
 int _strncmp(char *str1, char *str2, size_t n);
 char *_strtok(string str, string _delimiters);
 char *_strcat(string dest, string src);
@@ -51,6 +52,5 @@ void _free(void *_malloc, int is_dou_p);
 int _print_num(size_t _n, int _c);
 string get_PATH(string cmmd);
 string _getenv(string str);
-
 
 #endif /* End of Include Guard */

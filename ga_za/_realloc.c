@@ -32,11 +32,11 @@ void *_realloc(void *ptr, size_t old_size, size_t new_size)
 
 
     if (new_size < old_size)
-        _strncmp(new_mem, temp_ptr, new_size);    /* Copy data from old to new block. */
+        _strncpy(new_mem, temp_ptr, new_size);    /* Copy data from old to new block. */
 
     if (new_size > old_size)
         /* Copy data from old to new block for sizes larger than the old block. */
-         _strncmp(new_mem, temp_ptr, old_size);
+         _strncpy(new_mem, temp_ptr, old_size);
 
     free(ptr);      /* Free the old memory block. */
     return (new_mem);   /* Return a pointer to the reallocated memory block. */
