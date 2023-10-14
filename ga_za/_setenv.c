@@ -9,37 +9,39 @@
  */
 int _setenv(const char *name, const char *value, int overwrite)
 {
-    if (name == NULL || value == NULL)
-        return -1; // Invalid input
 
-    char **env = environ;
-    char *new_var = malloc(strlen(name) + strlen(value) + 2); /* +2 for '=' and null terminator */
+    char **env = NULL;
+    char *new_var = malloc(sizeof(char) * (strlen(name) + strlen(value) + 2)); /* +2 for '=' and null terminator */
+    char *tmp = NULL;
 
-    if (new_var == NULL)
+    if (name == NULL || value == NULL || new_var == NULL)
     {
-        perror("Memory allocation failed");
-        return -1;
+        if (new_var == NULL)
+            perror("Memory allocation failed");
+        return (-1); /* Invalid input OR Mem err */
     }
-
     strcpy(new_var, name);
     strcat(new_var, "=");
     strcat(new_var, value);
 
     if (overwrite)
     {
+        env = environ;
         while (*env) /* If 'overwrite' is 1, replace the existing variable */
         {
-            if (strncmp(name, *env, strlen(name)) == 0) /* Replace the existing variable */
+            if (!(strncmp(name, *env, strlen(name)))) /* Replace the existing variable */
             {
+                tmp = *env;
                 *env = new_var;
-                free(new_var);
+                free(tmp);
                 return 0;
             }
             env++;
         }
     }
 
-    char **new_env = malloc(sizeof(char *) * (env - environ + 2)); /* If 'overwrite' is 0 or the variable doesn't exist, add the new variable */
+    env = environ;
+    char **new_env = malloc(sizeof(char *) * _bffsz); /* If 'overwrite' is 0 or the variable doesn't exist, add the new variable */
     if (new_env == NULL)
     {
         perror("Memory allocation failed");

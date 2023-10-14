@@ -31,7 +31,6 @@ int main(int _cxt, dou_p argv, dou_p env)
 			continue;
 		}
 
-
 		semi_colon = _tokenization(getline_bffr, ";&|"); /* Works fine for ';', not so well for '&&' and '||' */
 
 		for (; *semi_colon; semi_colon++)
@@ -43,6 +42,17 @@ int main(int _cxt, dou_p argv, dou_p env)
 				_slt(dou_argv[0])(dou_argv, line_num, argv);
 				continue;
 			}
+
+			if (dou_argv[2] && (!(_strcmp(dou_argv[0], "setenv"))))
+			{
+				_setenv(dou_argv[1], dou_argv[2], 1);
+				continue;
+			}
+			/*if (dou_argv[2] && (!(_strcmp(dou_argv[0], "setenv"))))
+			{
+				_setenv(dou_argv[1], dou_argv[2], 1);
+				continue;
+			}*/
 
 			_execmd(dou_argv, env, argv, line_num);
 		}
