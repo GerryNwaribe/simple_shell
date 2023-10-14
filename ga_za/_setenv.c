@@ -34,7 +34,7 @@ int _setenv(const char *name, const char *value, int overwrite)
                 tmp = *env;
                 *env = new_var;
                 free(tmp);
-                return 0;
+                return (0);
             }
             env++;
         }
@@ -46,7 +46,7 @@ int _setenv(const char *name, const char *value, int overwrite)
     {
         perror("Memory allocation failed");
         free(new_var);
-        return -1;
+        return (-1);
     }
 
     env = environ;
@@ -63,5 +63,5 @@ int _setenv(const char *name, const char *value, int overwrite)
 
     environ = new_env; /* Update the environment pointer */
 
-    return 0;
+    return (0);
 }

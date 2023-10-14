@@ -43,11 +43,6 @@ int main(int _cxt, dou_p argv, dou_p env)
 				continue;
 			}
 
-			if (dou_argv[2] && (!(_strcmp(dou_argv[0], "setenv"))))
-			{
-				_setenv(dou_argv[1], dou_argv[2], 1);
-				continue;
-			}
 			/*if (dou_argv[2] && (!(_strcmp(dou_argv[0], "setenv"))))
 			{
 				_setenv(dou_argv[1], dou_argv[2], 1);
