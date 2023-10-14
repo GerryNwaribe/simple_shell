@@ -32,7 +32,7 @@ int main(int _cxt, dou_p argv, dou_p env)
 		}
 
 
-		semi_colon = _tokenization(getline_bffr, ";");
+		semi_colon = _tokenization(getline_bffr, ";&|"); /* Works fine for ';', not so well for '&&' and '||' */
 
 		for (; *semi_colon; semi_colon++)
 		{
