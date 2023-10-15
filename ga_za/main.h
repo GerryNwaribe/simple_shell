@@ -40,12 +40,12 @@ int _atoi(string s);
 
 int (*_slt(string s))(dou_p dou_argv, size_t line_num, dou_p argv);
 int _exit_num(dou_p local_argv, size_t line_num, dou_p argv);
+int _setenv(dou_p dou_argv, size_t line_num, dou_p argv);
 int _env(dou_p cmmd, size_t line_num, dou_p argv);
 int _cd(dou_p cmmd, size_t line_num, dou_p argv);
 int _is_prsent(string str);
 
 void _execmd(dou_p local_argv, dou_p env, dou_p argv, size_t line_num);
-int _setenv(const char *name, const char *value, int over_write);
 void *_realloc(void *ptr, size_t old_size, size_t new_size);
 ssize_t _getline(char **lineptr, size_t *n, int f_d);
 dou_p _tokenization(string str, string _delimiters);

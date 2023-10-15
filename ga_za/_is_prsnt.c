@@ -8,7 +8,7 @@
 int _is_prsent(string str)
 {
 	int x;
-	char *_str[] = {"cd", "env", "exit", NULL};
+	char *_str[] = {"cd", "env", "exit", "setenv", NULL};
 
 	for (x = 0; _str[x]; x++)
 	{
