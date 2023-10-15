@@ -12,7 +12,7 @@ int _unsetenv(dou_p dou_argv, size_t line_num, dou_p argv)
 {
     (void)line_num;
     (void)argv;
-    char *name = dou_argv[1], *tmp = NULL;
+    char *name = dou_argv[1]/*, *tmp = NULL*/;
     char **env = environ;
     int x = 0;
 
@@ -31,7 +31,7 @@ int _unsetenv(dou_p dou_argv, size_t line_num, dou_p argv)
                 environ[x] = environ[x + 1];
             }
 
-            /*free(*env);*/
+            free(*env);
             return(0);
         }
         
@@ -39,3 +39,28 @@ int _unsetenv(dou_p dou_argv, size_t line_num, dou_p argv)
     
     return (-1);
 }
+
+
+/*int _unsetenv(const char *name) {
+    if (name == NULL) {
+        perror("unsetenv VARIABLE");
+        return -1; // Invalid input
+    }
+
+    
+    size_t name_length = strlen(name);
+
+    for (int i = 0; environ[i]; i++) {
+        if (strncmp(name, environ[i], name_length) == 0 && environ[i][name_length] == '=') {
+
+            for (int j = i; environ[j]; j++) {
+                environ[j] = environ[j + 1];
+            }
+
+            return 0; 
+        }
+    }
+
+    return -1; 
+}*/
+

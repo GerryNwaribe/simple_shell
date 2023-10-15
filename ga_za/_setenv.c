@@ -8,7 +8,7 @@
  * @line_num: UNUSED line count.
  * Return: 0 on success, -1 on failure
  */
-int _setenv(dou_p dou_argv, dou_p argv, size_t line_num)
+int _setenv(dou_p dou_argv, size_t line_num, dou_p argv)
 {
     (void)line_num;
     (void)argv;
