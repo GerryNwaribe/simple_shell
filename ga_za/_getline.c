@@ -26,17 +26,15 @@ ssize_t _getline(char **lineptr, size_t *n, int f_d)
 
     while (GERRY)
     {
-        res = read(f_d, &buffer, 1);
+        res = read(f_d, &buffer, strlen(buffer));
         printf("%li", res);
         if (res == -1)
         {
-
             free(*lineptr);
-            return (-1); /* Error reading from file descriptor */
+            return (ERROR); /* Error reading from file descriptor */
         }
         else if (res == 0)
-            break; /* End-of-file reached */
-
+            break;          /* End-of-file reached */
         else
         {
             (*lineptr)[i++] = buffer;
