@@ -14,6 +14,7 @@ int (*_slt(string s))(dou_p dou_argv, size_t line_num, dou_p argv)
 		{"env", &_env},
 		{"exit", &_exit_num},
 		{"setenv", &_setenv},
+		{"unsetenv", &_unsetenv},
 		{'\0', NULL},
 	};
 
