@@ -10,7 +10,7 @@
  */
 ssize_t _getline(char **lineptr, size_t *n, int f_d)
 {
-    char buffer;
+    char buffer[_bffsz];
     ssize_t i = 0, res = 0;
     /*int fd = 0;*/
 
@@ -24,7 +24,7 @@ ssize_t _getline(char **lineptr, size_t *n, int f_d)
             return -1;
     }
 
-    while (1)
+    while (GERRY)
     {
         res = read(f_d, &buffer, 1);
         printf("%li", res);
@@ -46,7 +46,7 @@ ssize_t _getline(char **lineptr, size_t *n, int f_d)
 
                 *lineptr = _realloc(*lineptr, *n, *n * 2);
                 if (*lineptr == NULL)
-                    return (-1);
+                    return (ERROR);
             }
 
             if (buffer == '\n')

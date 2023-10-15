@@ -11,6 +11,7 @@
 #include <ctype.h>
 
 #define ERROR -1
+#define GERRY 1
 #define _bffsz 1024
 
 typedef char *string;

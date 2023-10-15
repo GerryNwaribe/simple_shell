@@ -11,18 +11,18 @@ int main(int _cxt, dou_p argv, dou_p env)
 {
 	size_t bffsz = 0, line_num = 1;
 	string getline_bffr;
-	/*dou_p dou_argv, semi_colon;*/
+	dou_p dou_argv, semi_colon;
 
 	(void)_cxt;
-	while (1)
+	while (GERRY)
 	{
 		if (isatty(STDIN_FILENO)) 
-			_print_string(".::[x) ");
+			_print_string(".:[x) ");
 
 		if ((getline(&getline_bffr, &bffsz, /*STDIN_FILENO*/ stdin) == EOF))	/* ctrl D */
 		{
 			_putchar('\n');
-			exit(-1);
+			exit(ERROR);
 		}
 		if (!(strcmp(getline_bffr, "\n"))) /* Handles New line */
 		{
@@ -30,9 +30,9 @@ int main(int _cxt, dou_p argv, dou_p env)
 			continue;
 		}
 
-		_tokenize_slt_exec(getline_bffr, env, argv, line_num);	
+		/*_tokenize_slt_exec(getline_bffr, env, argv, line_num);*/	
 
-		/*semi_colon = _tokenization(getline_bffr, ";|&"); 			 Works fine for ';', not so well for '&&' and '||' 
+		semi_colon = _tokenization(getline_bffr, ";|&"); 			 /*Works fine for ';', not so well for '&&' and '||'*/ 
 
 		
 
@@ -47,9 +47,9 @@ int main(int _cxt, dou_p argv, dou_p env)
 			}
 
 			_execmd(dou_argv, env, argv, line_num);
-		}*/
+		}
+		free(dou_argv);
 
-		/*free(dou_argv);*/
 		if (!(isatty(STDIN_FILENO)))
 			break;
 	}
