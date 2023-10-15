@@ -2,12 +2,13 @@
 
 /**
  * _setenv - Function to set or update an environment variable
- * @name: Name of the environment variable
- * @value: Value to assign to the environment variable
- * @overwrite: If 1, overwrite the variable if it already exists; if 0, do not overwrite
+ * @dou_argv: [0] Name of the environment variable
+ *              [1] Value to assign to the environment variable.
+ * @argv: UNUSED argument vector.
+ * @line_num: UNUSED line count.
  * Return: 0 on success, -1 on failure
  */
-int _setenv(dou_p dou_argv, size_t line_num, dou_p argv)
+int _setenv(dou_p dou_argv, dou_p argv, size_t line_num)
 {
     (void)line_num;
     (void)argv;
@@ -20,7 +21,11 @@ int _setenv(dou_p dou_argv, size_t line_num, dou_p argv)
     if (name == NULL || value == NULL || new_var == NULL)
     {
         if (new_var == NULL)
+        {
             perror("Memory allocation failed");
+            return (-1);
+        }
+        perror("setenv VARIABLE VALUE");
         return (-1); /* Invalid input OR Mem err */
     }
     _strcpy(new_var, name);

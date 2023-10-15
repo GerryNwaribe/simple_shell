@@ -17,7 +17,7 @@ int main(int _cxt, dou_p argv, dou_p env)
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-			_print_string("[$] ");
+			_print_string("[x] ");
 
 		if ((getline(&getline_bffr, &bffsz, /*STDIN_FILENO*/ stdin) == EOF))
 		{
@@ -39,6 +39,11 @@ int main(int _cxt, dou_p argv, dou_p env)
 			if (dou_argv && (!(_is_prsent(dou_argv[0]))))
 			{
 				_slt(dou_argv[0])(dou_argv, line_num, argv);
+				continue;
+			}
+			if (dou_argv[1] && (!(_strcmp(dou_argv[0], "unsetenv"))))
+			{
+				_unsetenv(dou_argv, line_num, argv);
 				continue;
 			}
 

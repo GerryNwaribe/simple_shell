@@ -47,6 +47,7 @@ int _is_prsent(string str);
 
 void _execmd(dou_p local_argv, dou_p env, dou_p argv, size_t line_num);
 void *_realloc(void *ptr, size_t old_size, size_t new_size);
+int _unsetenv(dou_p dou_argv, size_t line_num, dou_p argv);
 ssize_t _getline(char **lineptr, size_t *n, int f_d);
 dou_p _tokenization(string str, string _delimiters);
 void _free(void *_malloc, int is_dou_p);
