@@ -46,6 +46,7 @@ int _env(dou_p cmmd, size_t line_num, dou_p argv);
 int _cd(dou_p cmmd, size_t line_num, dou_p argv);
 int _is_prsent(string str);
 
+int _tokenize_slt_exec(string getline_bffr,dou_p env, dou_p argv, size_t line_num);
 void _execmd(dou_p local_argv, dou_p env, dou_p argv, size_t line_num);
 void *_realloc(void *ptr, size_t old_size, size_t new_size);
 ssize_t _getline(char **lineptr, size_t *n, int f_d);
