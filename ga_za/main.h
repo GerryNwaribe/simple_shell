@@ -57,6 +57,6 @@ void _free(void *_malloc, int is_dou_p);
 int _print_num(size_t _n, int _c);
 string _get_PATH(string cmmd);
 string _getenv(string str);
-
+int _and(char *cmd_one, char *cmd_two);
 
 #endif /* End of Include Guard */
