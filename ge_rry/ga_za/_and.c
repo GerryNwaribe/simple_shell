@@ -34,7 +34,6 @@ int _and(char *cmd_one, char *cmd_two)
             free(two);
             return (-1);
          }
-    
 
     pid_t pid1 = fork();
     int status;
