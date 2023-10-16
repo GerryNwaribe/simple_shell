@@ -5,7 +5,51 @@
 */
 int _and(char *cmd_one, char *cmd_two)
 {
-    pid_t pid;
+   char *one;
+    char *two;
+    char buffer[_BFFSZ];
+    char **tokens;
+
+    tokens = _tokenization(buffer, "||");
+    one = malloc(strlen(cmd_one) + 1);
+    two = malloc(strlen(cmd_two) + 1);
+    
+    if (one == NULL || two == NULL) 
+    {
+        perror("Error: Malloc failed");
+        return (-1);
+    }
+    
+    _strcpy(one, cmd_one);
+    _strcpy(two, cmd_two);
+
+    if (tokens == NULL)
+        return (1);
+    if (strcmp(one, two) == 0)
+    return(0);
+    
+        if (*one > 0 && *two == 0 || *one == 0 && *two > 0 || *one == 0 && *two == 0)
+        {
+            free(one);
+            free(two);
+            return (-1);
+         }
+    
+
+    pid_t pid1 = fork();
+    int status;
+    if(pid1 == 0)
+    {
+    
+        free(one);
+        free(two);
+        return (1);
+    }
+}
+
+
+
+/* pid_t pid;
     int status;
     char buffer[_BFFSZ];
     char **tokens;
@@ -64,47 +108,4 @@ int _and(char *cmd_one, char *cmd_two)
             return -1;
         }
         return WEXITSTATUS(status);
-    }
-}
-
-/*char *one;
-    char *two;
-    char buffer[_BFFSZ];
-    char **tokens;
-
-    tokens = _tokenization(buffer, "&&");
-    one = malloc(strlen(cmd_one) + 1);
-    two = malloc(strlen(cmd_two) + 1);
-    
-    if (one == NULL || two == NULL) 
-    {
-        perror("Error: Malloc failed");
-        return (-1);
-    }
-    
-    _strcpy(one, cmd_one);
-    _strcpy(two, cmd_two);
-
-    if (tokens == NULL)
-        return (1);
-
-    
-        if (*one > 0 && *two == 0 || *one == 0 && *two > 0 || *one == 0 && *two == 0)
-        {
-            free(one);
-            free(two);
-            return (-1);
-         }
-    
-
-    pid_t pid1 = fork();
-    int status;
-    if(pid1 == 0)
-    {
-    
-        free(one);
-        free(two);
-        return (1);
     }*/
-
-
