@@ -19,11 +19,12 @@ int main(int _cxt, dou_p argv, dou_p env)
 		if (isatty(STDIN_FILENO)) 
 			_print_string(".:[x) ");
 
-		if ((_getline(&getline_ptr, &bffsz, STDIN_FILENO/*stdin*/) == EOF))	/* ctrl D */
+		if ((_getline(&getline_ptr, &bffsz, STDIN_FILENO) == EOF))	/* ctrl D */
 		{
 			_putchar('\n');
 			exit(ERROR);
 		}
+		
 		if (!(strcmp(getline_ptr, "\n"))) /* Handles New line */
 		{
 			line_num++;
@@ -53,6 +54,6 @@ int main(int _cxt, dou_p argv, dou_p env)
 		if (!(isatty(STDIN_FILENO)))
 			break;
 	}
-	free(getline_ptr);
+	/*free(getline_ptr);*/
 	return (0);
 }
