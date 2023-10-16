@@ -10,14 +10,15 @@
  */
 int _setenv(dou_p dou_argv, size_t line_num, dou_p argv)
 {
-    (void)line_num;
-    (void)argv;
+    
     char *name = dou_argv[1];
     char *value = dou_argv[2];
     char **env = environ;
     char *new_var = malloc(sizeof(char) * (_strlen(name) + _strlen(value) + 2)); /* +2 for '=' and null terminator */
     int dx = 0;
 
+    (void)line_num;
+    (void)argv;
     if (name == NULL || value == NULL || new_var == NULL)
     {
         if (new_var == NULL)

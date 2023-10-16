@@ -8,7 +8,7 @@
  */
 string _get_PATH(string cmmd)
 {
-	int dir_length, _stat, __stat;
+	int dir_length, _stat, __stat, cmmd_length;
 	string path, path_cp, _token, file_path;
 	struct stat bffr;
 
@@ -17,7 +17,7 @@ string _get_PATH(string cmmd)
 	if (path)
 	{
 		path_cp = _strdup(path);
-		int cmmd_length = _strlen(cmmd);
+		cmmd_length = _strlen(cmmd);
 
 		_token = _strtok(path_cp, ":");
 		while (_token != NULL)

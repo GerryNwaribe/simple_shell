@@ -2,58 +2,49 @@
 
 /**
  * _getline -
- * @str:
- * @a:
+ * @lineptr:
+ * @n:
  * @f_d:
  * Return:
  *
  */
 ssize_t _getline(char **lineptr, size_t *n, int f_d)
 {
-    char buffer[_bffsz];
-    ssize_t i = 0, res = 0;
-    /*int fd = 0;*/
+    char buffer[1024];
+    ssize_t i = 0, res;
 
-    /*(void)f_d;*/
     if (*lineptr == NULL || *n == 0)
     {
-        *n = 100; /* Initial size of buffer */
-
-        *lineptr = malloc(*n);
+        *n = 1024; /* Initial size of buffer */
+        *lineptr = (char *)malloc(sizeof(char) * (*n));
         if (*lineptr == NULL)
             return -1;
     }
 
-    while (GERRY)
+    while ((res = read(f_d, buffer, sizeof(buffer))) > 0)
     {
-        res = read(f_d, &buffer, strlen(buffer));
-        printf("%li", res);
-        if (res == -1)
+        if (i + res >= *n) /* Buffer is full, need to allocate more space */
         {
-            free(*lineptr);
-            return (ERROR); /* Error reading from file descriptor */
+            *n *= 2;
+            *lineptr = (char *)realloc(*lineptr, *n);
+            if (*lineptr == NULL)
+                return -1;
         }
-        else if (res == 0)
-            break;          /* End-of-file reached */
-        else
-        {
-            (*lineptr)[i++] = buffer;
 
-            if (i == *n) /* Buffer is full, need to allocate more space */
-            {
+        strcpy(*lineptr + i, buffer);
+        i += res;
 
-                *lineptr = _realloc(*lineptr, *n, *n * 2);
-                if (*lineptr == NULL)
-                    return (ERROR);
-            }
-
-            if (buffer == '\n')
-                break; /* Newline reached, end of line */
-        }
+        if (strchr(buffer, '\n') != NULL)
+            break;  /* Newline reached, end of line */
     }
-    printf("%li", i);
+
+    if (i == 0 && res == -1)
+    {
+        return -1;  /* Error occurred during read */
+    }
+
     (*lineptr)[i] = '\0'; /* Null-terminate the string */
-    return (i);           /* Return number of characters read */
+    return i;             /* Return number of characters read */
 }
 
 /*ssize_t _getline(char **str, size_t *a, FILE *stream)

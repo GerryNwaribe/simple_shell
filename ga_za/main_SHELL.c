@@ -48,7 +48,7 @@ int main(int _cxt, dou_p argv, dou_p env)
 
 			_execmd(dou_argv, env, argv, line_num);
 		}
-		free(dou_argv);
+		/*free(dou_argv);*/
 
 		if (!(isatty(STDIN_FILENO)))
 			break;

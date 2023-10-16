@@ -10,12 +10,13 @@
  */
 int _unsetenv(dou_p dou_argv, size_t line_num, dou_p argv)
 {
-    (void)line_num;
-    (void)argv;
+    
     char *name = dou_argv[1]/*, *tmp = NULL*/;
     char **env = environ;
     int x = 0;
 
+    (void)line_num;
+    (void)argv;
     if (name == NULL)   /* Invalid input OR Mem err */
     {
         perror("unsetenv VARIABLE");

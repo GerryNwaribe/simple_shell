@@ -6,7 +6,7 @@
  */
 int _exit_num(dou_p local_argv, size_t line_num, dou_p argv)
 {
-	int x;
+	int x, _no;
 
 	(void)argv;
 	(void)line_num;
@@ -23,7 +23,7 @@ int _exit_num(dou_p local_argv, size_t line_num, dou_p argv)
 				exit(-1);
 		}
 
-		int _no = _atoi(local_argv[1]);
+		_no = _atoi(local_argv[1]);
 
 		exit(_no);
 	}
