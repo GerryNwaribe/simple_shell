@@ -10,6 +10,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <ctype.h>
+#include <string.h>
 
 #define ERROR -1
 #define GERRY 1
