@@ -12,6 +12,7 @@ ssize_t _getline(char **getlineptr, size_t *bffsz, int f_d)
 {
     char buffer[1024];
     ssize_t i = 0, res;
+    char *new_getline_ptr;
 
     if (*getlineptr == NULL || *bffsz == 0)
     {
@@ -27,11 +28,18 @@ ssize_t _getline(char **getlineptr, size_t *bffsz, int f_d)
        if (i + res >= *bffsz)      /*Buffer is full, need to allocate more space */
         {
             *bffsz *= 2;
-            *getlineptr = (char *)realloc(*getlineptr, *bffsz);
-            if (*getlineptr == NULL)
+            new_getline_ptr = (char *)realloc(*getlineptr, *bffsz);
+            if (new_getline_ptr == NULL)
                 return -1;
         }
-
+         *getlineptr = new_getline_ptr;
+         
+         if (i + res < *bffsz)
+        {
+            strncpy(*getlineptr + i, buffer, res);
+            i += res;
+        }
+        
         strcpy(*getlineptr /*+ i*/, buffer);
         i += res;
 
@@ -39,12 +47,12 @@ ssize_t _getline(char **getlineptr, size_t *bffsz, int f_d)
             break;  /* Newline reached, end of line */
     }
 
-    if (i == 0 && res == -1)
+    if (i == 0 && res == 0)
     {
         return -1;  /* Error occurred during read */
     }
 
     (*getlineptr)[i] = '\0'; /* Null-terminate the string */
-    printf("%lu\n", i);
+    
     return i;             /* Return number of characters read */
 }
