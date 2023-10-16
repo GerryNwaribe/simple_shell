@@ -19,7 +19,7 @@ int main(int _cxt, dou_p argv, dou_p env)
 		if (isatty(STDIN_FILENO)) 
 			_print_string(".:[x) ");
 
-		if ((getline(&getline_ptr, &bffsz, /*STDIN_FILENO*/stdin) == EOF))	/* ctrl D */
+		if ((_getline(&getline_ptr, &bffsz, STDIN_FILENO/*stdin*/) == EOF))	/* ctrl D */
 		{
 			_putchar('\n');
 			exit(ERROR);
