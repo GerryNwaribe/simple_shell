@@ -2,114 +2,62 @@
 
 /**
  * _getline -
- * @str:
- * @a:
+ * @getlineptr:
+ * @bffsz:
  * @f_d:
  * Return:
  *
  */
-ssize_t _getline(char **lineptr, size_t *n, int f_d)
+ssize_t _getline(char **getlineptr, size_t *bffsz, int f_d);
+ssize_t _getline(char **getlineptr, size_t *bffsz, int f_d)
 {
-    char buffer;
-    ssize_t i = 0, res = 0;
-    /*int fd = 0;*/
+    char *buffr = NULL;
+    ssize_t total_rd = 0;
+    ssize_t rd;
 
-    /*(void)f_d;*/
-    if (*lineptr == NULL || *n == 0)
+    if (*bffsz == 0) 
     {
-        *n = 100; /* Initial size of buffer */
-
-        *lineptr = malloc(*n);
-        if (*lineptr == NULL)
-            return -1;
+        *bffsz = _BFFSZ;
     }
 
-    while (1)
+    buffr = (char *)malloc(*bffsz);
+    if (buffr == NULL) 
     {
-        res = read(f_d, &buffer, 1);
-        printf("%li", res);
-        if (res == -1)
-        {
+        perror("Error: Malloc failed");
+        exit(99);
+    }
+    *getlineptr = buffr;
 
-            free(*lineptr);
-            return (-1); /* Error reading from file descriptor */
-        }
-        else if (res == 0)
-            break; /* End-of-file reached */
-
-        else
-        {
-            (*lineptr)[i++] = buffer;
-
-            if (i == *n) /* Buffer is full, need to allocate more space */
+    do {
+        if (total_rd == *bffsz) 
+        { 
+            *bffsz *= 2;
+            buffr = (char *)_realloc(buffr, *bffsz);
+            if (buffr == NULL) 
             {
-
-                *lineptr = _realloc(*lineptr, *n, *n * 2);
-                if (*lineptr == NULL)
-                    return (-1);
+                perror("Error: Realloc failed");
+                exit(99);
             }
-
-            if (buffer == '\n')
-                break; /* Newline reached, end of line */
-        }
-    }
-    printf("%li", i);
-    (*lineptr)[i] = '\0'; /* Null-terminate the string */
-    return (i);           /* Return number of characters read */
-}
-
-/*ssize_t _getline(char **str, size_t *a, FILE *stream)
-{
-    static char *buffer, *buffer2;
-    static ssize_t bufsize = _bffsz;
-    int num_char = 0, index;
-    char readd;
-
-    *str = buffer;
-    buffer = malloc(sizeof(char *) * bufsize);
-    if (buffer == NULL)
-    {
-        perror("Error");
-        free(buffer);
-        return (-1);
-    }
-    while (1)
-    {
-        readd = getchar();
-        if (readd == -1 || readd == '\n')
-        {
-            break;
+            *getlineptr = buffr;
         }
 
-    if (num_char >= bufsize - 1)
-    {
-        buffer2 = malloc(sizeof(char *) * (bufsize * 2));
-        if (buffer2 == NULL)
+        rd = read(f_d, buffr + total_rd, *bffsz - total_rd);
+        if (rd < 0) 
         {
-            perror("sh");
-            free(buffer2);
+            perror("Error: Can't read from file");
+            free(buffr);
+            exit(98);
+        } 
+        else if (rd == 0) 
+        { 
+            free(buffr);
             return (-1);
         }
+        total_rd += rd;
 
-        for (index = 0; index < num_char; index++)
-        {
-            buffer2[index] = buffer[index];
+    } while (rd > 0 && buffr[total_rd - 1] != '\n');
 
-        }
-        free(buffer2);
-        free(buffer);
-        buffer = buffer2;
-        bufsize *= 2;
-    }
-    buffer[num_char++] = readd;
-    }
-    buffer[num_char] = '\0';
+    buffr[total_rd] = '\0'; 
 
-    if (bufsize == 0 && num_char == -1)
-    {
-        free(buffer);
-        return (-1);
-    }
-    else
-    return (bufsize);
-}*/
+    return (total_rd);
+}

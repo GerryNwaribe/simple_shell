@@ -8,13 +8,12 @@
  * @new_size: New size (in bytes) for the reallocated memory block.
  * Return: A pointer to the reallocated memory block or NULL on failure.
  */
-void *_realloc(void *ptr, size_t old_size, size_t new_size)
+void *_realloc(void *ptr, /*size_t old_size,*/ size_t new_size)
 {
     char *new_mem = NULL;    /* Declare a character pointer variable new_mem. */
     char *temp_ptr = ptr; /* Declare a character pointer variable temp_ptr. */
 
-    if (new_size == old_size)
-        return (ptr); /* If sizes are the same, no reallocation needed. */
+
 
     if (new_size == 0 && ptr)
     {
@@ -31,12 +30,12 @@ void *_realloc(void *ptr, size_t old_size, size_t new_size)
         return (NULL); /* Return NULL if memory allocation fails. */
 
 
-    if (new_size < old_size)
+   /* if (new_size < old_size)*/
         _strncpy(new_mem, temp_ptr, new_size);    /* Copy data from old to new block. */
 
-    if (new_size > old_size)
-        /* Copy data from old to new block for sizes larger than the old block. */
-         _strncpy(new_mem, temp_ptr, old_size);
+    /*if (new_size > old_size)
+         Copy data from old to new block for sizes larger than the old block. 
+         _strncpy(new_mem, temp_ptr, old_size);*/
 
     free(ptr);      /* Free the old memory block. */
     return (new_mem);   /* Return a pointer to the reallocated memory block. */
