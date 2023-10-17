@@ -6,7 +6,7 @@
  */
 int _exit_num(_dou_p local_argv)
 {
-	int x;
+	int x, _no;
 
 	if (local_argv[1])
 	{
@@ -20,7 +20,7 @@ int _exit_num(_dou_p local_argv)
 				exit(-1);
 		}
 
-		int _no = _atoi(local_argv[1]);
+		_no = _atoi(local_argv[1]);
 
 		exit(_no);
 	}

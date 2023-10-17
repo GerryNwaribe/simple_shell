@@ -11,13 +11,16 @@ void execmd(_dou_p local_argv, _dou_p env, _dou_p argv)
 {
 	int _exev_Rv, _status;
 	pid_t _child_PID_Rv;
-	string atl_cmmd = NULL;
+	string __addr = NULL;
+	char _addr[_BFFSZ];
 
 	(void)env;
 	if (local_argv)
 	{
-		atl_cmmd = get_PATH(local_argv[0]);
-		if (atl_cmmd == NULL)
+		__addr = get_PATH(local_argv[0]);
+		strcpy(_addr, __addr);
+		_free(__addr, 0);
+		if (_addr == NULL)
 		{
 			perror(argv[0]);
 			return;
@@ -35,7 +38,7 @@ void execmd(_dou_p local_argv, _dou_p env, _dou_p argv)
 		}
 		else if (_child_PID_Rv == 0)
 		{
-			_exev_Rv = execve(atl_cmmd, local_argv, env);
+			_exev_Rv = execve(_addr, local_argv, env);
 			if (_exev_Rv == ERROR)
 			{
 				perror(argv[0]);

@@ -19,10 +19,17 @@ void _free(void *_malloc, int is_dou_p)
 
 		for (; alloc[x]; x++)
 		{
-			if (alloc[x])
+			if (alloc[x] != NULL)
+			{
 				free(alloc[x]);
+				alloc = NULL;
+			}
 		}
 	}
 
-	free(_malloc);
+	if (_malloc != NULL)
+	{
+		free(_malloc);
+		_malloc = NULL;
+	}
 }
