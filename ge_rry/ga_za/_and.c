@@ -13,6 +13,83 @@ int _and(char *cmd_one, char *cmd_two)
     tokens = _tokenization(buffer, "||");
     one = malloc(strlen(cmd_one) + 1);
     two = malloc(strlen(cmd_two) + 1);
+
+    if (one == NULL || two == NULL)
+    {
+        perror("Error: Malloc failed");
+        return -1;
+    }
+
+    _strcpy(one, cmd_one);
+    _strcpy(two, cmd_two);
+
+    if (tokens == NULL)
+        return 1;
+
+    if (strcmp(one, two) == 0)
+    {
+       
+        int result = system(one);
+        free(one);
+        free(two);
+        return result;
+    }
+
+    pid_t pid1 = fork();
+    int status;
+    if (pid1 == 0)
+    {
+       
+        int result = system(one);
+        free(one);
+        free(two);
+        exit(result);
+    }
+    else
+    {
+     
+        if (waitpid(pid1, &status, 0) == -1)
+        {
+            perror("Error: Waitpid failed");
+            return -1;
+        }
+        if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
+        {
+           
+            free(one);
+            free(two);
+            return WEXITSTATUS(status);
+        }
+    }
+
+    pid_t pid2 = fork();
+    if (pid2 == 0)
+    {
+      
+        int result = system(two);
+        free(one);
+        free(two);
+        exit(result);
+    }
+    else
+    {
+        
+        if (waitpid(pid2, &status, 0) == -1)
+        {
+            perror("Error: Waitpid failed");
+            return -1;
+        }
+        return WEXITSTATUS(status);
+    }
+}
+/*char *one;
+    char *two;
+    char buffer[_BFFSZ];
+    char **tokens;
+
+    tokens = _tokenization(buffer, "||");
+    one = malloc(strlen(cmd_one) + 1);
+    two = malloc(strlen(cmd_two) + 1);
     
     if (one == NULL || two == NULL) 
     {
@@ -34,7 +111,11 @@ int _and(char *cmd_one, char *cmd_two)
             free(two);
             return (-1);
          }
-
+    if (*one == *two)
+    {
+        exit;
+        return (1);
+    }
     pid_t pid1 = fork();
     int status;
     if(pid1 == 0)
@@ -43,9 +124,7 @@ int _and(char *cmd_one, char *cmd_two)
         free(one);
         free(two);
         return (1);
-    }
-}
-
+    }*/
 
 
 /* pid_t pid;
