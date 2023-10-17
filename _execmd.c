@@ -1,11 +1,12 @@
 #include "main.h"
 
 /**
- * execmd - Handles the exec of valid PATH.
+ * _execmd - Handles the exec of valid PATH.
  * @local_argv: Tokenized string gotten from stdin.
  * @env: Environmental variables.
  * @argv: Command line argument.
- *
+ * @line_num: line number
+ * Return: void
  */
 void _execmd(dou_p local_argv, dou_p env, dou_p argv, size_t line_num)
 {
@@ -13,13 +14,11 @@ void _execmd(dou_p local_argv, dou_p env, dou_p argv, size_t line_num)
 	pid_t _child_PID_Rv;
 	string atl_cmmd = NULL;
 
-	/*(void)env;*/
 	if (local_argv)
 	{
 		atl_cmmd = _get_PATH(local_argv[0]);
-
 		if (atl_cmmd == NULL)
-		{										
+		{
 			_print_string(argv[0]);
 			_print_string(": ");
 			_print_num(line_num, 0);
@@ -29,12 +28,11 @@ void _execmd(dou_p local_argv, dou_p env, dou_p argv, size_t line_num)
 			_putchar('\n');
 			return;
 		}
-
 		_child_PID_Rv = fork();
 		if (_child_PID_Rv < 0)
 		{
 			perror(argv[0]);
-			if (local_argv != NULL)			/*ls: cannot access '11': No such file or directory*/
+			if (local_argv != NULL)
 			{
 				_free(local_argv, 1);
 				exit(EXIT_FAILURE);
@@ -51,6 +49,5 @@ void _execmd(dou_p local_argv, dou_p env, dou_p argv, size_t line_num)
 		}
 		else
 			wait(&_status);
-		
 	}
 }

@@ -16,15 +16,15 @@ int main(int _cxt, dou_p argv, dou_p env)
 	(void)_cxt;
 	while (GERRY)
 	{
-		if (isatty(STDIN_FILENO)) 
+		if (isatty(STDIN_FILENO))
 			_print_string(".:[x) ");
 
-		if ((_getline(&getline_ptr, &bffsz, STDIN_FILENO) == EOF))	/* ctrl D */
+		if ((_getline(&getline_ptr, &bffsz, STDIN_FILENO)) == EOF)	/* ctrl D */
 		{
 			_putchar('\n');
 			exit(ERROR);
 		}
-		
+
 		if (!(_strcmp(getline_ptr, "\n"))) /* Handles New line */
 		{
 			line_num++;
@@ -33,24 +33,7 @@ int main(int _cxt, dou_p argv, dou_p env)
 
 		_tokenize_slt_exec(getline_ptr, env, argv, line_num);
 
-		/*semi_colon = _tokenization(getline_ptr, ";|&"); 			 works fine for ';', not so well for '&&' and '||'
 
-		
-
-		for (; *semi_colon; semi_colon++)
-		{
-			dou_argv = _tokenization(*semi_colon, " \n\t\r");
-
-			if (dou_argv && (!(_is_prsent(dou_argv[0]))))
-			{
-				_slt(dou_argv[0])(dou_argv, line_num, argv);
-				continue;
-			}
-
-			_execmd(dou_argv, env, argv, line_num);
-		}
-		free(dou_argv);
-*/
 		if (!(isatty(STDIN_FILENO)))
 			break;
 	}

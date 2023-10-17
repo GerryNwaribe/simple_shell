@@ -18,11 +18,17 @@
 
 typedef char *string;
 typedef char **dou_p;
-
+/**
+ * struct main - Structure representing a shell built-in command.
+ * @key_w: The keyword or command name.
+ * @_func: A pointer to the function that handles the command.
+ *
+ * Return: 0
+*/
 typedef struct main
 {
-    string key_w;
-    int (*_func)(dou_p dou_argv, size_t line_num, dou_p argv);
+	string key_w;
+	int (*_func)(dou_p dou_argv, size_t line_num, dou_p argv);
 } _is;
 
 extern dou_p environ;
@@ -49,9 +55,9 @@ int _env(dou_p cmmd, size_t line_num, dou_p argv);
 int _cd(dou_p cmmd, size_t line_num, dou_p argv);
 int _is_prsent(string str);
 
-int _tokenize_slt_exec(string getline_bffr,dou_p env, dou_p argv, size_t line_num);
+int _tokenize_slt_exec(string getline_bffr, dou_p env, dou_p argv, size_t line_num);
 void _execmd(dou_p local_argv, dou_p env, dou_p argv, size_t line_num);
-void *_realloc(void *ptr, /*size_t old_size,*/ size_t new_size);
+void *_realloc(void *ptr, size_t new_size);
 ssize_t _getline(char **getlineptr, size_t *n, int f_d);
 dou_p _tokenization(string str, string _delimiters);
 void _free(void *_malloc, int is_dou_p);

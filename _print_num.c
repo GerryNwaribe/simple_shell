@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * print_num - Print a number to the standard output.
+ * _print_num - Print a number to the standard output.
  * @_n: The number to print.
  * @_c: Number count variable
  * Return: The number of characters printed.

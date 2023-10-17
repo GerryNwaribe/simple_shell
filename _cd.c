@@ -3,6 +3,8 @@
 /**
  * _cd - This function.
  * @cmmd: The command from stdin who's path is to be found.
+ * @line_num: line number
+ * @argv: argument vector
  * Return: void.
  */
 int _cd(dou_p cmmd, size_t line_num, dou_p argv)
@@ -16,7 +18,6 @@ int _cd(dou_p cmmd, size_t line_num, dou_p argv)
 		{
 			if (!(_strcmp(cmmd[1], "-")))
 			{
-				/*printf("%s\n", cmmd[1]);*/
 				if (chdir(p_wd))
 					perror("cd");
 				return (0);
@@ -36,16 +37,14 @@ int _cd(dou_p cmmd, size_t line_num, dou_p argv)
 			_print_string(cmmd[1]);
 			_putchar('\n');
 		}
-
 		return (0);
 	}
 	else
 	{
 		if (hm)
 		{
-			
 			if (chdir(hm))
-				perror("cd: HOME");
+			perror("cd: HOME");
 			return (0);
 		}
 		else

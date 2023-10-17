@@ -3,6 +3,9 @@
 /**
  * _exit_num - Exits the Shell with an integer 'exit <N0>'
  * @local_argv: The string to be converted into an integer.
+ * @line_num: line number
+ * @argv: argument vector
+ * Return: exit number
  */
 int _exit_num(dou_p local_argv, size_t line_num, dou_p argv)
 {
