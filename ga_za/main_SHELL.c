@@ -27,33 +27,18 @@ int main(int _cxt, dou_p argv, dou_p env)
 		
 		if (!(_strcmp(getline_ptr, "\n"))) /* Handles New line */
 		{
+			_free(getline_ptr, 0);
 			line_num++;
 			continue;
 		}
 
 		_tokenize_slt_exec(getline_ptr, env, argv, line_num);
 
-		/*semi_colon = _tokenization(getline_ptr, ";|&"); 			 works fine for ';', not so well for '&&' and '||'
-
-		
-
-		for (; *semi_colon; semi_colon++)
-		{
-			dou_argv = _tokenization(*semi_colon, " \n\t\r");
-
-			if (dou_argv && (!(_is_prsent(dou_argv[0]))))
-			{
-				_slt(dou_argv[0])(dou_argv, line_num, argv);
-				continue;
-			}
-
-			_execmd(dou_argv, env, argv, line_num);
-		}
-		free(dou_argv);
-*/
 		if (!(isatty(STDIN_FILENO)))
 			break;
+		
+		_free(getline_ptr, 0);
 	}
-	/*free(getline_ptr);*/
+	
 	return (0);
 }

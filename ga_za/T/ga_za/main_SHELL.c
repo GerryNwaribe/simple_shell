@@ -18,14 +18,17 @@ int main(int _cxt, _dou_p argv, _dou_p env)
 	{
 		if (isatty(STDIN_FILENO))
 			_print_string("[$] ");
-		if ((getline(&getline_bffr, &bffsz, stdin)) == EOF)
+		if ((_getline(&getline_bffr, &bffsz, STDIN_FILENO)) == EOF)
 		{
 			_putchar('\n');
 			exit(-1);
 		}
 
 		if (!(strcmp(getline_bffr, "\n")))
+		{
+			_free(getline_bffr, 0);
 			continue;
+		}
 
 		dou_argv = _tokenization(getline_bffr, " \n\t\r");
 
@@ -37,10 +40,10 @@ int main(int _cxt, _dou_p argv, _dou_p env)
 
 		execmd(dou_argv, env, argv);
 
-		free(dou_argv);
+		_free(dou_argv, 0);
 		if (isatty(STDIN_FILENO) == 0)
 			break;
 	}
-	free(getline_bffr);
+	_free(getline_bffr, 0);
 	return (0);
 }

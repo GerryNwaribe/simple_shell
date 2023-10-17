@@ -11,7 +11,7 @@
 #include <ctype.h>
 
 #define ERROR -1
-#define _bffsz 1024
+#define _BFFSZ 1024
 
 typedef char *string;
 typedef char **_dou_p;
@@ -46,5 +46,8 @@ string _getenv(string str);
 int _is_prsent(string str);
 int _cd(_dou_p cmmd);
 int _env(_dou_p cmmd);
+
+ssize_t _getline(char **getlineptr, size_t *bffsz, int f_d);
+
 
 #endif /* End of if statement */
