@@ -19,7 +19,7 @@ int main(int _cxt, dou_p argv, dou_p env)
 		if (isatty(STDIN_FILENO))
 			_print_string("$ ");
 
-		if ((_getline(&getline_ptr, &bffsz, STDIN_FILENO)) == EOF)	/* ctrl D */
+		if ((getline(&getline_ptr, &bffsz, stdin)) == EOF)	/* ctrl D */
 		{
 			_putchar('\n');
 			exit(ERROR);
@@ -27,7 +27,7 @@ int main(int _cxt, dou_p argv, dou_p env)
 
 		if (!(_strcmp(getline_ptr, "\n"))) /* Handles New line */
 		{
-			free(getline_ptr);
+			/*free(getline_ptr);*/
 			line_num++;
 			continue;
 		}
