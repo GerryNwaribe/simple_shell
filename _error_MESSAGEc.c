@@ -12,17 +12,17 @@ void _error_MESSAGE(dou_p argv, size_t line_num, dou_p cmmd, string key_w)
 {
 	_print_string(argv[0]);
 	_print_string(": ");
-	_print_num(line_num, 0);
-	_print_string(": ");
-	_print_string(cmmd[0]); /* sh: 3: cd: can't cd to g */
 
 	if (!(strcmp("cd", key_w)))
 	{
+		_print_num(line_num, 0);
+		_print_string(": ");
+		_print_string(cmmd[0]); /* sh: 3: cd: can't cd to g */
 		_print_string(": can't cd to ");
 		_print_string(cmmd[1]);
 	}
 	else
-		_print_string(": not found");
+		_print_string("No such file or directory");
 
 	_putchar('\n');
 }
