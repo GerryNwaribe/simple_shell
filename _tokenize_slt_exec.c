@@ -10,23 +10,22 @@
  */
 int _tokenize_slt_exec(string gtln, dou_p env, dou_p av, size_t l_dx)
 {
-	dou_p dou_av, semi_colon;
+	dou_p dou_av/*, semi_colon*/ = NULL;
 
-	semi_colon = _tokenization(gtln, ";|&");
+	/*semi_colon = _tokenization(gtln, ";|&");
 
 	for (; *semi_colon; semi_colon++)
-	{
+	{*/
 
-		dou_av = _tokenization(*semi_colon, " \n\t\r");
+		dou_av = _tokenization(gtln, " \n\t\r");
 
 		if (dou_av && (!(_is_prsent(dou_av[0]))))
 		{
 			_slt(dou_av[0])(dou_av, l_dx, av);
-			continue;
 		}
 
 		_execmd(dou_av, env, av, l_dx);
-	}
-	free(dou_av);
+	/*}*/
+	/*_free(semi_colon, 0);*/
 	return (0);
 }

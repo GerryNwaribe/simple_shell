@@ -9,8 +9,8 @@
  */
 int main(int _cxt, dou_p argv, dou_p env)
 {
-	size_t bffsz = 0, line_num = 1;
-	string getline_ptr;
+	size_t bffsz, line_num = 1;
+	string getline_ptr = NULL;
 	/*dou_p dou_argv, semi_colon;*/
 
 	(void)_cxt;
@@ -21,13 +21,14 @@ int main(int _cxt, dou_p argv, dou_p env)
 
 		if ((getline(&getline_ptr, &bffsz, stdin)) == EOF)	/* ctrl D */
 		{
+			_free(getline_ptr, 0);
 			_putchar('\n');
 			exit(ERROR);
 		}
 
 		if (!(_strcmp(getline_ptr, "\n"))) /* Handles New line */
 		{
-			/*free(getline_ptr);*/
+			/*_free(getline_ptr, 0);*/
 			line_num++;
 			continue;
 		}
