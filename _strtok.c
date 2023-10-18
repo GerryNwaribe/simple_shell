@@ -15,7 +15,7 @@ string _strtok(string str, string _delimiters)
 	if (str)
 		_sStr = str;
 
-	while (_strchr(_delimiters, *_sStr) && *_sStr)
+	while ((_strchr(_delimiters, *_sStr)) && *_sStr)
 	{
 		_sStr++;
 	}
