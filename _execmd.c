@@ -37,7 +37,7 @@ void _execmd(dou_p local_argv, dou_p env, dou_p argv, size_t line_num)
 		}
 		else if (_child_PID_Rv == 0)
 		{
-			_exev_Rv = execve(_addr, local_argv, NULL);
+			_exev_Rv = execve(_addr, local_argv, environ);
 
 			if (_exev_Rv == ERROR)
 			{
