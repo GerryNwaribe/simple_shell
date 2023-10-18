@@ -24,7 +24,7 @@ typedef char **dou_p;
  * @_func: A pointer to the function that handles the command.
  *
  * Return: 0
-*/
+ */
 typedef struct main
 {
 	string key_w;
@@ -55,7 +55,8 @@ int _env(dou_p cmmd, size_t line_num, dou_p argv);
 int _cd(dou_p cmmd, size_t line_num, dou_p argv);
 int _is_prsent(string str);
 
-int _tokenize_slt_exec(string getline_bffr, dou_p env, dou_p argv, size_t line_num);
+int _tokenize_slt_exec
+			(string getline_bffr, dou_p env, dou_p argv, size_t line_num);
 void _error_MESSAGE(dou_p argv, size_t line_num, dou_p cmmd, string key_w);
 void _execmd(dou_p local_argv, dou_p env, dou_p argv, size_t line_num);
 ssize_t _getline(char **getlineptr, size_t *n, int f_d);
