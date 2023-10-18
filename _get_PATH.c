@@ -14,9 +14,9 @@ string _get_PATH(string cmmd)
 	struct stat bffr;
 
 	path = getenv("PATH");
-	
+
 	if (path)
-	{		
+	{
 		_strcpy(path_cp, path);
 		cmmd_length = _strlen(cmmd);
 
@@ -24,7 +24,7 @@ string _get_PATH(string cmmd)
 		while (_token != NULL)
 		{
 			dir_length = _strlen(_token);
-			
+
 			_strcpy(file_path, _token);
 			_strcat(file_path, "/");
 			_strcat(file_path, cmmd);
