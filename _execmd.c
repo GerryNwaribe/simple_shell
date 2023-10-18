@@ -22,6 +22,7 @@ void _execmd(dou_p local_argv, dou_p env, dou_p argv, size_t line_num)
 		if (_addr == NULL)
 		{
 			_error_MESSAGE(argv, line_num, local_argv, "addr");
+			_free(local_argv, 0);
 			return;
 		}
 		_child_PID_Rv = fork();

@@ -26,7 +26,7 @@ int _cd(dou_p cmmd, size_t line_num, dou_p argv)
 		else
 			perror("cd");
 
-		if ((chdir(cmmd[1])))
+		if (!(chdir(cmmd[1])))
 			_error_MESSAGE(argv, line_num, cmmd, "cd");
 
 		return (0);
