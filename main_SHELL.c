@@ -17,7 +17,7 @@ int main(int _cxt, dou_p argv, dou_p env)
 	while (GERRY)
 	{
 		if (isatty(STDIN_FILENO))
-			_print_string(".:[x) ");
+			_print_string("$ ");
 
 		if ((_getline(&getline_ptr, &bffsz, STDIN_FILENO)) == EOF)	/* ctrl D */
 		{
