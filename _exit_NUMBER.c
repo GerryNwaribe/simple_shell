@@ -27,8 +27,9 @@ int _exit_num(dou_p local_argv, size_t line_num, dou_p argv)
 		}
 
 		_no = _atoi(local_argv[1]);
-
+		_free(local_argv, 1);
 		exit(_no);
 	}
+	_free(local_argv, 1);
 	exit(1);
 }
