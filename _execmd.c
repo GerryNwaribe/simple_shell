@@ -14,7 +14,7 @@ void _execmd(dou_p local_argv, dou_p env, dou_p argv, size_t line_num)
 	pid_t _child_PID_Rv;
 	string _addr = NULL;
 
-	(void)env;
+	/*(void)env;*/
 	if (local_argv)
 	{
 		_addr = _get_PATH(local_argv[0]);
@@ -37,7 +37,7 @@ void _execmd(dou_p local_argv, dou_p env, dou_p argv, size_t line_num)
 		}
 		else if (_child_PID_Rv == 0)
 		{
-			_exev_Rv = execve(_addr, local_argv, environ);
+			_exev_Rv = execve(_addr, local_argv, env);
 
 			if (_exev_Rv == ERROR)
 			{
