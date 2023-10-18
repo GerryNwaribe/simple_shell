@@ -11,9 +11,6 @@ void _free(void *_mem, int is_dou_p)
 	int x = 0;
 	void **alloc;
 
-	if (_mem == NULL)
-		return;
-
 	if (is_dou_p)
 	{
 		alloc = (void **)_mem;
@@ -33,5 +30,5 @@ void _free(void *_mem, int is_dou_p)
 		free(_mem);
 		_mem = NULL;
 	}
-	return;
+
 }

@@ -2,36 +2,31 @@
 
 /**
  * _tokenize_slt_exec - Tokenize, parse, execute shell commands ';' and '||'
- * @getline_bffr: The input string to be tokenized and executed
+ * @gtln: The input string to be tokenized and executed
  * @env: An array of environment variables.
- * @argv: An array of command-line arguments.
- * @line_num: The current line number for error reporting.
+ * @av: An array of command-line arguments.
+ * @l_dx: The current line number for error reporting.
  * Return: 0 on success, -1 on failure.
  */
-int _tokenize_slt_exec(string getline_bffr, dou_p env, dou_p argv, size_t line_num)
+int _tokenize_slt_exec(string gtln, dou_p env, dou_p av, size_t l_dx)
 {
-	dou_p dou_argv, semi_colon;
-	
+	dou_p dou_av, semi_colon;
 
-	semi_colon = _tokenization(getline_bffr, ";"); /* Works fine for ';', not so well for '&&' and '||'*/
+	semi_colon = _tokenization(gtln, ";|&");
 
 	for (; *semi_colon; semi_colon++)
 	{
-		
 
-	
-			dou_argv = _tokenization(*semi_colon, " \n\t\r");
+		dou_av = _tokenization(*semi_colon, " \n\t\r");
 
-			if (dou_argv && (!(_is_prsent(dou_argv[0]))))
-			{
-				_slt(dou_argv[0])(dou_argv, line_num, argv);
-				continue;
-			}
+		if (dou_av && (!(_is_prsent(dou_av[0]))))
+		{
+			_slt(dou_av[0])(dou_av, l_dx, av);
+			continue;
+		}
 
-			_execmd(dou_argv, env, argv, line_num);
-			
-		
+		_execmd(dou_av, env, av, l_dx);
 	}
-	free(dou_argv);
+	free(dou_av);
 	return (0);
 }
