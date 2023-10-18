@@ -27,16 +27,8 @@ int _cd(dou_p cmmd, size_t line_num, dou_p argv)
 			perror("cd");
 
 		if ((chdir(cmmd[1])))
-		{
-			_print_string(argv[0]);
-			_print_string(": ");
-			_print_num(line_num, 0);
-			_print_string(": ");
-			_print_string(cmmd[0]);		/* sh: 3: cd: can't cd to g */
-			_print_string(": can't cd to ");
-			_print_string(cmmd[1]);
-			_putchar('\n');
-		}
+			_error_MESSAGE(argv, line_num, cmmd, "cd");
+
 		return (0);
 	}
 	else
@@ -44,7 +36,7 @@ int _cd(dou_p cmmd, size_t line_num, dou_p argv)
 		if (hm)
 		{
 			if (chdir(hm))
-			perror("cd: HOME");
+				perror("cd: HOME");
 			return (0);
 		}
 		else

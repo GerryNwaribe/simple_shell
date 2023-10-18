@@ -27,6 +27,7 @@ int main(int _cxt, dou_p argv, dou_p env)
 
 		if (!(_strcmp(getline_ptr, "\n"))) /* Handles New line */
 		{
+			free(getline_ptr);
 			line_num++;
 			continue;
 		}

@@ -21,9 +21,17 @@ void _free(void *_mem, int is_dou_p)
 		for (; alloc[x]; x++)
 		{
 			if (alloc[x])
+			{
 				free(alloc[x]);
+				alloc[x] = NULL;
+			}
 		}
 	}
 
-	free(_mem);
+	if (_mem)
+	{
+		free(_mem);
+		_mem = NULL;
+	}
+	return;
 }

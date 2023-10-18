@@ -11,17 +11,15 @@
 int _tokenize_slt_exec(string getline_bffr, dou_p env, dou_p argv, size_t line_num)
 {
 	dou_p dou_argv, semi_colon;
-	size_t result;
+	
 
 	semi_colon = _tokenization(getline_bffr, ";"); /* Works fine for ';', not so well for '&&' and '||'*/
 
 	for (; *semi_colon; semi_colon++)
 	{
-		dou_p or_operator = _tokenization(*semi_colon, "||");
+		
 
-		for (; *or_operator; or_operator++)
-		{
-
+	
 			dou_argv = _tokenization(*semi_colon, " \n\t\r");
 
 			if (dou_argv && (!(_is_prsent(dou_argv[0]))))
@@ -30,11 +28,9 @@ int _tokenize_slt_exec(string getline_bffr, dou_p env, dou_p argv, size_t line_n
 				continue;
 			}
 
-			result = _execmd(dou_argv, env, argv, line_num);
-			if (result != 0)
-				continue;
-		}
-		free(or_operator);
+			_execmd(dou_argv, env, argv, line_num);
+			
+		
 	}
 	free(dou_argv);
 	return (0);

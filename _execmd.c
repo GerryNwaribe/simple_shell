@@ -19,13 +19,7 @@ void _execmd(dou_p local_argv, dou_p env, dou_p argv, size_t line_num)
 		atl_cmmd = _get_PATH(local_argv[0]);
 		if (atl_cmmd == NULL)
 		{
-			_print_string(argv[0]);
-			_print_string(": ");
-			_print_num(line_num, 0);
-			_print_string(": ");
-			_print_string(local_argv[0]);		/*sh: 3: exi: not found*/
-			_print_string(": not found");
-			_putchar('\n');
+			_error_MESSAGE(argv, line_num, local_argv, "addr");
 			return;
 		}
 		_child_PID_Rv = fork();
