@@ -10,11 +10,11 @@
  */
 void _execmd(dou_p local_argv, dou_p env, dou_p argv, size_t line_num)
 {
-
 	int _exev_Rv, _status;
 	pid_t _child_PID_Rv;
 	string _addr = NULL;
 
+	(void)env;
 	if (local_argv)
 	{
 		_addr = _get_PATH(local_argv[0]);

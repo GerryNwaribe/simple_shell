@@ -8,7 +8,7 @@
  */
 char *_strncpy(char *dest, char *src, size_t n)
 {
-	int j = 0;
+	size_t j = 0;
 
 	/* Copy from 'src' to 'dest' up to 'n' or until the \0 is encountered. */
 	while (j < n && src[j] != '\0')

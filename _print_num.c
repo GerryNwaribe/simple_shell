@@ -8,12 +8,14 @@
  */
 int _print_num(size_t _n, int _c)
 {
-	if (_n < 0)
-	{
-		_putchar('-');
-		_c++;
-		_n *= -1;
-	}
+	/**
+	 *if (_n < 0)
+	 *{
+	 *	_putchar('-');
+	 *	_c++;
+	 *	_n *= -1;
+	 *}
+	 */
 
 	if (_n / 10)
 		_c = _print_num(_n / 10, _c);
