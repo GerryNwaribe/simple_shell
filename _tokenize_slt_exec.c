@@ -11,14 +11,14 @@
 
 int _tokenize_slt_exec(string gtln, dou_p env, dou_p av, size_t l_dx)
 {
-	dou_p dou_cmm = NULL, sin_cmm = NULL;
-	int x = 0;
+	dou_p dou_cmm = NULL, first_cmm = NULL;
+	int i = 0;
 
-	sin_cmm = _tokenization(gtln, " \n");
+	first_cmm = _tokenization(gtln, "\n");
 
-	for (x = 0; sin_cmm[x]; x++)
+	for (i = 0; first_cmm[i]; i++)
 	{
-		dou_cmm = _tokenization(sin_cmm[x], " \n");
+		dou_cmm = _tokenization(first_cmm[i], " \n");
 
 		if (!dou_cmm[0])
 		{
@@ -36,10 +36,7 @@ int _tokenize_slt_exec(string gtln, dou_p env, dou_p av, size_t l_dx)
 			_execmd(dou_cmm, env, av, l_dx);
 		}
 	}
-
-	if (dou_cmm[0] != NULL)
-		_free(sin_cmm, 0);
-	if (dou_cmm[0] != NULL)
+		_free(first_cmm, 0);
 		_free(dou_cmm, 0);
 	return (0);
 }

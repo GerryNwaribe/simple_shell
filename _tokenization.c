@@ -20,7 +20,7 @@ dou_p _tokenization(string gtln, string _delimiters)
 			i++;
 		_idx++;
 	}
-		local_argv = malloc(sizeof(char *) * (i + 1));
+		local_argv = malloc(sizeof(char *) * (i + 2));
 
 	token = strtok(gtln, _delimiters);
 
