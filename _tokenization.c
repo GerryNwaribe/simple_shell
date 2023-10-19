@@ -2,27 +2,27 @@
 
 /**
  * _tokenization - Takes the string from stdin and tokenize into dou_p
- * @str: The string to be tokenized.
+ * @gtln: The string to be tokenized.
  * @_delimiters: The string of delimiters for parsing.
  * Return: A Double pointer.
  *
  */
-dou_p _tokenization(string str, string _delimiters)
+dou_p _tokenization(string gtln, string _delimiters)
 {
 	string token;
-	int i = 0, _idx = 0, x = 0;
+	int i = 0, _idx = 0;
 	dou_p local_argv;
 
 	i = 0;
-	while (str[_idx] != '\0')
+	while (gtln[_idx] != '\0')
 	{
-		if (strchr(_delimiters, str[_idx]))
+		if (strchr(_delimiters, gtln[_idx]))
 			i++;
 		_idx++;
 	}
 		local_argv = malloc(sizeof(char *) * (i + 1));
 
-	token = strtok(str, _delimiters);
+	token = strtok(gtln, _delimiters);
 
 	_idx = 0;
 	while (token != NULL)

@@ -13,6 +13,7 @@ void _execmd(dou_p dou_cmmd, dou_p env, dou_p argv, size_t line_num)
 	int _exev_Rv, _status;
 	pid_t _child_PID_Rv;
 	string _addr = NULL;
+	/* char *_cp_cmm[_BFFSZ]; */
 
 	(void)env;
 	if (dou_cmmd)
@@ -48,5 +49,5 @@ void _execmd(dou_p dou_cmmd, dou_p env, dou_p argv, size_t line_num)
 			wait(&_status);
 	}
 	_free(_addr, 0);
-	_free(dou_cmmd, 0);
+	/*_free(dou_cmmd, 0);*/
 }
