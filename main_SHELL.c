@@ -17,7 +17,7 @@ int main(int _cxt, dou_p argv, dou_p env)
 	while (GERRY)
 	{
 		if (isatty(STDIN_FILENO))
-			_print_string("$ ");
+			_print_string(" .:[:) ");
 
 		if ((getline(&getline_ptr, &bffsz, stdin)) == EOF)	/* ctrl D */
 		{
@@ -28,7 +28,6 @@ int main(int _cxt, dou_p argv, dou_p env)
 
 		if (!(_strcmp(getline_ptr, "\n"))) /* Handles New line */
 		{
-			/*_free(getline_ptr, 0);*/
 			line_num++;
 			continue;
 		}

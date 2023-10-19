@@ -33,16 +33,10 @@ typedef struct main
 
 extern dou_p environ;
 
-char *_strncpy(char *dest, char *src, size_t n);
-int _strncmp(char *str1, char *str2, size_t n);
+
+
 char *_strtok(string str, string _delimiters);
-char *_strcat(string dest, string src);
-char *_strcpy(string dest, string src);
-int _strcmp(string s1, string s2);
-int _strchr(string s, char c);
 int _print_string(string st);
-char *_strdup(string str);
-int _strlen(string s);
 int _putchar(char c);
 int _isdigit(int c);
 int _atoi(string s);
