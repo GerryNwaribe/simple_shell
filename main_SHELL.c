@@ -11,8 +11,7 @@ int main(int _cxt, dou_p argv, dou_p env)
 {
 	size_t bffsz = 0, line_num = 1;
 	string gtln = NULL;
-	/*dou_p dou_argv, semi_colon;*/
-	ssize_t read = 0;
+	ssize_t read;
 
 	(void)_cxt;
 	while (GERRY)
@@ -21,27 +20,26 @@ int main(int _cxt, dou_p argv, dou_p env)
 			_print_string(" .:[:) ");
 
 		read = getline(&gtln, &bffsz, stdin);
-		if (!(isatty(STDIN_FILENO)) && read == EOF)
-			break;
-		if (read == EOF)
+		if (read == EOF && isatty(STDIN_FILENO))
 		{
 			_free(gtln, 0);
 			_putchar('\n');
 			exit(ERROR);
 		}
+		if (!(isatty(STDIN_FILENO)) && read == EOF)
+			break;
+		if (gtln[read - 1] == '\n')
+			gtln[read - 1] = '\0';
 
-		if (!(strcmp(gtln, "\n")))
+		if (gtln == NULL)
 		{
 			line_num++;
 			continue;
 		}
 
-
-
-
 		_tokenize_slt_exec(gtln, env, argv, line_num);
 
-
 	}
+
 	return (0);
 }

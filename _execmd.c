@@ -16,15 +16,13 @@ void _execmd(dou_p dou_cmmd, dou_p env, dou_p argv, size_t line_num)
 	string _addr = NULL;
 	/* char *_cp_cmm[_BFFSZ]; */
 
-	(void)env;
-	(void)line_num;
+	(void)env, (void)line_num;
 	if (dou_cmmd)
 	{
 		_addr = _get_PATH(dou_cmmd[0]);
 		if (_addr == NULL)
 		{
 			_error_MESSAGE(argv, line_num, dou_cmmd, "addr");
-			/*perror("argv[0] [_get_PATH]");*/
 			return;
 		}
 		_child_PID_Rv = fork();
@@ -50,7 +48,5 @@ void _execmd(dou_p dou_cmmd, dou_p env, dou_p argv, size_t line_num)
 		else
 			wait(&_status);
 	}
-
 	_free(_addr, 0);
-	/*_free(dou_cmmd, 0);*/
 }

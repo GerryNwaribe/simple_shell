@@ -9,32 +9,30 @@
  */
 dou_p _tokenization(string gtln, string _delimiters)
 {
-	string token;
-	int i = 0, _idx = 0;
-	dou_p local_argv;
-
-	i = 0;
-	while (gtln[_idx] != '\0')
-	{
-		if (strchr(_delimiters, gtln[_idx]))
-			i++;
-		_idx++;
-	}
-		local_argv = malloc(sizeof(char *) * (i + 2));
+	string token = NULL, _stckarr[_BFFSZ];
+	dou_p dou_cmm;
+	int _idx = 0;
 
 	token = strtok(gtln, _delimiters);
 
-	_idx = 0;
-	while (token != NULL)
+	for (_idx = 0; token != NULL; _idx++, token = strtok(NULL, _delimiters))
+		_stckarr[_idx] = token;
+
+	_stckarr[_idx] = NULL;
+
+	dou_cmm = malloc(sizeof(char *) * (_idx + 1));
+
+	for (_idx = 0; _stckarr[_idx] != NULL; _idx++)
+		dou_cmm[_idx] = _stckarr[_idx];
+
+	dou_cmm[_idx] = NULL;
+
+
+	if (dou_cmm == NULL)
 	{
-		local_argv[_idx] = token;
-		_idx++;
-		token = strtok(NULL, _delimiters);
+		_free(dou_cmm, 1);
+		return (NULL);
 	}
-	local_argv[_idx] = NULL;
 
-	if (local_argv == NULL)
-		_free(local_argv, 1);
-
-	return (local_argv);
+	return (dou_cmm);
 }
