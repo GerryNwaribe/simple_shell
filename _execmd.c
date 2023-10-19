@@ -8,6 +8,7 @@
  * @line_num: line number
  * Return: void
  */
+void _execmd(dou_p dou_cmmd, dou_p env, dou_p argv, size_t line_num);
 void _execmd(dou_p dou_cmmd, dou_p env, dou_p argv, size_t line_num)
 {
 	int _exev_Rv, _status;
@@ -22,8 +23,8 @@ void _execmd(dou_p dou_cmmd, dou_p env, dou_p argv, size_t line_num)
 		_addr = _get_PATH(dou_cmmd[0]);
 		if (_addr == NULL)
 		{
-			/*_error_MESSAGE(argv, line_num, dou_cmmd, "addr");*/
-			perror("argv[0] [_get_PATH]");
+			_error_MESSAGE(argv, line_num, dou_cmmd, "addr");
+			/*perror("argv[0] [_get_PATH]");*/
 			return;
 		}
 		_child_PID_Rv = fork();
@@ -49,7 +50,7 @@ void _execmd(dou_p dou_cmmd, dou_p env, dou_p argv, size_t line_num)
 		else
 			wait(&_status);
 	}
-	
+
 	_free(_addr, 0);
 	/*_free(dou_cmmd, 0);*/
 }

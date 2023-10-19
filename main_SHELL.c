@@ -30,7 +30,7 @@ int main(int _cxt, dou_p argv, dou_p env)
 			exit(ERROR);
 		}
 
-		if (!(strcmp(gtln, "\n"))) 
+		if (!(strcmp(gtln, "\n")))
 		{
 			line_num++;
 			continue;
