@@ -15,7 +15,7 @@ int _setenv(dou_p dou_argv, size_t line_num, dou_p argv)
 	char *value = dou_argv[2];
 	char **env = environ;
 	/* +2 for '=' and null terminator */
-	char *new_var = malloc(sizeof(char) * (_strlen(name) + _strlen(value) + 2));
+	char *new_var = malloc(sizeof(char) * (strlen(name) + strlen(value) + 2));
 	int dx = 0;
 
 	(void)line_num;
@@ -36,9 +36,9 @@ int _setenv(dou_p dou_argv, size_t line_num, dou_p argv)
 
 	while (*env) /* If 'overwrite' is 1, replace existing variable */
 	{
-		if (!(_strncmp(name, *env, _strlen(name)))) /* Replace existing variable */
+		if (!(strncmp(name, *env, strlen(name)))) /* Replace existing variable */
 		{
-			_strcpy(environ[dx], new_var);
+			strcpy(environ[dx], new_var);
 			free(new_var);
 			return (0);
 		}

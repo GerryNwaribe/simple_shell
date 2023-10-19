@@ -26,7 +26,7 @@ int main(int _cxt, dou_p argv, dou_p env)
 			exit(ERROR);
 		}
 
-		if (!(_strcmp(getline_ptr, "\n"))) /* Handles New line */
+		if (!(strcmp(getline_ptr, "\n"))) /* Handles New line */
 		{
 			line_num++;
 			continue;

@@ -9,33 +9,24 @@
  */
 void *_realloc(void *ptr, size_t new_size)
 {
-	char *new_mem = NULL;    /* Declare a character pointer variable new_mem. */
-	char *temp_ptr = ptr; /* Declare a character pointer variable temp_ptr. */
+	char *new_mem = NULL;
+	char *temp_ptr = ptr;
 
 	if (new_size == 0 && ptr)
 	{
-		free(ptr); /* If new_size is 0 and ptr is not NULL, free memory. */
+		free(ptr);
 		return (NULL);
 	}
 
-	if (!ptr && new_size)          /* If ptr is NULL, allocate new memory. */
+	if (!ptr && new_size)
 		return (malloc(new_size));
 
-
-	new_mem = malloc(new_size); /* Allocate memory for the reallocated block. */
+	new_mem = malloc(new_size);
 	if (!new_mem)
-		return (NULL); /* Return NULL if memory allocation fails. */
+		return (NULL);
+	
+	strncpy(new_mem, temp_ptr, new_size);
 
-
-	/* if (new_size < old_size)*/
-	_strncpy(new_mem, temp_ptr, new_size);    /* Copy data from old to new*/
-
-	/**
-	  *if (new_size > old_size)
-	  *Copy data from old to new block for sizes larger than the old block.
-	  *_strncpy(new_mem, temp_ptr, old_size);
-	  */
-
-	free(ptr);      /* Free the old memory block. */
-	return (new_mem);   /* Return a pointer to the reallocated memory block. */
+	free(ptr);
+	return (new_mem);
 }

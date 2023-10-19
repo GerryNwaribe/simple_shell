@@ -15,7 +15,7 @@ string _strtok(string str, string _delimiters)
 	if (str)
 		_sStr = str;
 
-	while ((_strchr(_delimiters, *_sStr)) && *_sStr)
+	while ((strchr(_delimiters, *_sStr)) && *_sStr)
 	{
 		_sStr++;
 	}
@@ -28,7 +28,7 @@ string _strtok(string str, string _delimiters)
 
 	while (*_shifter)
 	{
-		if (_strchr(_delimiters, *_shifter))
+		if (strchr(_delimiters, *_shifter))
 		{
 			if (*_shifter == '\0')
 				_sStr = _shifter;

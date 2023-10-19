@@ -7,12 +7,12 @@
  */
 string _getenv(string str)
 {
-	size_t lx = _strlen(str);
+	size_t lx = strlen(str);
 	dou_p _env_cp = environ;
 
 	for (; *_env_cp; ++_env_cp)
 	{
-		if (!(_strncmp(*_env_cp, str, lx)) && (*_env_cp)[lx] == '=')
+		if (!(strncmp(*_env_cp, str, lx)) && (*_env_cp)[lx] == '=')
 			return (&(*_env_cp)[lx + 1]);
 
 	}

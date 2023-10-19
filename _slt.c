@@ -20,7 +20,7 @@ int (*_slt(string s))(dou_p dou_argv, size_t line_num, dou_p argv)
 
 	for (x = 0; fmt[x].key_w; x++)
 	{
-		if (!(_strcmp(s, fmt[x].key_w)))
+		if (!(strcmp(s, fmt[x].key_w)))
 			return (fmt[x]._func);
 	}
 	return (0);

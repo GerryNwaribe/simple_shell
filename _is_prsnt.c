@@ -12,7 +12,7 @@ int _is_prsent(string str)
 
 	for (x = 0; _str[x]; x++)
 	{
-		if (!(_strcmp(str, _str[x])))
+		if (!(strcmp(str, _str[x])))
 			return (0);
 
 	}

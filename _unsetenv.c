@@ -24,7 +24,7 @@ int _unsetenv(dou_p dou_argv, size_t line_num, dou_p argv)
 	}
 	for (; *env; x++, env++)   /* If overwrite is 1, replace existing variable */
 	{
-		if (!(_strncmp(name, *env, _strlen(name))))   /* Replace existing variable */
+		if (!(strncmp(name, *env, strlen(name))))   /* Replace existing variable */
 		{
 			for (; environ[x]; x++)
 			{

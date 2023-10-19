@@ -18,12 +18,12 @@ string _get_PATH(string cmmd)
 	if (path)
 	{
 		strcpy(path_cp, path);
-		cmmd_length = _strlen(cmmd);
+		cmmd_length = strlen(cmmd);
 
 		_token = _strtok(path_cp, ":");
 		while (_token != NULL)
 		{
-			dir_length = _strlen(_token);
+			dir_length = strlen(_token);
 
 			strcpy(file_path, _token);
 			strcat(file_path, "/");
