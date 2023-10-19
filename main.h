@@ -55,7 +55,6 @@ int _env(dou_p cmmd, size_t line_num, dou_p argv);
 int _cd(dou_p cmmd, size_t line_num, dou_p argv);
 int _is_prsent(string str);
 
-ssize_t read_from_file(char *buffr, size_t *bffsz, int f_d, size_t *total_rd);
 void _error_MESSAGE(dou_p argv, size_t line_num, dou_p cmmd, string key_w);
 void _execmd(dou_p local_argv, dou_p env, dou_p argv, size_t line_num);
 int _tokenize_slt_exec(string gtln, dou_p env, dou_p av, size_t l_dx);

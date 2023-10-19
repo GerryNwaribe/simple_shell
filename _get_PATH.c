@@ -17,7 +17,7 @@ string _get_PATH(string cmmd)
 
 	if (path)
 	{
-		_strcpy(path_cp, path);
+		strcpy(path_cp, path);
 		cmmd_length = _strlen(cmmd);
 
 		_token = _strtok(path_cp, ":");
@@ -25,15 +25,15 @@ string _get_PATH(string cmmd)
 		{
 			dir_length = _strlen(_token);
 
-			_strcpy(file_path, _token);
-			_strcat(file_path, "/");
-			_strcat(file_path, cmmd);
-			_strcat(file_path, "\0");
+			strcpy(file_path, _token);
+			strcat(file_path, "/");
+			strcat(file_path, cmmd);
+			strcat(file_path, "\0");
 
 			if (!(stat(file_path, &bffr)))
 			{
 				_addr = malloc(cmmd_length + dir_length + 2);
-				_strcpy(_addr, file_path);
+				strcpy(_addr, file_path);
 				return (_addr);
 			}
 
@@ -43,7 +43,7 @@ string _get_PATH(string cmmd)
 		if (!(stat(cmmd, &bffr))) /* /bin/ls */
 		{
 			_cmmd = malloc(cmmd_length + 1);
-			_strcpy(_cmmd, cmmd);
+			strcpy(_cmmd, cmmd);
 			return (_cmmd);
 		}
 	}

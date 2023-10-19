@@ -30,9 +30,9 @@ int _setenv(dou_p dou_argv, size_t line_num, dou_p argv)
 		perror("setenv VARIABLE VALUE");
 		return (-1); /* Invalid input OR Mem err */
 	}
-	_strcpy(new_var, name);
-	_strcat(new_var, "=");
-	_strcat(new_var, value);
+	strcpy(new_var, name);
+	strcat(new_var, "=");
+	strcat(new_var, value);
 
 	while (*env) /* If 'overwrite' is 1, replace existing variable */
 	{

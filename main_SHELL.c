@@ -17,7 +17,7 @@ int main(int _cxt, dou_p argv, dou_p env)
 	while (GERRY)
 	{
 		if (isatty(STDIN_FILENO))
-			_print_string(" .:[:) ");
+			_print_string("$ ");
 
 		if ((getline(&getline_ptr, &bffsz, stdin)) == EOF)	/* ctrl D */
 		{
@@ -39,6 +39,5 @@ int main(int _cxt, dou_p argv, dou_p env)
 		if (!(isatty(STDIN_FILENO)))
 			break;
 	}
-	/*free(getline_ptr);*/
 	return (0);
 }

@@ -16,7 +16,7 @@ dou_p _tokenization(string str, string _delimiters)
 	i = 0;
 	while (str[_idx] != '\0')
 	{
-		if (_strchr(_delimiters, str[_idx]))
+		if (strchr(_delimiters, str[_idx]))
 			i++;
 		_idx++;
 	}
