@@ -24,7 +24,7 @@ void *_realloc(void *ptr, size_t new_size)
 	new_mem = malloc(new_size);
 	if (!new_mem)
 		return (NULL);
-	
+
 	strncpy(new_mem, temp_ptr, new_size);
 
 	free(ptr);
