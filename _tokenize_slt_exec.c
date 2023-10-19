@@ -10,30 +10,76 @@
  */
 int _tokenize_slt_exec(string gtln, dou_p env, dou_p av, size_t l_dx)
 {
-	dou_p dou_av = NULL;
+	dou_p /*dou_cmm = NULL,*/ mult_cmm = NULL;
+	int x = 0;
 
-	dou_av = _tokenization(gtln, " \n\t\r");
-	if (!dou_av[0])
+	mult_cmm = _tokenization(gtln, " ");
+
+	for (x = 0; mult_cmm[x]; x++)
 	{
-		_free(dou_av, 0);
-		return (1);
+		/*dou_cmm = _tokenization(mult_cmm[x], " \n\t\r");*/
+
+		/*for (; dou_cmm[x]; x++)
+			printf("%s\n", dou_cmm[x]);*/
+
+		if (!mult_cmm[0])
+		{
+			_free(mult_cmm, 0);
+			return (0);
+		}
+
+		if (mult_cmm[0] && (!(_is_prsent(mult_cmm[0]))))
+		{
+			_slt(mult_cmm[0])(mult_cmm, l_dx, av);
+			_free(mult_cmm, 0);
+			return (0);
+		}
+		if (mult_cmm[0])
+		{
+			_execmd(mult_cmm, env, av, l_dx);
+			return (0);
+		}
+
+		if (mult_cmm[0] != NULL)
+			_free(mult_cmm, 0);
 	}
 
-	if (dou_av[0] && (!(_is_prsent(dou_av[0]))))
+	return (0);
+}
+
+/*
+int _tokenize_slt_exec(string gtln, dou_p env, dou_p av, size_t l_dx)
+{
+	dou_p dou_cmm = NULL;
+	int x = 0;
+
+	dou_cmm = _tokenization(gtln, " \n\t\r");
+
+	for (; dou_cmm[x]; x++)
+		printf("%s\n", dou_cmm[x]);
+
+	if (!dou_cmm[0])
 	{
-		_slt(dou_av[0])(dou_av, l_dx, av);
-		_free(dou_av, 0);
+		_free(dou_cmm, 0);
 		return (0);
 	}
-	if (dou_av[0])
+
+	if (dou_cmm[0] && (!(_is_prsent(dou_cmm[0]))))
 	{
-		_execmd(dou_av, env, av, l_dx);
+		_slt(dou_cmm[0])(dou_cmm, l_dx, av);
+		_free(dou_cmm, 0);
+		return (0);
+	}
+	if (dou_cmm[0])
+	{
+		_execmd(dou_cmm, env, av, l_dx);
 		return (0);
 	}
 
-	if (dou_av[0] != NULL)
-		_free(dou_av, 0);
+	if (dou_cmm[0] != NULL)
+		_free(dou_cmm, 0);
 
 
 	return (0);
 }
+*/

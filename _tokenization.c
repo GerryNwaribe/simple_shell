@@ -10,7 +10,7 @@
 dou_p _tokenization(string str, string _delimiters)
 {
 	string token;
-	int i = 0, _idx = 0;
+	int i = 0, _idx = 0, x = 0;
 	dou_p local_argv;
 
 	i = 0;
@@ -20,7 +20,7 @@ dou_p _tokenization(string str, string _delimiters)
 			i++;
 		_idx++;
 	}
-	local_argv = malloc(sizeof(char *) * (i + 1));
+		local_argv = malloc(sizeof(char *) * (i + 1));
 
 	token = strtok(str, _delimiters);
 

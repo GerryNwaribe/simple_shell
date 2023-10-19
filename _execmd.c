@@ -2,41 +2,41 @@
 
 /**
  * _execmd - Handles the exec of valid PATH.
- * @local_argv: Tokenized string gotten from stdin.
+ * @dou_cmmd: Tokenized string gotten from stdin.
  * @env: Environmental variables.
  * @argv: Command line argument.
  * @line_num: line number
  * Return: void
  */
-void _execmd(dou_p local_argv, dou_p env, dou_p argv, size_t line_num)
+void _execmd(dou_p dou_cmmd, dou_p env, dou_p argv, size_t line_num)
 {
 	int _exev_Rv, _status;
 	pid_t _child_PID_Rv;
 	string _addr = NULL;
 
 	(void)env;
-	if (local_argv)
+	if (dou_cmmd)
 	{
-		_addr = _get_PATH(local_argv[0]);
+		_addr = _get_PATH(dou_cmmd[0]);
 		if (_addr == NULL)
 		{
-			_error_MESSAGE(argv, line_num, local_argv, "addr");
-			_free(local_argv, 0);
+			_error_MESSAGE(argv, line_num, dou_cmmd, "addr");
+			_free(dou_cmmd, 0);
 			return;
 		}
 		_child_PID_Rv = fork();
 		if (_child_PID_Rv < 0)
 		{
 			perror(argv[0]);
-			if (local_argv != NULL)
+			if (dou_cmmd != NULL)
 			{
-				_free(local_argv, 0);
+				_free(dou_cmmd, 0);
 				exit(EXIT_FAILURE);
 			}
 		}
 		else if (_child_PID_Rv == 0)
 		{
-			_exev_Rv = execve(_addr, local_argv, environ);
+			_exev_Rv = execve(_addr, dou_cmmd, environ);
 
 			if (_exev_Rv == ERROR)
 			{
@@ -48,5 +48,5 @@ void _execmd(dou_p local_argv, dou_p env, dou_p argv, size_t line_num)
 			wait(&_status);
 	}
 	_free(_addr, 0);
-	_free(local_argv, 0);
+	_free(dou_cmmd, 0);
 }
