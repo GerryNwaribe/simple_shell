@@ -27,7 +27,10 @@ int main(int _cxt, dou_p argv, dou_p env)
 			exit(ERROR);
 		}
 		if (!(isatty(STDIN_FILENO)) && read == EOF)
+		{
+			_free(gtln, 0);
 			break;
+		}
 		if (gtln[read - 1] == '\n')
 			gtln[read - 1] = '\0';
 

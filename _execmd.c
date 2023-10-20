@@ -22,6 +22,7 @@ void _execmd(dou_p dou_cmmd, dou_p env, dou_p argv, size_t line_num)
 		_addr = _get_PATH(dou_cmmd[0]);
 		if (_addr == NULL)
 		{
+			_free(_addr, 0);
 			_error_MESSAGE(argv, line_num, dou_cmmd, "addr");
 			return;
 		}
@@ -31,7 +32,8 @@ void _execmd(dou_p dou_cmmd, dou_p env, dou_p argv, size_t line_num)
 			perror(argv[0]);
 			if (dou_cmmd != NULL)
 			{
-				_free(dou_cmmd, 0);
+				_free(_addr, 0);
+				_free(dou_cmmd, 1);
 				exit(EXIT_FAILURE);
 			}
 		}
