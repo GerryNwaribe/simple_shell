@@ -13,7 +13,7 @@ int _tokenize_slt_exec(string gtln, dou_p env, dou_p av, size_t l_dx)
 	dou_p dou_cmm = NULL, first_cmm = NULL;
 	int x;
 
-	first_cmm = _tokenization(gtln, "\n");
+	first_cmm = _tokenization(gtln, ";\n");
 
 	if (first_cmm == NULL)
 		return (0);
