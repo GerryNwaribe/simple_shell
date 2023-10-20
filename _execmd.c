@@ -19,7 +19,7 @@ void _execmd(dou_p dou_cmmd, dou_p env, dou_p argv, size_t line_num, dou_p first
 	if (dou_cmmd)
 	{
 		_addr = _get_PATH(dou_cmmd[0]);
-		printf("%s\n", _addr);
+		/*printf("%s\n", _addr);*/
 
 		if (_addr == NULL)
 		{
