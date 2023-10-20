@@ -27,4 +27,5 @@ void _error_MESSAGE(dou_p argv, size_t line_num, dou_p dou_cmmd, string key_w)
         fprintf(stderr, "No such file or directory\n");
     
     _free(dou_cmmd, 1);
+  
 }

@@ -15,7 +15,7 @@ string _get_PATH(string cmmd)
 
 	path = getenv("PATH");
 
-	if (!(stat(cmmd, &bffr))) /* /bin/ls */
+	if (!(stat(cmmd, &bffr)) && !(access(cmmd, F_OK))) /* /bin/ls */
 	{
 		_cmmd = malloc(sizeof(char) * cmmd_length + 1);
 		strcpy(_cmmd, cmmd);

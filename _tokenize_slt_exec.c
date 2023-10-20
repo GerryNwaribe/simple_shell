@@ -5,10 +5,10 @@
  * @gtln: The input string to be tokenized and executed
  * @env: An array of environment variables.
  * @av: An array of command-line arguments.
- * @l_dx: The current line number for error reporting.
+ * @ln_cnt: The current line number for error reporting.
  * Return: 0 on success, -1 on failure.
  */
-int _tokenize_slt_exec(string gtln, dou_p env, dou_p av, size_t l_dx)
+int _tokenize_slt_exec(string gtln, dou_p env, dou_p av, size_t ln_cnt)
 {
 	dou_p dou_cmm = NULL, first_cmm = NULL;
 	int x;
@@ -33,11 +33,11 @@ int _tokenize_slt_exec(string gtln, dou_p env, dou_p av, size_t l_dx)
 			if (!strcmp(dou_cmm[0], "exit"))
 				_free(first_cmm, 0);
 
-			_slt(dou_cmm[0])(dou_cmm, l_dx, av);
+			_slt(dou_cmm[0])(dou_cmm, ln_cnt, av);
 		}
 		else
 		{
-			_execmd(dou_cmm, env, av, l_dx, first_cmm);
+			_execmd(dou_cmm, env, av, ln_cnt, first_cmm);
 		}
 	}
 		_free(first_cmm, 0);

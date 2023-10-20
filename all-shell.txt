@@ -1,0 +1,165 @@
+#include "main.h"
+
+
+
+
+int main(int _cxt, dou_p argv, dou_p env)
+{
+	size_t bffsz = 0, line_num = 1;
+	string gtln = NULL;
+	ssize_t read;
+
+	(void)_cxt;
+	while (GERRY)
+	{
+		if (isatty(STDIN_FILENO))
+			_print_string(" .:[:) ");
+
+		read = getline(&gtln, &bffsz, stdin);
+		if (read == EOF && isatty(STDIN_FILENO))
+		{
+			_free(gtln, 0);
+			_putchar('\n');
+			exit(ERROR);
+		}
+		
+		if ((!(isatty(STDIN_FILENO)) && read == EOF) && _isblnk(gtln))
+		{
+			_free(gtln, 0);
+			break;
+		}
+		gtln[strcspn(gtln, "\n")] = '\0';
+
+		if (gtln == NULL)
+		{
+			line_num++;
+			continue;
+		}
+
+		_tokenize_slt_exec(gtln, env, argv, line_num);
+
+	}
+
+	return (0);
+}
+
+
+
+int _tokenize_slt_exec(string gtln, dou_p env, dou_p av, size_t l_dx)
+{
+	dou_p dou_cmm = NULL, first_cmm = NULL;
+	int x;
+
+	first_cmm = _tokenization(gtln, ";\n|&");
+
+	if (first_cmm == NULL)
+		return (0);
+
+	for (x = 0; first_cmm[x]; x++)
+	{
+		dou_cmm = _tokenization(first_cmm[x], " \n");
+
+		if (!dou_cmm[0])
+		{
+			_free(dou_cmm, 0);
+			return (0);
+		}
+
+		if (dou_cmm[0] && (!(_is_prsent(dou_cmm[0]))))
+		{
+			if (!strcmp(dou_cmm[0], "exit"))
+				_free(first_cmm, 0);
+
+			_slt(dou_cmm[0])(dou_cmm, l_dx, av);
+		}
+		else
+		{
+			_execmd(dou_cmm, env, av, l_dx, first_cmm);
+		}
+	}
+		_free(first_cmm, 0);
+		_free(dou_cmm, 0);
+	return (0);
+}
+
+
+
+void _execmd(dou_p dou_cmmd, dou_p env, dou_p argv, size_t line_num, dou_p first_cmm)
+{
+	int _exev_Rv, _status;
+	pid_t _child_PID_Rv;
+	string _addr = NULL;
+
+	(void)env, (void)line_num;
+	if (dou_cmmd)
+	{
+		_addr = _get_PATH(dou_cmmd[0]);
+		/*printf("%s\n", _addr);*/
+
+		if (_addr == NULL)
+		{
+			_free(_addr, 0);
+			_free(first_cmm, 0);
+			_error_MESSAGE(argv, line_num, dou_cmmd, "addr");
+			exit(127);
+		}
+		_child_PID_Rv = fork();
+		if (_child_PID_Rv < 0)
+		{
+			perror(argv[0]);
+			if (dou_cmmd != NULL)
+			{
+				_free(_addr, 0);
+				_free(dou_cmmd, 0);
+				exit(EXIT_FAILURE);
+			}
+		}
+		else if (_child_PID_Rv == 0)
+		{
+			_exev_Rv = execve(_addr, dou_cmmd, environ);
+			if (_exev_Rv == ERROR)
+			{
+				perror("argv[0] [Execve]");
+				exit(EXIT_FAILURE);
+			}
+		}
+		else
+			wait(&_status);
+	}
+	_free(_addr, 0);
+}
+
+
+
+dou_p _tokenization(string gtln, string _delimiters)
+{
+	string token = NULL, _stckarr[_BFFSZ];
+	dou_p dou_cmm;
+	int _idx = 0;
+
+	token = strtok(gtln, _delimiters);
+
+	for (_idx = 0; token != NULL; _idx++, token = strtok(NULL, _delimiters))
+		_stckarr[_idx] = token;
+
+	_stckarr[_idx] = NULL;
+
+	dou_cmm = malloc(sizeof(char *) * (_idx + 1));
+
+	for (_idx = 0; _stckarr[_idx] != NULL; _idx++)
+		dou_cmm[_idx] = _stckarr[_idx];
+
+	dou_cmm[_idx] = NULL;
+
+
+	if (dou_cmm == NULL)
+	{
+		_free(dou_cmm, 0);
+		return (NULL);
+	}
+
+	return (dou_cmm);
+}
+
+
+
