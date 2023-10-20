@@ -35,7 +35,7 @@ int _tokenize_slt_exec(string gtln, dou_p env, dou_p av, size_t l_dx)
 		else
 			_execmd(dou_cmm, env, av, l_dx);
 	}
-		_free(first_cmm, 1);
-		_free(dou_cmm, 1);
+		_free(first_cmm, 0);
+		_free(dou_cmm, 0);
 	return (0);
 }

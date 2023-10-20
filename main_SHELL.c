@@ -26,7 +26,7 @@ int main(int _cxt, dou_p argv, dou_p env)
 			_putchar('\n');
 			exit(ERROR);
 		}
-		if (!(isatty(STDIN_FILENO)) && read == EOF)
+		if ((!(isatty(STDIN_FILENO)) && read == EOF) || _isblnk(gtln))
 		{
 			_free(gtln, 0);
 			break;

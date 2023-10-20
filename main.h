@@ -37,9 +37,11 @@ extern dou_p environ;
 
 char *_strtok(string str, string _delimiters);
 int _print_string(string st);
+int _isblnk(char *str);
 int _putchar(char c);
 int _isdigit(int c);
 int _atoi(string s);
+
 
 int (*_slt(string s))(dou_p dou_argv, size_t line_num, dou_p argv);
 int _exit_num(dou_p local_argv, size_t line_num, dou_p argv);

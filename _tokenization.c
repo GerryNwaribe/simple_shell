@@ -30,7 +30,7 @@ dou_p _tokenization(string gtln, string _delimiters)
 
 	if (dou_cmm == NULL)
 	{
-		_free(dou_cmm, 1);
+		_free(dou_cmm, 0);
 		return (NULL);
 	}
 

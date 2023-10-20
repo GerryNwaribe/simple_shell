@@ -33,7 +33,7 @@ void _execmd(dou_p dou_cmmd, dou_p env, dou_p argv, size_t line_num)
 			if (dou_cmmd != NULL)
 			{
 				_free(_addr, 0);
-				_free(dou_cmmd, 1);
+				_free(dou_cmmd, 0);
 				exit(EXIT_FAILURE);
 			}
 		}
