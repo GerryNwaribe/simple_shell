@@ -6,11 +6,12 @@
 #include <sys/wait.h>
 #include <string.h>
 #include <unistd.h>
+#include <string.h>
 #include <stdlib.h>
 #include <fcntl.h>
 #include <stdio.h>
 #include <ctype.h>
-#include <string.h>
+#include <errno.h>
 
 #define ERROR -1
 #define GERRY 1

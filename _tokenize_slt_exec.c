@@ -30,10 +30,15 @@ int _tokenize_slt_exec(string gtln, dou_p env, dou_p av, size_t l_dx)
 
 		if (dou_cmm[0] && (!(_is_prsent(dou_cmm[0]))))
 		{
+			if (!strcmp(dou_cmm[0], "exit"))
+				_free(first_cmm, 0);
+
 			_slt(dou_cmm[0])(dou_cmm, l_dx, av);
 		}
 		else
+		{
 			_execmd(dou_cmm, env, av, l_dx);
+		}
 	}
 		_free(first_cmm, 0);
 		_free(dou_cmm, 0);

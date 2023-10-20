@@ -24,7 +24,7 @@ void _execmd(dou_p dou_cmmd, dou_p env, dou_p argv, size_t line_num)
 		{
 			_free(_addr, 0);
 			_error_MESSAGE(argv, line_num, dou_cmmd, "addr");
-			return;
+			exit(0);
 		}
 		_child_PID_Rv = fork();
 		if (_child_PID_Rv < 0)
@@ -40,7 +40,6 @@ void _execmd(dou_p dou_cmmd, dou_p env, dou_p argv, size_t line_num)
 		else if (_child_PID_Rv == 0)
 		{
 			_exev_Rv = execve(_addr, dou_cmmd, environ);
-
 			if (_exev_Rv == ERROR)
 			{
 				perror("argv[0] [Execve]");
