@@ -20,7 +20,8 @@ int main(int _cxt, dou_p argv, dou_p env)
 			_print_string(" .:[:) ");
 
 		read = getline(&gtln, &bffsz, stdin);
-		if ((read == EOF && !(isatty(STDIN_FILENO))) || (read == EOF && (isatty(STDIN_FILENO))))
+		if ((read == EOF && !(isatty(STDIN_FILENO))) ||
+						(read == EOF && (isatty(STDIN_FILENO))))
 		{
 			_free(gtln, 0);
 			if (isatty(STDIN_FILENO))
@@ -30,7 +31,7 @@ int main(int _cxt, dou_p argv, dou_p env)
 
 		gtln[strcspn(gtln, "\n")] = '\0';
 
-		if ((!(isatty(STDIN_FILENO)) && read == EOF) && _isblnk(gtln)) /*  21th oct 6am  */ /* 21 oct 11 59pm */
+		if ((!(isatty(STDIN_FILENO)) && read == EOF) && _isblnk(gtln))
 		{
 			_free(gtln, 0);
 			break;

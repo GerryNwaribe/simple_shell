@@ -52,7 +52,7 @@ int _env(dou_p cmmd, size_t line_num, dou_p argv);
 int _cd(dou_p cmmd, size_t line_num, dou_p argv);
 int _is_prsent(string str);
 
-void _execmd(dou_p dou_cmmd, dou_p env, dou_p argv, size_t line_num, dou_p first_cmm);
+void _execmd(dou_p dou_cm, dou_p env, dou_p av, size_t ln_nu, dou_p ft_cmm);
 void _error_MESSAGE(dou_p argv, size_t line_num, dou_p cmmd, string key_w);
 int _tokenize_slt_exec(string gtln, dou_p env, dou_p av, size_t l_dx);
 size_t _getline(char **getlineptr, size_t *bffsz, int f_d);
