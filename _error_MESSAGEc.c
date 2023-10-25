@@ -26,6 +26,9 @@ void _error_MESSAGE(dou_p argv, size_t line_num, dou_p dou_cmmd, string key_w)
 	else
 		fprintf(stderr, "No such file or directory\n");
 
-	_free(dou_cmmd, 1);
-
+	if (!(isatty(STDIN_FILENO)))
+	{
+		_free(dou_cmmd, 1); /* dou free "lddjdj" interactive */
+		exit(127);
+	}
 }

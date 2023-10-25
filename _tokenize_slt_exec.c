@@ -10,37 +10,28 @@
  */
 int _tokenize_slt_exec(string gtln, dou_p env, dou_p av, size_t ln_cnt)
 {
-	dou_p dou_cmm = NULL, first_cmm = NULL;
-	int x;
+	dou_p dou_cmm = NULL, alx = NULL;
 
-	first_cmm = _tokenization(gtln, ";\n|&");
-
-	if (first_cmm == NULL)
-		return (0);
-
-	for (x = 0; first_cmm[x]; x++)
+	if (_is_semicolon(gtln))
 	{
-		dou_cmm = _tokenization(first_cmm[x], " \n");
-
-		if (!dou_cmm[0])
-		{
-			_free(dou_cmm, 0);
-			return (0);
-		}
-
-		if (dou_cmm[0] && (!(_is_prsent(dou_cmm[0]))))
-		{
-			if (!strcmp(dou_cmm[0], "exit"))
-				_free(first_cmm, 0);
-
-			_slt(dou_cmm[0])(dou_cmm, ln_cnt, av);
-		}
-		else
-		{
-			_execmd(dou_cmm, env, av, ln_cnt, first_cmm);
-		}
+		_semicolon(gtln, env, av, ln_cnt);
+		return (EXIT_SUCCESS);
 	}
-		_free(first_cmm, 0);
-		_free(dou_cmm, 0);
+
+	dou_cmm = _tokenization(gtln, " \n");
+	if (!dou_cmm[0])
+	{
+		_free(dou_cmm, 1);
+		return (ERROR);
+	}
+
+	if (dou_cmm[0] && (!(_is_prsent(dou_cmm[0]))))
+	{
+		_slt(dou_cmm[0])(dou_cmm, ln_cnt, av, alx);
+	}
+	else
+		_execmd(dou_cmm, env, av, ln_cnt, (dou_p)gtln);
+
+	_free(dou_cmm, 1);
 	return (0);
 }

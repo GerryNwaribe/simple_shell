@@ -7,40 +7,37 @@
  * @argv: argument vector
  * Return: void.
  */
-int _cd(dou_p cmmd, size_t line_num, dou_p argv)
+int _cd(dou_p cmmd, size_t line_num, dou_p argv, dou_p splt_cmm)
 {
-	const char *hm = _getenv("HOME");
-	const char *p_wd = _getenv("OLDPWD");
+	const char *hm = getenv("HOME");
+	char p_wd[_BFFSZ];
+	char _old[] = "OLDPWD", _new[] = "PWD";
 
+	(void)splt_cmm;
 	if (cmmd[1])
 	{
-		if (p_wd)
+		if (!(strcmp(cmmd[1], "-")))
 		{
-			if (!(strcmp(cmmd[1], "-")))
-			{
-				if (chdir(p_wd))
-					perror("cd");
-				return (0);
-			}
+			strcpy(p_wd, getenv("OLDPWD"));
+			_pwd_update(_old);
+			if (chdir(p_wd))
+				perror("cd [OLDPWD Not set]");
+			_pwd_update(_new);
+			return (0);
 		}
-		else
-			perror("cd");
-
-		if (!(chdir(cmmd[1])))
+		_pwd_update(_old);
+		if (chdir(cmmd[1]))
 			_error_MESSAGE(argv, line_num, cmmd, "cd");
-
+		_pwd_update(_new);
 		return (0);
 	}
 	else
 	{
-		if (hm)
-		{
-			if (chdir(hm))
-				perror("cd: HOME");
-			return (0);
-		}
-		else
-			perror("cd");
+		_pwd_update(_old);
+		if (chdir(hm))
+			perror("cd [HOME Not set]");
+		_pwd_update(_new);
+		return (0);
 	}
 	return (1);
 }

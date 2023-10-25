@@ -9,8 +9,8 @@
  * @ln_nu: line number
  * Return: void
  */
-void _execmd(dou_p dou_cm, dou_p env, dou_p av, size_t ln_nu, dou_p ft_cmm);
-void _execmd(dou_p dou_cm, dou_p env, dou_p av, size_t ln_nu, dou_p ft_cmm)
+int _execmd(dou_p dou_cm, dou_p env, dou_p av, size_t ln_nu, dou_p ft_cmm);
+int _execmd(dou_p dou_cm, dou_p env, dou_p av, size_t ln_nu, dou_p ft_cmm)
 {
 	int _exev_Rv, _status;
 	pid_t _child_PID_Rv;
@@ -23,10 +23,11 @@ void _execmd(dou_p dou_cm, dou_p env, dou_p av, size_t ln_nu, dou_p ft_cmm)
 		if (_addr == NULL)
 		{
 			_free(_addr, 0);
-			_free(ft_cmm, 0);
+			if (!(isatty(STDIN_FILENO)))
+				_free((char *)ft_cmm, 0);
 			_error_MESSAGE(av, ln_nu, dou_cm, "addr");
-			exit(127);
 		}
+
 		_child_PID_Rv = fork();
 		if (_child_PID_Rv < 0)
 		{
@@ -44,11 +45,12 @@ void _execmd(dou_p dou_cm, dou_p env, dou_p av, size_t ln_nu, dou_p ft_cmm)
 			if (_exev_Rv == ERROR)
 			{
 				perror("av[0] [Execve]");
-				exit(EXIT_FAILURE);
+				return (127);
 			}
 		}
 		else
 			wait(&_status);
 	}
 	_free(_addr, 0);
+	return (0);
 }

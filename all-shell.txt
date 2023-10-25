@@ -1,4 +1,58 @@
-#include "main.h"
+
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/wait.h>
+#include <string.h>
+#include <unistd.h>
+#include <string.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <ctype.h>
+#include <errno.h>
+
+#define ERROR -1
+#define GERRY 1
+#define _BFFSZ 1024
+
+typedef char *string;
+typedef char **dou_p;
+
+typedef struct main
+{
+	string key_w;
+	int (*_func)(dou_p dou_argv, size_t line_num, dou_p argv);
+} _is;
+
+extern dou_p environ;
+
+char *_strtok(string str, string _delimiters);
+int _print_string(string st);
+int _isblnk(char *str);
+int _putchar(char c);
+int _isdigit(int c);
+int _atoi(string s);
+
+
+int (*_slt(string s))(dou_p dou_argv, size_t line_num, dou_p argv);
+int _exit_num(dou_p local_argv, size_t line_num, dou_p argv);
+int _unsetenv(dou_p dou_argv, size_t line_num, dou_p argv);
+int _setenv(dou_p dou_argv, size_t line_num, dou_p argv);
+int _env(dou_p cmmd, size_t line_num, dou_p argv);
+int _cd(dou_p cmmd, size_t line_num, dou_p argv);
+int _is_prsent(string str);
+
+void _execmd(dou_p dou_cm, dou_p env, dou_p av, size_t ln_nu, dou_p ft_cmm);
+void _error_MESSAGE(dou_p argv, size_t line_num, dou_p cmmd, string key_w);
+int _tokenize_slt_exec(string gtln, dou_p env, dou_p av, size_t l_dx);
+size_t _getline(char **getlineptr, size_t *bffsz, int f_d);
+dou_p _tokenization(string str, string _delimiters);
+void *_realloc(void *ptr, size_t new_size);
+void _free(void *_malloc, int is_dou_p);
+int _print_num(size_t _n, int _c);
+string _get_PATH(string cmmd);
+string _getenv(string str);
+
 
 
 
@@ -162,4 +216,377 @@ dou_p _tokenization(string gtln, string _delimiters)
 }
 
 
+
+string _get_PATH(string cmmd)
+{
+	int dir_length, cmmd_length = strlen(cmmd);
+	string path = NULL, _token = NULL, _addr = NULL, _cmmd = NULL;
+	char path_cp[_BFFSZ], file_path[_BFFSZ];
+	struct stat bffr;
+
+	path = getenv("PATH");
+
+	if (!(stat(cmmd, &bffr)) && !(access(cmmd, F_OK))) /* /bin/ls */
+	{
+		_cmmd = malloc(sizeof(char) * cmmd_length + 1);
+		strcpy(_cmmd, cmmd);
+		return (_cmmd);
+	}
+	else
+	{
+		strcpy(path_cp, path);
+
+		_token = strtok(path_cp, ":");
+		while (_token != NULL)
+		{
+			dir_length = strlen(_token);
+
+			strcpy(file_path, _token);
+			strcat(file_path, "/");
+			strcat(file_path, cmmd);
+			strcat(file_path, "\0");
+
+			if (!(stat(file_path, &bffr)))
+			{
+				_addr = malloc(sizeof(char) * cmmd_length + dir_length + 2);
+				strcpy(_addr, file_path);
+				return (_addr);
+			}
+
+			_token = strtok(NULL, ":");
+		}
+	}
+	return (NULL);
+}
+
+
+void _error_MESSAGE(dou_p argv, size_t line_num, dou_p dou_cmmd, string key_w)
+{
+	fprintf(stderr, "%s: ", argv[0]);
+
+	if (!(strcmp("cd", key_w)))
+	{
+		fprintf(stderr, "%lu: ", line_num);
+		fprintf(stderr, "%s: can't cd to ", dou_cmmd[0]);
+		fprintf(stderr, "%s\n", dou_cmmd[1]);
+	}
+	else if (!(strcmp("addr", key_w)))
+	{
+		fprintf(stderr, "%lu: ", line_num);
+		fprintf(stderr, "%s: not found\n", dou_cmmd[0]);
+	}
+	else
+		fprintf(stderr, "No such file or directory\n");
+
+	_free(dou_cmmd, 1);
+
+}
+
+
+int (*_slt(string s))(dou_p dou_argv, size_t line_num, dou_p argv)
+{
+	int x;
+
+	_is fmt[] = {
+		{"cd", &_cd},
+		{"env", &_env},
+		{"exit", &_exit_num},
+		{"setenv", &_setenv},
+		{"unsetenv", &_unsetenv},
+		{'\0', NULL},
+	};
+
+	for (x = 0; fmt[x].key_w; x++)
+	{
+		if (!(strcmp(s, fmt[x].key_w)))
+			return (fmt[x]._func);
+	}
+	return (0);
+}
+
+
+
+int _is_prsent(string str)
+{
+	int x;
+	char *_str[] = {"cd", "env", "exit", "setenv", "unsetenv", NULL};
+
+	for (x = 0; _str[x]; x++)
+	{
+		if (!(strcmp(str, _str[x])))
+			return (0);
+
+	}
+
+	return (1);
+}
+
+
+
+
+
+
+int _isblnk(char *str)
+{
+	int i;
+
+	for (i = 0; str[i]; i++)
+		if (!isspace((unsigned char)str[i]))
+			return (0);   /* Found a non-whitespace character */
+
+	return (1);   /* All characters are whitespace */
+}
+
+
+
+
+void _free(void *_mem, int is_dou_p)
+{
+	int x = 0;
+	void **alloc;
+
+	if (is_dou_p)
+	{
+		alloc = (void **)_mem;
+
+		for (; alloc[x]; x++)
+		{
+			if (alloc[x] != NULL)
+			{
+				free(alloc[x]);
+				alloc[x] = NULL;
+			}
+		}
+	}
+
+	if (_mem)
+	{
+		free(_mem);
+		_mem = NULL;
+	}
+
+}
+
+
+
+
+int _putchar(char c)
+{
+	return (write(STDOUT_FILENO, &c, 1)); /* STDOUT_FILENO is part of unistd.h */
+}
+
+
+
+int _env(dou_p cmmd, size_t line_num, dou_p argv)
+{
+	dou_p dx = environ;
+
+	(void)cmmd;
+	(void)argv;
+	(void)line_num;
+
+	for (; *dx; dx++)
+	{
+		_print_string(*dx);
+		_putchar('\n');
+	}
+	return (0);
+}
+
+
+
+
+
+int _print_string(string st)
+{
+	int x, idx;
+
+	for (x = 0; st[x]; x++)
+	{
+		idx += _putchar(st[x]);
+	}
+	return (idx);
+
+}
+
+
+
+
+
+int _atoi(char *s)
+{
+	int sign = 1, i = 0;
+
+	unsigned int res = 0;
+
+	while (!(s[i] <= '9' && s[i] >= '0') && s[i] != '\0')
+	{
+		if (s[i] == '-')
+			sign *= -1;
+		i++;
+	}
+
+	while (s[i] <= '9' && (s[i] >= '0' && s[i] != '\0'))
+	{
+		res = (res * 10) + (s[i] - '0');
+		i++;
+	}
+
+	res *= sign;
+
+	return (res);
+}
+
+
+int _isdigit(int c)
+{
+	if (c >= 48 && c <= 57)
+		return (1);
+
+	return (0);
+}
+
+
+int _exit_num(dou_p dou_cmm, size_t line_num, dou_p argv)
+{
+	int x, _no;
+
+	(void)argv;
+	(void)line_num;
+	if (dou_cmm[1])
+	{
+		for (x = 0; dou_cmm[1][x]; x++)
+		{
+			if (_isdigit(dou_cmm[1][x]))
+			{
+				continue;
+			}
+			else
+			{
+				_free(dou_cmm, 0);
+				exit(0);
+			}
+		}
+
+		_no = _atoi(dou_cmm[1]);
+		_free(dou_cmm, 1);
+		exit(_no);
+	}
+
+	_free(dou_cmm, 1);
+	exit(0);
+}
+
+
+
+int _unsetenv(dou_p dou_argv, size_t line_num, dou_p argv)
+{
+
+	char *name = dou_argv[1]/*, *tmp = NULL*/;
+	char **env = environ;
+	int x = 0;
+
+	(void)line_num;
+	(void)argv;
+	if (name == NULL)   /* Invalid input OR Mem err */
+	{
+		perror("unsetenv VARIABLE");
+		return (-1);
+	}
+	for (; *env; x++, env++)   /* If overwrite is 1, replace existing variable */
+	{
+		if (!(strncmp(name, *env, strlen(name))))   /* Replace existing variable */
+		{
+			for (; environ[x]; x++)
+			{
+				environ[x] = environ[x + 1];
+			}
+
+			free(*env);
+			return (0);
+		}
+	}
+	return (-1);
+}
+
+
+
+int _setenv(dou_p dou_cmm, size_t line_num, dou_p argv)
+{
+
+	char *name = dou_cmm[1], *bff = NULL;
+	char *value = dou_cmm[2];
+	char **env = environ;
+	char new_var[_BFFSZ];
+	int dx = 0;
+
+	/* +2 for '=' and null terminator */
+	(void)line_num;
+	(void)argv;
+	if (name == NULL || value == NULL)
+	{
+		perror("[(setenv VARIABLE VALUE)]");
+		return (-1); /* Invalid input OR Mem err */
+	}
+	strcpy(new_var, name);
+	strcat(new_var, "=");
+	strcat(new_var, value);
+
+	while (*env) /* If 'overwrite' is 1, replace existing variable */
+	{
+		if (!(strncmp(name, *env, strlen(name)))) /* Replace existing variable */
+		{
+			strcpy(environ[dx], new_var);
+			return (0);
+		}
+
+		dx++;
+		env++;
+	}
+
+	bff = malloc(sizeof(char) * (strlen(name) + strlen(value) + 2));
+	environ[dx++] = bff;
+	environ[dx] = '\0';
+	return (0);
+}
+
+
+
+int _cd(dou_p cmmd, size_t line_num, dou_p argv)
+{
+	const char *hm = getenv("HOME");
+	const char *p_wd = getenv("OLDPWD");
+
+	if (cmmd[1])
+	{
+		if (p_wd)
+		{
+			if (!(strcmp(cmmd[1], "-")))
+			{
+				if (chdir(p_wd))
+					perror("cd");
+				return (0);
+			}
+		}
+		else
+			perror("cd");
+
+		if (!(chdir(cmmd[1])))
+			_error_MESSAGE(argv, line_num, cmmd, "cd");
+
+		return (0);
+	}
+	else
+	{
+		if (hm)
+		{
+			if (chdir(hm))
+				perror("cd: HOME");
+			return (0);
+		}
+		else
+			perror("cd");
+	}
+	return (1);
+}
 

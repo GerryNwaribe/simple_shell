@@ -7,12 +7,13 @@
  * @argv: argument vector
  * Return: exit number
  */
-int _exit_num(dou_p dou_cmm, size_t line_num, dou_p argv)
+int _exit_num(dou_p dou_cmm, size_t line_num, dou_p argv, dou_p first_cmm)
 {
 	int x, _no;
 
-	(void)argv;
-	(void)line_num;
+	(void)argv, (void)line_num;
+	_free(first_cmm, 0);
+
 	if (dou_cmm[1])
 	{
 		for (x = 0; dou_cmm[1][x]; x++)
@@ -23,7 +24,7 @@ int _exit_num(dou_p dou_cmm, size_t line_num, dou_p argv)
 			}
 			else
 			{
-				_free(dou_cmm, 0);
+				_free(dou_cmm, 1);
 				exit(0);
 			}
 		}

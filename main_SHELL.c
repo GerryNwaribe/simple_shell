@@ -9,43 +9,38 @@
  */
 int main(int _cxt, dou_p argv, dou_p env)
 {
-	size_t bffsz = 0, line_num = 1;
-	string gtln = NULL;
+	size_t bffsz = 0, ln_cnt = 1;
+	string gtln = NULL, _gtln = NULL;
 	ssize_t read;
 
 	(void)_cxt;
 	while (GERRY)
 	{
 		if (isatty(STDIN_FILENO))
-			_print_string(" .:[:) ");
-
+			_print_string(" .:[$) ");
 		read = getline(&gtln, &bffsz, stdin);
 		if ((read == EOF && !(isatty(STDIN_FILENO))) ||
-						(read == EOF && (isatty(STDIN_FILENO))))
+			(read == EOF && (isatty(STDIN_FILENO))))
 		{
 			_free(gtln, 0);
 			if (isatty(STDIN_FILENO))
 				_putchar('\n');
+
 			exit(0);
 		}
 
-		gtln[strcspn(gtln, "\n")] = '\0';
-
+		_gtln = _nll_nwln(gtln, read); /* frees gtln and set "\n" to NULL in new buffer */
 		if ((!(isatty(STDIN_FILENO)) && read == EOF) && _isblnk(gtln))
 		{
-			_free(gtln, 0);
+			_free(_gtln, 0);
 			break;
 		}
-
-		if (gtln == NULL || _isblnk(gtln))
+		if (_gtln == NULL || _isblnk(_gtln))
 		{
-			line_num++;
+			ln_cnt++;
 			continue;
 		}
-
-		_tokenize_slt_exec(gtln, env, argv, line_num);
-
+		_tokenize_slt_exec(_gtln, env, argv, ln_cnt);
 	}
-
 	return (0);
 }

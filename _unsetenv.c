@@ -8,23 +8,25 @@
  * @line_num: UNUSED line count.
  * Return: 0 on success, -1 on failure
  */
-int _unsetenv(dou_p dou_argv, size_t line_num, dou_p argv)
+int _unsetenv(dou_p dou_argv, size_t line_num, dou_p argv, dou_p first_cmm)
 {
 
-	char *name = dou_argv[1]/*, *tmp = NULL*/;
+	char *name = dou_argv[1] /*, *tmp = NULL*/;
 	char **env = environ;
 	int x = 0;
 
 	(void)line_num;
 	(void)argv;
-	if (name == NULL)   /* Invalid input OR Mem err */
+	_free(first_cmm, 0);
+
+	if (name == NULL) /* Invalid input OR Mem err */
 	{
 		perror("unsetenv VARIABLE");
 		return (-1);
 	}
-	for (; *env; x++, env++)   /* If overwrite is 1, replace existing variable */
+	for (; *env; x++, env++) /* If overwrite is 1, replace existing variable */
 	{
-		if (!(strncmp(name, *env, strlen(name))))   /* Replace existing variable */
+		if (!(strncmp(name, *env, strlen(name)))) /* Replace existing variable */
 		{
 			for (; environ[x]; x++)
 			{
@@ -37,5 +39,3 @@ int _unsetenv(dou_p dou_argv, size_t line_num, dou_p argv)
 	}
 	return (-1);
 }
-
-

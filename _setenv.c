@@ -8,7 +8,7 @@
  * @line_num: UNUSED line count.
  * Return: 0 on success, -1 on failure
  */
-int _setenv(dou_p dou_cmm, size_t line_num, dou_p argv)
+int _setenv(dou_p dou_cmm, size_t line_num, dou_p argv, dou_p first_cmm)
 {
 
 	char *name = dou_cmm[1], *bff = NULL;
@@ -17,9 +17,9 @@ int _setenv(dou_p dou_cmm, size_t line_num, dou_p argv)
 	char new_var[_BFFSZ];
 	int dx = 0;
 
-	/* +2 for '=' and null terminator */
 	(void)line_num;
 	(void)argv;
+	_free(first_cmm, 0);
 	if (name == NULL || value == NULL)
 	{
 		perror("[(setenv VARIABLE VALUE)]");
@@ -40,7 +40,6 @@ int _setenv(dou_p dou_cmm, size_t line_num, dou_p argv)
 		dx++;
 		env++;
 	}
-
 	bff = malloc(sizeof(char) * (strlen(name) + strlen(value) + 2));
 	environ[dx++] = bff;
 	environ[dx] = '\0';
