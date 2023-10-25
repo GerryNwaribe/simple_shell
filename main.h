@@ -31,14 +31,14 @@ typedef struct main
 	int (*_func)(dou_p dou_argv, size_t line_num, dou_p argv, dou_p _cmm);
 } _is;
 /**
- * struct _list -
- * @name_value:
- * @next:
- * Return:
+ * struct _list - Structure representing a shell built-in command.
+ * @name_value: member
+ * @next: member
+ * Return: 0
  */
 typedef struct _list
 {
-	string 	name_value;
+	string name_value;
 	struct _list *next;
 } _list;
 

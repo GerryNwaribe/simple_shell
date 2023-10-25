@@ -1,14 +1,14 @@
 #include "main.h"
 
 /**
- * _is_semicolon -
- * @gtln:
- * Return:
+ * _is_semicolon - checks if semicolon is part of the string.
+ * @gtln: the string to be checked.
+ * Return: 1 if found and 0 otherwise
  */
 int _is_semicolon(string gtln)
 {
-    if (strchr(gtln, ';'))
-        return (1);
+	if (strchr(gtln, ';'))
+		return (1);
 
-    return (0);
+	return (0);
 }

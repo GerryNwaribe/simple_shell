@@ -20,7 +20,7 @@ int main(int _cxt, dou_p argv, dou_p env)
 			_print_string(" .:[$) ");
 		read = getline(&gtln, &bffsz, stdin);
 		if ((read == EOF && !(isatty(STDIN_FILENO))) ||
-			(read == EOF && (isatty(STDIN_FILENO))))
+				(read == EOF && (isatty(STDIN_FILENO))))
 		{
 			_free(gtln, 0);
 			if (isatty(STDIN_FILENO))
@@ -28,8 +28,8 @@ int main(int _cxt, dou_p argv, dou_p env)
 
 			exit(0);
 		}
-
-		_gtln = _nll_nwln(gtln, read); /* frees gtln and set "\n" to NULL in new buffer */
+		/* frees gtln and set "\n" to NULL in new buffer */
+		_gtln = _nll_nwln(gtln, read);
 		if ((!(isatty(STDIN_FILENO)) && read == EOF) && _isblnk(gtln))
 		{
 			_free(_gtln, 0);

@@ -5,6 +5,7 @@
  * @cmmd: The command from stdin who's path is to be found.
  * @line_num: line number
  * @argv: argument vector
+ * @splt_cmm: dou command in splits.
  * Return: void.
  */
 int _cd(dou_p cmmd, size_t line_num, dou_p argv, dou_p splt_cmm)
