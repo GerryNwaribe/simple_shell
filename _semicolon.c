@@ -13,6 +13,7 @@ int _semicolon(string gtln, dou_p env, dou_p av, size_t ln_cnt)
 	dou_p dou_cmm = NULL, split_cmm = NULL;
 	int x;
 
+	(void)_head_;
 	split_cmm = _tokenization(gtln, ";");
 	if (split_cmm == NULL)
 		return (ERROR);

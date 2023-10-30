@@ -11,14 +11,13 @@
 int _setenv(dou_p dou_cmm, size_t line_num, dou_p argv, dou_p first_cmm)
 {
 
-	char *name = dou_cmm[1], *bff = NULL;
+	char *name = dou_cmm[1], *___bff = NULL;
 	char *value = dou_cmm[2];
 	char **env = environ;
 	char new_var[_BFFSZ];
 	int dx = 0;
 
-	(void)line_num;
-	(void)argv;
+	(void)line_num, (void)argv, (void)_head_;
 	_free(first_cmm, 0);
 	if (name == NULL || value == NULL)
 	{
@@ -40,8 +39,10 @@ int _setenv(dou_p dou_cmm, size_t line_num, dou_p argv, dou_p first_cmm)
 		dx++;
 		env++;
 	}
-	bff = malloc(sizeof(char) * (strlen(name) + strlen(value) + 2));
-	environ[dx++] = bff;
+	___bff = malloc(sizeof(char) * (strlen(new_var) + 1));
+	strcpy(___bff, new_var);
+	environ[dx++] = ___bff;
 	environ[dx] = '\0';
+
 	return (0);
 }

@@ -7,18 +7,19 @@
  */
 void _pwd_update(char __s[])
 {
-	char new_var[_BFFSZ], _s[_BFFSZ];
-	char **env = environ;
-	int dx = 0;
+	char _v[_BFFSZ];
+	char *dou_cmm[3];
 
-	getcwd(_s, sizeof(_s));
 
-	strcpy(new_var, __s);
-	strcat(new_var, "=");
-	strcat(new_var, _s);
-	for (; *env; dx++, env++)
-	{
-		if (!(strncmp(__s, *env, strlen(__s)))) /* Replace existing variable */
-			strcpy(environ[dx], new_var);
-	}
+	(void)_head_;
+	getcwd(_v, sizeof(_v));
+
+	dou_cmm[0] = "setenv";
+	dou_cmm[1] = __s;
+	dou_cmm[2] = _v;
+	dou_cmm[3] = NULL;
+
+	_setenv(dou_cmm, 0, NULL, NULL);
+
+
 }

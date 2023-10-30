@@ -17,6 +17,8 @@ int _print_num(size_t _n, int _c)
 	 *}
 	 */
 
+	(void)_head_;
+
 	if (_n / 10)
 		_c = _print_num(_n / 10, _c);
 

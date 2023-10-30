@@ -10,6 +10,8 @@
  */
 void _error_MESSAGE(dou_p argv, size_t line_num, dou_p dou_cmmd, string key_w)
 {
+	(void)_head_;
+
 	fprintf(stderr, "%s: ", argv[0]);
 
 	if (!(strcmp("cd", key_w)))
@@ -22,6 +24,12 @@ void _error_MESSAGE(dou_p argv, size_t line_num, dou_p dou_cmmd, string key_w)
 	{
 		fprintf(stderr, "%lu: ", line_num);
 		fprintf(stderr, "%s: not found\n", dou_cmmd[0]);
+	}
+	else if (!(strcmp("exit", key_w)))
+	{
+		/*sh: 1: exit: Illegal number: 6f*/
+		fprintf(stderr, "%lu: ", line_num);
+		fprintf(stderr, "%s: Illegal number: %s\n", key_w, dou_cmmd[1]);
 	}
 	else
 		fprintf(stderr, "No such file or directory\n");

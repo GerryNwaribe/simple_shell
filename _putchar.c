@@ -7,5 +7,6 @@
  */
 int _putchar(char c)
 {
+	(void)_head_;
 	return (write(STDOUT_FILENO, &c, 1)); /* STDOUT_FILENO is part of unistd.h */
 }

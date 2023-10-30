@@ -12,6 +12,8 @@ void *_realloc(void *ptr, size_t new_size)
 	char *new_mem = NULL;
 	char *temp_ptr = ptr;
 
+	(void)_head_;
+
 	if (new_size == 0 && ptr)
 	{
 		free(ptr);

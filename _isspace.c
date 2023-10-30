@@ -9,6 +9,8 @@ int _isblnk(char *str)
 {
 	int i;
 
+	(void)_head_;
+
 	for (i = 0; str[i]; i++)
 		if (!isspace((unsigned char)str[i]))
 			return (0);   /* Found a non-whitespace character */

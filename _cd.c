@@ -11,32 +11,34 @@
 int _cd(dou_p cmmd, size_t line_num, dou_p argv, dou_p splt_cmm)
 {
 	const char *hm = getenv("HOME");
-	char p_wd[_BFFSZ];
-	char _old[] = "OLDPWD", _new[] = "PWD";
+	char _old[] = "OLDPWD", _new[] = "PWD", _old_[_BFFSZ];
 
-	(void)splt_cmm;
+	(void)splt_cmm, (void)_head_;
 	if (cmmd[1])
 	{
 		if (!(strcmp(cmmd[1], "-")))
 		{
-			strcpy(p_wd, getenv("OLDPWD"));
+			strcpy(_old_, (getenv("OLDPWD")));
 			_pwd_update(_old);
-			if (chdir(p_wd))
-				perror("cd [OLDPWD Not set]");
+			if (chdir(_old_))
+				perror("[OLDPWD Not set]");
 			_pwd_update(_new);
 			return (0);
 		}
-		_pwd_update(_old);
-		if (chdir(cmmd[1]))
-			_error_MESSAGE(argv, line_num, cmmd, "cd");
-		_pwd_update(_new);
-		return (0);
+		if (!(access(cmmd[1], X_OK)))
+		{
+			_pwd_update(_old);
+			if (chdir(cmmd[1]))
+				_error_MESSAGE(argv, line_num, cmmd, "cd");
+			_pwd_update(_new);
+			return (0);
+		}
 	}
 	else
 	{
 		_pwd_update(_old);
 		if (chdir(hm))
-			perror("cd [HOME Not set]");
+			perror("[HOME Not set]");
 		_pwd_update(_new);
 		return (0);
 	}

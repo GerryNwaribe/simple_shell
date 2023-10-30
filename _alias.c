@@ -1,36 +1,44 @@
 #include "main.h"
 
 /**
- * _alias - This function creates and effect alaises.
- * @dou_av: double pointer for strings on stdin.
+ * _alias - This function creates and applies alaises.
+ * @_cmmd: double pointer for strings on stdin.
  * @ln_nm: stdin word count.
  * @av: Environmental variable.
  * @_cmm: dou command in splits.
  * Return: returns 0 on success.
  */
-int _alias(dou_p dou_av, size_t ln_nm, dou_p av, dou_p _cmm)
+int _alias(dou_p _cmmd, size_t ln_nm, dou_p av, dou_p _cmm)
 {
-	/**
-	 * implementation.. alias [name[='value'] ...]
-	 * alias: name='value' ##prints all alias
-	 * alias ls_alias=/bin/ls
-	 */
-
-	static _list **stt_list;
-	_list *head = NULL;
-	_list *shifter = NULL;
-	_list *new = malloc(sizeof(_list));
+	_list *tmp = *_head_;	/* alias: name='value' ##prints all alias */
+	_list *new = NULL;		/* implementation.. alias [name[='value'] ...] */
+	int nod_num = 0;		/* alias ls_alias=/bin/ls */
 
 	(void)ln_nm, (void)av, (void)_cmm;
-	new->name_value = dou_av[1];
-	new->next = NULL;
+	if (_cmmd[1])
+	{
+		new = malloc(sizeof(_list));
+		if (new == NULL)
+			return (ERROR);
+		new->_value = strdup(_cmmd[1]);
+		new->next = *_head_;
+		*_head_ = new;
 
-	head = new;
-	*stt_list = head;
-
-	for (shifter = *stt_list; shifter; shifter = shifter->next)
-		printf("%s\n", shifter->name_value);
-
-	free(new);
-	return (0);
+		return (0);
+	}
+	else
+	{
+		for (; tmp != NULL; nod_num++, tmp = tmp->next)
+		{
+			if (tmp == NULL)
+				_print_string("(nil) list\n");
+			else
+			{
+				_print_string("alias");
+				_print_string(tmp->_value);
+			}
+		}
+		return (nod_num);
+	}
+	return (-1);
 }

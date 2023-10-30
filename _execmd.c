@@ -16,7 +16,7 @@ int _execmd(dou_p dou_cm, dou_p env, dou_p av, size_t ln_nu, dou_p ft_cmm)
 	pid_t _child_PID_Rv;
 	string _addr = NULL;
 
-	(void)env, (void)ln_nu;
+	(void)env, (void)ln_nu, (void)_head_;
 	if (dou_cm)
 	{
 		_addr = _get_PATH(dou_cm[0]);
@@ -26,8 +26,8 @@ int _execmd(dou_p dou_cm, dou_p env, dou_p av, size_t ln_nu, dou_p ft_cmm)
 			if (!(isatty(STDIN_FILENO)))
 				_free((char *)ft_cmm, 0);
 			_error_MESSAGE(av, ln_nu, dou_cm, "addr");
+			return (127);
 		}
-
 		_child_PID_Rv = fork();
 		if (_child_PID_Rv < 0)
 		{

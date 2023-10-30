@@ -7,6 +7,8 @@
  */
 int _is_semicolon(string gtln)
 {
+	(void)_head_;
+
 	if (strchr(gtln, ';'))
 		return (1);
 

@@ -12,7 +12,7 @@ int _exit_num(dou_p dou_cmm, size_t line_num, dou_p argv, dou_p splt_cmm)
 {
 	int x, _no;
 
-	(void)argv, (void)line_num;
+	(void)argv, (void)line_num, (void)_head_;
 	_free(splt_cmm, 0);
 
 	if (dou_cmm[1])
@@ -25,16 +25,18 @@ int _exit_num(dou_p dou_cmm, size_t line_num, dou_p argv, dou_p splt_cmm)
 			}
 			else
 			{
-				_free(dou_cmm, 1);
-				exit(0);
+				_error_MESSAGE(argv, line_num, dou_cmm, "exit");
+				return (ERROR);
 			}
 		}
 
 		_no = _atoi(dou_cmm[1]);
 		_free(dou_cmm, 1);
+		_free_alias();
 		exit(_no);
 	}
 
 	_free(dou_cmm, 1);
+	_free_alias();
 	exit(0);
 }

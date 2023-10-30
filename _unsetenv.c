@@ -15,8 +15,7 @@ int _unsetenv(dou_p dou_argv, size_t line_num, dou_p argv, dou_p first_cmm)
 	char **env = environ;
 	int x = 0;
 
-	(void)line_num;
-	(void)argv;
+	(void)line_num, (void)argv, (void)_head_;
 	_free(first_cmm, 0);
 
 	if (name == NULL) /* Invalid input OR Mem err */

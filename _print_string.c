@@ -9,6 +9,8 @@ int _print_string(string st)
 {
 	int x, idx;
 
+	(void)_head_;
+
 	for (x = 0; st[x]; x++)
 	{
 		idx += _putchar(st[x]);

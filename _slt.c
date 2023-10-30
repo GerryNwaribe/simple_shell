@@ -8,7 +8,6 @@
 int (*_slt(string s))(dou_p dou_av, size_t ln_nm, dou_p av, dou_p _cmm)
 {
 	int x;
-
 	_is fmt[] = {
 		{"cd", &_cd},
 		{"env", &_env},
@@ -18,6 +17,9 @@ int (*_slt(string s))(dou_p dou_av, size_t ln_nm, dou_p av, dou_p _cmm)
 		{"unsetenv", &_unsetenv},
 		{'\0', NULL},
 	};
+
+	(void)_head_;
+
 
 	for (x = 0; fmt[x].key_w; x++)
 	{

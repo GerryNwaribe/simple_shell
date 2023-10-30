@@ -14,6 +14,7 @@ size_t _getline(char **getlineptr, size_t *bffsz, int f_d)
 	size_t total_rd = 0;
 	ssize_t rd;
 
+	(void)_head_;
 	if (*bffsz == 0)
 		*bffsz = _BFFSZ;
 

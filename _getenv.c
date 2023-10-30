@@ -10,6 +10,7 @@ string _getenv(string str)
 	size_t lx = strlen(str);
 	dou_p _env_cp = environ;
 
+	(void)_head_;
 	for (; *_env_cp; ++_env_cp)
 	{
 		if (!(strncmp(*_env_cp, str, lx)) && (*_env_cp)[lx] == '=')

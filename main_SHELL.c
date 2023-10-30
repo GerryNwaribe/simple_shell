@@ -13,23 +13,21 @@ int main(int _cxt, dou_p argv, dou_p env)
 	string gtln = NULL, _gtln = NULL;
 	ssize_t read;
 
-	(void)_cxt;
+	(void)_cxt, (void)_head_;
 	while (GERRY)
 	{
 		if (isatty(STDIN_FILENO))
 			_print_string(" .:[$) ");
 		read = getline(&gtln, &bffsz, stdin);
 		if ((read == EOF && !(isatty(STDIN_FILENO))) ||
-				(read == EOF && (isatty(STDIN_FILENO))))
+			(read == EOF && (isatty(STDIN_FILENO))))
 		{
 			_free(gtln, 0);
 			if (isatty(STDIN_FILENO))
 				_putchar('\n');
-
 			exit(0);
 		}
-		/* frees gtln and set "\n" to NULL in new buffer */
-		_gtln = _nll_nwln(gtln, read);
+		_gtln = _nll_nwln(gtln, read); /* frees gtln and set "\n" to NULL in new buffer */
 		if ((!(isatty(STDIN_FILENO)) && read == EOF) && _isblnk(gtln))
 		{
 			_free(_gtln, 0);

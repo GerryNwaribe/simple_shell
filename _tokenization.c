@@ -13,8 +13,8 @@ dou_p _tokenization(string gtln, string _delimiters)
 	dou_p dou_cmm;
 	int _idx = 0;
 
+	(void)_head_;
 	token = strtok(gtln, _delimiters);
-
 	for (_idx = 0; token != NULL; _idx++, token = strtok(NULL, _delimiters))
 		_stck_arr[_idx] = token;
 

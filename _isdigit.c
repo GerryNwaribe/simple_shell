@@ -8,6 +8,8 @@
 
 int _isdigit(int c)
 {
+	(void)_head_;
+
 	if (c >= 48 && c <= 57)
 		return (1);
 

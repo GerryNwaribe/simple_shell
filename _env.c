@@ -16,6 +16,7 @@ int _env(dou_p cmmd, size_t line_num, dou_p argv, dou_p splt_cmm)
 	(void)cmmd;
 	(void)argv;
 	(void)line_num;
+	(void)_head_;
 	_free(splt_cmm, 0);
 
 	for (; *dx; dx++)

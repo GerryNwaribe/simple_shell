@@ -6,6 +6,7 @@
 #include <sys/wait.h>
 #include <string.h>
 #include <unistd.h>
+#include <signal.h>
 #include <string.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -36,20 +37,24 @@ typedef struct main
  * @next: member
  * Return: 0
  */
-typedef struct _list
+typedef struct _list_
 {
-	string name_value;
-	struct _list *next;
+	string _value;
+	struct _list_ *next;
 } _list;
 
 extern dou_p environ;
+static _list **_head_;
 
 char *_strtok(string str, string _delimiters);
+void _handle_ctrl_D(int signal);
 int _print_string(string st);
 int _isblnk(char *str);
 int _putchar(char c);
 int _isdigit(int c);
 int _atoi(string s);
+void _free_alias();
+
 
 int (*_slt(string s))(dou_p dou_argv, size_t line_num, dou_p argv, dou_p _cmm);
 int _exit_num(dou_p local_argv, size_t line_num, dou_p argv, dou_p _cmm);

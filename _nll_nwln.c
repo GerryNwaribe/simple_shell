@@ -8,6 +8,9 @@
  */
 string _nll_nwln(string gtln, ssize_t read)
 {
+	(void)_head_;
+
+
 	if (_isblnk(gtln))     /* if what's in gtln is "\n\0" OR whitespaces */
 	{
 		return (NULL);
